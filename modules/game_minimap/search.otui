@@ -1,0 +1,31 @@
+MainWindow
+  id: searchWindow
+  !text: tr('Procurar Monstro')
+  size: 250 150
+  @onEscape: self:destroy()
+
+  Label
+    !text: tr('Nome Do Monstro')
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 20
+    margin-left: 20
+    margin-right: 20
+    text-align: center
+
+  TextEdit
+    id: searchMonster
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    margin-left: 20
+    margin-right: 20
+
+  Button
+    !text: tr('Procurar')
+    anchors.top: prev.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 10
+    @onClick: modules.game_minimap.searchMonster()

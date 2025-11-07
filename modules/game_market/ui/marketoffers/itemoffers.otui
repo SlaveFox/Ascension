@@ -1,0 +1,174 @@
+OfferTableRow < TableRow
+  font: verdana-11px-monochrome
+  color: #cccccc
+  height: 15
+
+OfferTableColumn < TableColumn
+  font: verdana-11px-monochrome
+  background-color: alpha
+  text-offset: 5 0
+  color: #cccccc
+  width: 80
+
+itemDetailsTableRow < TableRow
+  font: verdana-11px-monochrome
+  focusable: true
+  color: #cccccc
+  height: 45
+  focusable: false
+  padding: 2
+  even-background-color: alpha
+  odd-background-color: alpha
+
+itemDetailsTableColumn < TableColumn
+  font: verdana-11px-monochrome
+  background-color: alpha
+  text-offset: 5 2
+  color: #cccccc
+  width: 100
+  focusable: false 
+
+OfferTableWarningColumn < OfferTableColumn
+  color: #e03d3d
+
+OfferTableHeaderRow < TableHeaderRow
+  font: verdana-11px-monochrome
+  color: #cccccc
+  height: 20
+
+OfferTableHeaderColumn < SortableTableHeaderColumn
+  font: verdana-11px-monochrome
+  text-offset: 2 0
+  color: #cccccc
+
+  $focus:
+    background-color: #294f6d
+    color: #ffffff
+
+Panel
+  background-color: #22283399
+  margin: 1
+
+  Button
+    id: buyButton
+    !text: tr('Comprar')
+    anchors.right: parent.right
+    anchors.bottom: sellingTableScrollBar.top
+    margin-right: 6
+    margin-bottom: 2
+    width: 80
+    enabled: false
+
+  Button
+    id: sendOfferButton
+    !text: tr('Ofertar')
+    anchors.right: buyButton.left
+    anchors.bottom: sellingTableScrollBar.top
+    margin-right: 6
+    margin-bottom: 2
+    width: 80
+    enabled: false
+
+  Label
+    !text: tr('Vender')
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 44
+    margin-left: 6
+
+  Table
+    id: sellingTable
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    anchors.right: parent.right
+    height: 200
+    margin-top: 5
+    margin-bottom: 5
+    margin-right: 6
+    padding: 1
+    focusable: false
+    background-color: #222833
+    border-width: 1
+    border-color: #191f27
+    table-data: sellingTableData
+    row-style: OfferTableRow
+    column-style: OfferTableColumn
+    header-column-style: false
+    header-row-style: false
+
+    OfferTableHeaderRow
+      id: header
+      OfferTableHeaderColumn
+        !text: tr('Item')
+        width: 200
+      OfferTableHeaderColumn
+        !text: tr('Vendedor')
+        width: 180
+      OfferTableHeaderColumn
+        !text: tr('Quantidade')
+        width: 80
+      OfferTableHeaderColumn
+        !text: tr('Moeda')
+        width: 120
+      OfferTableHeaderColumn
+        !text: tr('Preço')
+        width: 100
+      OfferTableHeaderColumn
+        !text: tr('Válido até')
+        width: 100
+
+  TableData
+    id: sellingTableData
+    anchors.bottom: sellingTable.bottom
+    anchors.left: sellingTable.left
+    anchors.right: sellingTable.right
+    margin-top: 2
+    vertical-scrollbar: sellingTableScrollBar
+
+  VerticalScrollBar
+    id: sellingTableScrollBar
+    anchors.top: sellingTable.top
+    anchors.bottom: sellingTable.bottom
+    anchors.right: sellingTable.right
+    step: 28
+    pixels-scroll: true
+
+  Table
+    id: itemdetailsTable
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 260
+    height: 68
+    margin-left: 6
+    margin-bottom: 85
+    margin-right: 6
+    padding: 1
+    focusable: false
+    background-color: #222833
+    border-width: 1
+    border-color: #191f27
+    table-data: itemdetailsTableData
+    row-style: itemDetailsTableRow
+    column-style: itemDetailsTableColumn
+    visible: true
+
+  TableData
+    id: itemdetailsTableData
+    anchors.bottom: itemdetailsTable.bottom
+    anchors.left: itemdetailsTable.left
+    anchors.right: itemdetailsTable.right
+    margin-top: 2
+    vertical-scrollbar: itemdetailsTableScrollBar
+    visible: false
+
+  VerticalScrollBar
+    id: itemdetailsTableScrollBar
+    anchors.top: itemdetailsTable.top
+    anchors.bottom: itemdetailsTable.bottom
+    anchors.right: itemdetailsTable.right
+    step: 28
+    pixels-scroll: true
+    visible: false

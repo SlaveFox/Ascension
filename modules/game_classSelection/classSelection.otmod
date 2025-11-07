@@ -1,0 +1,9 @@
+Module
+  name: game_classSelection
+  description: Interface de seleção de classe
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [classSelection]
+  @onLoad: ClassSelection.init()
+  @onUnload: ClassSelection.terminate()

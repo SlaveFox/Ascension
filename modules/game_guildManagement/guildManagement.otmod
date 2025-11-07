@@ -1,0 +1,9 @@
+Module
+  name: game_guildManagement
+  description: Exibe informações de guilda
+  author: Thony&Raposo
+  website:
+  sandboxed: true
+  scripts: [ guildManagement ]
+  @onLoad: init()
+  @onUnload: terminate()

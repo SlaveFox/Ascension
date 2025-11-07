@@ -1,0 +1,884 @@
+CreatureOutfit < UICreature
+
+PreyRerollButton < UIWidget
+  size: 76 105
+  layout: verticalBox
+
+  UIButton
+    id: bonusGoldTopPanel
+    height: 76
+    padding: 3
+    layout: verticalBox
+    border-width: 1
+    border-color-bottom: #222222  
+    border-color-right: #222222  
+    border-color-top: #6e6e6e
+    border-color-left: #6e6e6e
+    tooltip: Reroll Monster List
+    @onClick: function(widget) Prey.onClickReroll(widget) end
+
+    $pressed:
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+
+    UIButton
+      id: bonusGoldButton
+      height: 50
+      icon-source: prey/prey_reroll
+      phantom: true
+
+    LabelValueTemplate
+      id: bonusGoldTopValue
+      height: 20
+      margin-top: 1
+
+  GoldValueTemplate
+    id: bonusGoldBottom
+    height: 18
+    margin-top: 5
+
+PreyMonsterListPanel < Window
+  size: 270 420
+  phantom: true
+  layout: anchor
+
+  Panel
+    id: monsterListContainer
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 230
+    margin: 5
+    background-color: #484848
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+    padding: 5
+    layout: anchor
+
+    ScrollablePanel
+      id: monsterList
+      anchors.fill: parent
+      layout:
+        type: verticalBox
+        spacing: 2
+        align: top
+      vertical-scrollbar: monsterScrollBar
+
+    VerticalScrollBar
+      id: monsterScrollBar
+      orientation: vertical
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      step: 20
+      background-color: #111111aa
+      border-width: 1
+      visible: true
+
+  Panel
+    id: monsterSearchPanel
+    height: 25
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: monsterListContainer.bottom
+    padding: 1
+    margin: 0 5 0 5
+    layout: horizontalBox
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+    background-color: #262626
+
+    TextEdit
+      id: monsterSearchInput
+      size: 225 20
+      color: #FFFFFF
+      @onTextChange: function(widget) Prey.onSearchMonster(widget) end
+
+  Panel
+    id: monsterPreviewPanel
+    height: 95
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: monsterSearchPanel.bottom
+    margin: 5
+    layout: horizontalBox
+
+    Panel
+      id: previewLeft
+      size: 140 95
+      layout: anchor
+      background-color: #484848
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+
+      UICreature
+        id: outfitBoxPreview
+        size: 76 76
+        phantom: true
+        old-scaling: true
+        anchors.centerIn: parent
+
+    UIButton
+      id: bonusButton
+      margin-left: 10
+      size: 76 90
+      icon: prey/prey_choose_gray
+      border-width: 1
+      border-color-bottom: #222222  
+      border-color-right: #222222  
+      border-color-top: #6e6e6e
+      border-color-left: #6e6e6e
+      tooltip: Select a bonus
+      @onClick: Prey.onChooseBonus()
+      $pressed:
+        border-color-bottom: #6e6e6e  
+        border-color-right: #6e6e6e  
+        border-color-top: #222222
+        border-color-left: #222222
+
+
+PreyActivePanel < Window
+  size: 270 420
+  margin-right: 5
+  phantom: true
+  layout: verticalBox
+
+  Panel
+    id: preyContainer
+    size: 250 170
+    layout: horizontalBox
+    margin-top: 2
+    margin-left: 2
+
+    Panel
+      id: cardPanel
+      size: 150 130
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+
+      CreatureOutfit
+        id: creaturePreview
+        size: 125 125
+        anchors.centerIn: parent
+        phantom: true
+
+        UICreature
+          id: outfitBoxActive
+          size: 90 90    
+          old-scaling: true
+          anchors.centerIn: parent
+          phantom: true
+
+
+    Panel
+      id: bannerPanel
+      size: 78 110
+      margin-left: 8
+      layout: verticalBox
+      align-horizontal: center
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+
+      UIButton
+        id: bannerImage
+        image-source: prey/prey_bignobonus
+        size: 32 130
+        margin: 5
+        align-horizontal: center
+
+      Panel
+        id: leftPanelStar
+        size: 90 24
+        margin-top: 2
+        margin-left: 10
+        align-horizontal: center
+        layout:
+          type: grid
+          cell-size: 11 11
+          cell-spacing: 3
+          num-columns: 5
+
+        UIButton
+          id: star1
+          image-source: prey/prey_nostar
+          phantom: true
+
+  Panel
+    id: preyProgressContainer
+    size: 250 23
+    margin-top: 5
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+    background-color: #1e1e1e
+    padding: 2 
+
+    ProgressBar
+      id: preyProgressBar
+      anchors.left: parent.left
+      anchors.right: parent.right          
+      anchors.top: parent.top
+      height: 20
+      background-color: #986603
+
+      Label
+        id: preyProgressLabel
+        anchors.centerIn: parent
+        text: "18h 35min remaining"
+        color: #CCCCCC
+
+  Panel
+    id: bonusPanelContainerLeft
+    size: 250 105
+    margin-top: 5
+    layout: horizontalBox
+    align-horizontal: right
+
+    Panel
+      id: bonusPanel1Left
+      size: 76 110
+      margin-right: 5
+      layout: verticalBox
+
+      UIButton
+        id: bonusGoldTopPanel
+        height: 76
+        padding: 3
+        layout: verticalBox
+        border-width: 1
+        border-color-bottom: #222222  
+        border-color-right: #222222  
+        border-color-top: #6e6e6e
+        border-color-left: #6e6e6e
+        tooltip: Reroll Monster List
+        @onClick: function(widget) Prey.onClickReroll(widget) end
+
+        $pressed:
+          border-color-bottom: #6e6e6e  
+          border-color-right: #6e6e6e  
+          border-color-top: #222222
+          border-color-left: #222222
+
+        UIButton
+          id: bonusGoldButton
+          height: 50
+          icon-source: prey/prey_reroll
+          phantom: true
+
+        LabelValueTemplate
+          id: bonusGoldTopValue
+          height: 20
+          margin-top: 1
+
+      GoldValueTemplate
+        id: bonusGoldBottom
+        height: 18
+        margin-top: 5
+
+    Panel
+      id: bonusPanel2Left
+      size: 76 110
+      margin-right: 5
+      layout: verticalBox
+
+      UIButton
+        id: selectCreature
+        height: 76
+        border-width: 1
+        border-color-bottom: #222222  
+        border-color-right: #222222  
+        border-color-top: #6e6e6e
+        border-color-left: #6e6e6e
+        icon: prey/prey_select
+        tooltip: Select Creature
+        $pressed:
+          border-color-bottom: #6e6e6e  
+          border-color-right: #6e6e6e  
+          border-color-top: #222222
+          border-color-left: #222222
+
+      PreyCardTemplate
+        id: selectCreatureReroll
+        size: 30 18
+        margin-top: 5
+
+    Panel
+      id: bonusPanel2Left
+      size: 76 110
+      margin-right: 5
+      layout: verticalBox
+
+      UIButton
+        id: bonusReroll
+        height: 76
+        border-width: 1
+        border-color-bottom: #222222  
+        border-color-right: #222222  
+        border-color-top: #6e6e6e
+        border-color-left: #6e6e6e
+        icon: prey/prey_bonus_reroll
+        tooltip: Reroll current bonus
+        @onClick: function(widget) Prey.onClickRerollBonus(widget) end
+        $pressed:
+          border-color-bottom: #6e6e6e  
+          border-color-right: #6e6e6e  
+          border-color-top: #222222
+          border-color-left: #222222
+
+      PreyCardTemplate
+        id: bonusCardReroll
+        size: 30 18
+        margin-top: 5
+
+  Panel
+    id: bonusOptionsContainerLeft
+    size: 250 40
+    layout: verticalBox
+
+    Panel
+      id: checkboxPanel1Left
+      size: 250 24
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+      margin-bottom: 3
+      padding: 5 0 5 5
+
+      CheckBox
+        id: automaticBonusReroll
+        checked: false
+        size: 18 18
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        tooltip: Automatic Bonus Reroll
+
+      Label
+        id: checkboxLabel1Left
+        text: Automatic Bonus Reroll
+        color: #CCCCCC
+        margin-left: 5
+        anchors.left: automaticBonusReroll.right
+        anchors.verticalCenter: parent.verticalCenter
+        text-auto-resize: true
+
+      PreyCardTemplate
+        id: checkboxCard1Left
+        size: 40 20
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        margin-right: 4
+
+    Panel
+      id: checkboxPanel2Left
+      size: 250 24
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+      padding: 5 0 5 5
+
+      CheckBox
+        id: lockPrey
+        checked: true
+        size: 18 18
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        tooltip: Lock Prey
+
+      Label
+        id: checkboxLabel2Left
+        text: Lock Prey
+        color: #CCCCCC
+        margin-left: 5
+        anchors.left: lockPrey.right
+        anchors.verticalCenter: parent.verticalCenter
+        text-auto-resize: true
+
+      PreyCardTemplate
+        id: checkboxCard2Left
+        size: 40 20
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        margin-right: 4
+
+PreySelectionPanel < Window
+  size: 270 420
+  margin-right: 5
+  phantom: true
+  layout: verticalBox
+
+  Panel
+    id: outfitGridPanel
+    padding: 5
+    size: 100 240
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+    background-color: #484848
+    layout:
+      type: grid
+      cell-size: 72 75
+      cell-spacing: 3
+      num-columns: 3
+    align-horizontal: center
+
+    CreatureOutfitSelection
+      id: outfit1
+
+  Panel
+    id: outfitBonusPanel
+    size: 100 100
+    layout: horizontalBox
+    margin-top: 10
+    align-horizontal: center
+
+    Panel
+      id: bonusPanel1
+      size: 76 150
+      margin-right: 5
+      layout: verticalBox
+
+      PreyRerollButton
+        id: rerollButton
+
+    Panel
+      id: bonusPanel2
+      size: 76 110
+      margin-right: 5
+      layout: verticalBox
+
+      UIButton
+        id: selectCreature
+        height: 76
+        border-width: 1
+        border-color-bottom: #222222  
+        border-color-right: #222222  
+        border-color-top: #6e6e6e
+        border-color-left: #6e6e6e
+        icon: prey/prey_select
+        tooltip: Select Creature
+        $pressed:
+          border-color-bottom: #6e6e6e  
+          border-color-right: #6e6e6e  
+          border-color-top: #222222
+          border-color-left: #222222
+      PreyCardTemplate
+        id: selectCreatureReroll
+        size: 30 18
+        margin-top: 5
+
+    UIButton
+      id: bonusButton
+      size: 76 90
+      icon: prey/prey_choose_gray
+      border-width: 1
+      border-color-bottom: #222222  
+      border-color-right: #222222  
+      border-color-top: #6e6e6e
+      border-color-left: #6e6e6e          
+      tooltip: Select a bonus
+      @onClick: Prey.onChooseBonus()
+
+      $pressed:
+        border-color-bottom: #6e6e6e  
+        border-color-right: #6e6e6e  
+        border-color-top: #222222
+        border-color-left: #222222
+
+PreyLockedPanel < Window
+  size: 270 420
+  phantom: true
+  layout: verticalBox
+
+  Panel
+    id: lockedContainer
+    size: 250 170
+    layout: horizontalBox
+    margin-top: 2
+    margin-left: 2
+
+    Panel
+      id: cardPanel
+      size: 150 130
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+
+      UIButton
+        id: cardImage
+        image-source: prey/prey_biginactive
+        anchors.centerIn: parent
+        size: 96 125
+
+    Panel
+      id: bannerPanel
+      size: 78 110
+      margin-left: 8
+      layout: verticalBox
+      align-horizontal: center
+      border-width: 1
+      border-color-bottom: #6e6e6e  
+      border-color-right: #6e6e6e  
+      border-color-top: #222222
+      border-color-left: #222222
+      background-color: #484848
+
+      UIButton
+        id: bannerImage
+        image-source: prey/prey_bignobonus
+        size: 32 130
+        margin: 5
+        align-horizontal: center
+      
+      Panel
+        id: rightPanelStar
+        size: 90 24
+        margin-top: 2
+        margin-left: 10
+        align-horizontal: center
+        layout:
+          type: grid
+          cell-size: 11 11
+          cell-spacing: 3
+          num-columns: 5
+
+        UIButton
+          id: star1
+          image-source: prey/prey_nostar
+          phantom: true
+
+  Panel
+    id: infoPanel
+    height: 15
+    margin-top: 8
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+    background-color: #262626
+
+  UIButton
+    id: unlockButton
+    image-source: prey/prey_perm_test
+    height: 60
+    image-clip: 0 0 204 68
+    margin-top: 6
+    align-horizontal: center
+    tooltip: "Use a Prey Card to unlock this slot"
+    $pressed:
+      image-clip: 0 67 204 68
+    @onClick: Prey.onUnlockSlot()
+
+
+CreatureOutfitSelection < UIWidget
+  size: 90 90
+  cursor: pointer
+  border-width: 1
+  border-color: alpha
+  @checked:
+    border-width: 1
+    border-color-bottom: #6e6e6e  
+    border-color-right: #6e6e6e  
+    border-color-top: #222222
+    border-color-left: #222222
+
+  UICreature
+    id: outfitBox
+    size: 40 40
+    old-scaling: true
+    anchors.centerIn: parent
+    phantom: true
+
+
+LabelValueTemplate < UIWidget
+  size: 100 20
+  border-width: 1
+  border-color-bottom: #6e6e6e  
+  border-color-right: #6e6e6e  
+  border-color-top: #222222
+  border-color-left: #222222
+  background-color: #1e1e1e
+  padding-left: 4
+  padding-right: 4
+
+  Label
+    id: text
+    text: Free
+    anchors.centerIn: parent
+    text-align: center
+    color: #CCCCCC
+    text-auto-resize: true
+
+GoldValueTemplate < UIWidget
+  size: 100 20
+  border-width: 1
+  border-color-bottom: #6e6e6e  
+  border-color-right: #6e6e6e  
+  border-color-top: #222222
+  border-color-left: #222222
+  background-color: #1e1e1e
+  padding-left: 4
+  padding-right: 4
+
+  Label
+    id: text
+    text: 0
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: icon.left
+    margin-right: 5
+    text-align: right
+    color: #CCCCCC
+    text-auto-resize: true
+
+  UIItem
+    id: icon
+    size: 24 24
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    item-id: 3031
+
+PreyCardTemplate < UIWidget
+  size: 100 20
+  border-width: 1
+  border-color-bottom: #6e6e6e  
+  border-color-right: #6e6e6e  
+  border-color-top: #222222
+  border-color-left: #222222
+  background-color: #1e1e1e
+  padding-left: 4
+  padding-right: 4
+
+  Label
+    id: text
+    text: 999
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: icon.left
+    margin-right: 5
+    text-align: right
+    color: #CCCCCC
+    text-auto-resize: true
+
+  UIButton
+    id: icon
+    size: 14 14
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: prey/prey_wildcard
+    phantom: true
+    focusable: false
+
+PreySlotTemplate < UIWidget
+  size: 270 300
+  layout: verticalBox
+  phantom: true
+
+Window
+  id: preyWindow
+  text: Prey System
+  size: 880 630
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: Prey.hide()
+
+  Panel
+    id: centralPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: 155
+    layout: horizontalBox
+
+    PreySlotTemplate
+      id: preySlot1
+      margin-left: 10
+    PreySlotTemplate
+      id: preySlot2
+      margin-left: 5
+    PreySlotTemplate
+      id: preySlot3
+      margin-left: 5
+
+  Panel
+    id: lowPanel
+    height: 120
+    anchors.top: centralPanel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin: 10 15 0 10
+    padding: 10
+    border-width: 1
+    border-color-top: #6e6e6e  
+    border-color-left: #6e6e6e  
+    border-color-bottom: #222222
+    border-color-right: #222222
+    layout: verticalBox
+    align-horizontal: center
+    align-vertical: center
+
+    Label
+      id: lowPanelLabel
+      text: Passe o mouse sobre um bot�o para ver a descri��o.
+
+
+  GoldValueTemplate
+    id: footerLabel
+    size: 120 20
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-left: 10
+
+  PreyCardTemplate
+    id: preyCardLabel
+    size: 100 20
+    anchors.left: footerLabel.right
+    anchors.bottom: parent.bottom
+    margin-left: 8
+
+  Button
+    id: preyStoreButton
+    size: 24 20
+    anchors.left: preyCardLabel.right
+    anchors.bottom: parent.bottom
+    margin-left: 8
+    tooltip: Open Prey Store
+    border-width: 1
+    border-color-top: #6e6e6e  
+    border-color-left: #6e6e6e  
+    border-color-bottom: #222222
+    border-color-right: #222222
+    background-color: #1e1e1e
+    @onClick: modules.game_shop.sendShopInfo(); modules.game_prey.Prey.hide()
+
+    UIButton
+      id: storeIcon
+      image-source: prey/prey_smallstore
+      size: 16 16
+      phantom: true
+      anchors.centerIn: parent
+
+  Button
+    id: footerCloseButton
+    text: "Close"
+    width: 80
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin: 0 15 0 0 
+    @onClick: modules.game_prey.Prey.hide()
+
+PreyCreature < Panel
+  height: 28
+  margin-top: 3
+
+  CreatureOutfit
+    id: creature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    size: 27 27
+  UIWidget
+    id: noCreature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    size: 27 27
+    image-source: prey/prey_inactive
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: preyType
+    anchors.left: creature.right
+    margin-left: 15
+    anchors.verticalCenter: creature.verticalCenter
+    size: 20 20
+
+  UIWidget
+    id: creatureName
+    anchors.left: preyType.right
+    margin-left: 10
+    anchors.top: parent.top
+    anchors.bottom: prev.bottom
+    margin-bottom: 7
+    anchors.right: parent.right
+    text: Inactive
+    font: verdana-11px-rounded
+    text-align: left     
+
+  ProgressBar
+    id: time
+    anchors.left: creatureName.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: 2
+    height: 6
+    background-color: #C28400
+    phantom: false    
+
+PreyTrackerWindow < Window
+  id: preyTrackerWindow
+  text: Preys
+  size: 210 160
+
+  Panel
+    id: contentsPanel
+    anchors.fill: parent
+    margin: 5
+    padding: 5
+    layout: verticalBox
+
+    Label
+      text: Prey Creatures
+      height: 15
+
+    HorizontalSeparator
+      margin-top: 1
+      height: 2
+
+    PreyCreature
+      id: slot1
+      margin-top: 5
+
+    PreyCreature
+      id: slot2
+
+    PreyCreature
+      id: slot3
+
+SimpleTestWindow < Window
+  text: Test
+  size: 100 100

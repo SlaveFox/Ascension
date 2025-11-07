@@ -1,0 +1,9 @@
+Module
+  name: game_debuffhud
+  description: Debuff Cooldown HUD (versão simples)
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [debuffhud]
+  @onLoad: debuffhud.init()
+  @onUnload: debuffhud.terminate()

@@ -1,0 +1,70 @@
+MarketWindow < MainWindow
+  id: marketWindow
+  !text: tr('Market')
+  size: 850 530
+
+  @onEscape: Market.close()
+
+  // Main Panel Window
+
+  MarketTabBar
+    id: mainTabBar
+    width: 164
+    height: 25
+    anchors.top: parent.top
+    anchors.left: parent.left
+
+  Panel
+    id: mainTabContent
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    padding: 3
+    border-width: 1
+    border-color: #000000
+    margin-bottom: 20
+
+  Label
+    id: balanceLabel
+    !text: tr('Gold Coins') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: parent.top
+    anchors.right: parent.right
+
+  Label
+    id: premiumPointsLabel
+    !text: tr('Premium Points') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    margin-left: 320
+    anchors.top: parent.top
+    anchors.left: parent.left
+
+  Label
+    id: eventsPointsLabel
+    !text: tr('Events Points') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    margin-left: 520
+    anchors.top: parent.top
+    anchors.left: parent.left
+
+  Button
+    id: closeButton
+    !text: tr('Fechar')
+    anchors.top: mainTabContent.bottom
+    anchors.horizontalCenter: mainTabContent.horizontalCenter
+    margin-top: 5
+    width: 110
+    @onClick: Market.close()
+
+  Button
+    id: refreshOffersButton
+    !text: tr('Atualizar')
+    anchors.top: mainTabContent.bottom
+    anchors.right: mainTabContent.right
+    margin-top: 5
+    width: 110
+    @onClick: refresh()

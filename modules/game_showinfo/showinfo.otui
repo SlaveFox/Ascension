@@ -1,0 +1,226 @@
+ShowInfoCustomizer < Window
+  id: showinfoCustomizer
+  text: Show Info  Customizer
+  size: 360 360
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+
+  UIWidget
+    id: body
+    anchors.fill: parent
+    margin: 5
+
+    UIWidget
+      id: moveRow
+      height: 22
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      layout:
+        type: horizontalBox
+        spacing: 6
+
+      CheckBox
+        id: moveToggle
+        tooltip: Ative para poder arrastar o Show Info na tela
+      Label
+        text: Movimentar Show Info
+        margin-left: 2
+      
+      UIWidget
+      id: soundRow
+      height: 22
+      anchors.top: moveRow.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+      layout:
+        type: horizontalBox
+        spacing: 6
+
+      Button
+        id: soundButton
+        width: 140
+        tooltip: Ative/desative som nas notificações
+        text: ...
+
+    Label
+      id: bgOpacityLabel
+      text: Opacidade do Fundo: 60%
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 10
+
+    HorizontalScrollBar
+      id: bgOpacityScroll
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+      minimum: 0
+      maximum: 100
+      step: 1
+      value: 60
+
+    Label
+      text: Cor de Fundo (paleta)
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 10
+
+    UIWidget
+      id: paletteRow
+      height: 20
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+      layout:
+        type: horizontalBox
+        spacing: 8
+
+      CheckBox
+        id: paletteBgToggle
+      Label
+        text: Background Tint Color
+      CheckBox
+        id: paletteXpToggle
+      Label
+        text: Tint no ícone de XP
+
+    Panel
+      id: colorBoxPanel
+      anchors.top: paletteRow.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 117
+      margin-top: 4
+      layout:
+        type: grid
+        cell-size: 15 15
+        cell-spacing: 2
+        num-columns: 19
+        num-lines: 7
+
+    Button
+      id: resetBtn
+      text: Reset to Defaults
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      width: 130
+      height: 22
+
+    Button
+      id: closeBtn
+      text: Close
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      width: 90
+      height: 22
+
+
+ItemWidgetInfo < UIWidget
+  image-source: /data/images/ui/showInfoPanel
+  height: 40
+  padding: 1
+  phantom: true
+  opacity: 0.9
+
+  Item
+    id: itemWidget
+    phantom: true
+    virtual: true
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+
+  Label
+    id: itemName
+    phantom: true
+    anchors.left: prev.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-auto-resize: true
+    text-align: center
+    text-wrap: true
+
+ExpWidgetInfo < UIWidget
+  height: 40
+  padding: 1
+  image-source: /data/images/ui/showInfoPanel
+  phantom: true
+  opacity: 0.9
+
+  UIWidget
+    id: iconImage
+    phantom: true
+    size: 34 34
+    image-source: /images/icons/exp
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 3
+
+  Label
+    id: labelExp
+    phantom: true
+    anchors.left: prev.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-auto-resize: true
+    text-align: center
+    text-wrap: true
+
+
+Panel
+  id: staticWindow
+  size: 220 335
+  phantom: true
+  image-source:
+
+  UIWidget
+    id: miniwindowTopBar
+    phantom: true
+    visible: false
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+  UIButton
+    id: closeButton
+    phantom: true
+    visible: false
+  UIButton
+    id: minimizeButton
+    phantom: true
+    visible: false
+  UIButton
+    id: lockButton
+    phantom: true
+    visible: false
+
+  VerticalScrollBar
+    id: miniwindowScrollBar
+    phantom: true
+    visible: false
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+  ResizeBorder
+    id: bottomResizeBorder
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: contentsPanel
+    phantom: true
+    anchors.fill: parent
+
+    ScrollablePanel
+      id: infoPanel
+      phantom: true
+      anchors.fill: parent
+      layout:
+        type: verticalBox
+        spacing: 3

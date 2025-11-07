@@ -1,0 +1,9 @@
+Module
+  name: game_missionInterface
+  description: Mission interface system
+  author: Raposo
+  sandboxed: true
+  scripts: [missionInterface]
+  files: [missionInterface.otui]
+  @onLoad: MissionInterface.init()
+  @onUnload: MissionInterface.terminate()

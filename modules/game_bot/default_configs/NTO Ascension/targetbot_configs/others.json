@@ -1,0 +1,29 @@
+{
+  "looting": {
+    "items": [
+
+    ],
+    "maxDanger": 10,
+    "minCapacity": 100,
+    "containers": [
+
+    ],
+    "everyItem": false
+  },
+  "targeting": [
+    {
+      "danger": 1,
+      "keepDistance": false,
+      "lureCount": 2,
+      "lureCavebot": false,
+      "avoidAttacks": false,
+      "keepDistanceRange": 5,
+      "lure": false,
+      "name": "|",
+      "maxDistance": 10,
+      "chase": false,
+      "priority": 1,
+      "regex": "^|$"
+    }
+  ]
+}

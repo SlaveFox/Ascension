@@ -1,0 +1,10 @@
+Module
+  name: game_goal
+  description: donate goal
+  author: Anyone
+  website: dragonclass.com.br
+  sandboxed: true
+  security: jR$5p@9Qz!
+  scripts: [ goal ]
+  @onLoad: init()
+  @onUnload: terminate()

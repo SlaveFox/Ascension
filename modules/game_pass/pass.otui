@@ -1,0 +1,777 @@
+CreatureOutfitPass < UIWidget
+  size: 64 64
+
+  UICreature
+    id: outfitBox
+    size: 64 64
+    old-scaling: true
+    anchors.centerIn: parent
+
+MissionCard < Panel
+  border-width: 1
+  border-color-top: #898A8C 
+  border-color-left: #898A8C
+  border-color-bottom: #1e1e1e 
+  border-color-right: #1e1e1e 
+  image-source: /images/ui/window_headless
+  padding: 6
+  layout:
+    type: verticalBox
+    spacing: 4
+
+  Panel
+    id: missionIconPanel
+    size: 92 92
+    background-color: #3b2412
+    padding: 5
+    border-width: 1
+    border-color-top: #1e1e1e  
+    border-color-left: #1e1e1e 
+    border-color-bottom: #898A8C
+    border-color-right: #898A8C
+
+    Panel
+      id: missionIconImage
+      anchors.centerIn: parent
+
+    Panel
+      id: missionIconBadges
+      layout:
+        type: verticalBox
+        spacing: 2
+      size: 15 50
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+
+      UIWidget
+        id: badgeIcon1
+        image-source: images/icons/events.png
+        size: 15 15
+
+      UIWidget
+        id: badgeIcon2
+        image-source: images/icons/graduation.png
+        size: 15 15
+
+      UIWidget
+        id: badgeIcon3
+        image-source: images/icons/exp.png
+        size: 15 15
+
+    Panel
+      id: missionIconBadgeRight
+      size: 16 16
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      UIWidget
+        id: badgeIconRight
+        size: 16 16
+
+  Label
+    id: missionName
+    text-align: center
+    text-auto-resize: true
+    color: #e0c578
+
+  Label
+    id: missionDescription
+    text: "Descrição breve da Missão que explica o que fazer."
+    color: #bbbbbb
+    text-align: center
+    text-wrap: true
+    height: 36
+
+  Panel
+    id: missionProgressBar
+    size: 100 12
+    border-width: 1
+    border-color-top: #1e1e1e  
+    border-color-left: #1e1e1e 
+    border-color-bottom: #898A8C
+    border-color-right: #898A8C
+    background-color: #1a1510
+
+    ProgressBar
+      id: missionProgressFill
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      height: 12
+      background-color: #7a7616
+
+    Label
+      id: missionProgressLabel
+      anchors.centerIn: parent
+      text: "0/0"
+      text-align: center      
+      text-auto-resize: true
+
+
+RewardItemTemplate < UIWidget
+  size: 180 60
+  layout:
+    type: horizontalBox
+    spacing: 8
+  padding: 5
+  margin-bottom: 4
+  border-width: 1
+  border-color-top: #898A8C 
+  border-color-left: #898A8C
+  border-color-bottom: #1e1e1e 
+  border-color-right: #1e1e1e 
+  background-color: #4c2b08
+  cursor: pointer
+
+  UIWidget
+    id: rewardTypeIcon
+    size: 25 20
+
+  Panel
+    id: rewardTextPanel
+    layout:
+      type: verticalBox
+    width: 100
+    height: 50
+    
+    Label
+      id: rewardLabel
+      text: "Recompensa"
+      height: 25
+      text-align: left
+      color: white
+      text-auto-resize: false
+    
+    Panel
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      background-color: #1a1510
+      size: 60 10
+      ProgressBar
+        id: rewardProgressBar
+        height: 10
+        background-color: #7a7616
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+  UIItem
+    id: rewardItem
+    padding: 2
+    background-color: #3b2412
+    border-width: 1
+    border-color-top: #1e1e1e  
+    border-color-left: #1e1e1e 
+    border-color-bottom: #898A8C
+    border-color-right: #898A8C
+    width: 50
+    height: 50
+
+    Panel
+      size: 16 16
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      UIWidget
+        id: rewardStatusIcon
+        size: 16 16
+
+Window
+  id: passWindow
+  text: Passe de Batalha
+  color: #f7c760
+  font: baby-14
+  size: 500 400
+  border-width: 1
+  text-offset: 0 1
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: modules.game_pass.hide()
+
+  UIWidget
+    id: tabs
+    size: 390 25
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    layout:
+      type: grid
+      cell-size: 120 25
+      cell-spacing: 10
+      num-columns: 3
+
+    Button
+      id: progressTab
+      text: "Progresso"
+      @onClick: modules.game_pass.switchToTab('progressPanel')
+      color: white
+      $hover:
+        color: #FFD700
+
+    Button
+      id: missionsTab
+      text: "Missões"
+      @onClick: modules.game_pass.switchToTab('missionsPanel')
+      color: white
+      $hover:
+        color: #FFD700
+
+    Button
+      id: rewardsTab
+      text: "Recompensas"
+      @onClick: modules.game_pass.switchToTab('rewardsPanel')
+      color: white
+      $hover:
+        color: #FFD700
+
+
+  Panel
+    id: missionsPanel
+    anchors.top: tabs.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    visible: false
+
+    Label
+      id: progressTitle
+      text: "Missões do Passe"
+      text-align: center
+      font: baby-14
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 10
+
+    HorizontalSeparator
+      id: progressSeparator
+      anchors.top: progressTitle.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 1
+      margin-top: 6
+
+    UIScrollArea
+      id: missionScroll
+      anchors.top: progressSeparator.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      padding: 5
+      auto-resize-children: true
+      vertical-scrollbar: missionScrollBar
+
+      layout:
+        type: grid
+        num-columns: 3
+        cell-size: 142 180
+        cell-spacing: 10
+
+    VerticalScrollBar
+      id: missionScrollBar
+      step: 20
+      pixels-scroll: true
+      anchors.top: missionScroll.top
+      anchors.bottom: missionScroll.bottom
+      anchors.right: parent.right
+
+  Panel
+    id: progressPanel
+    anchors.top: tabs.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    visible: true
+
+    Label
+      id: progressTitle
+      text: "Progresso"
+      text-align: center
+      font: baby-14
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 10
+
+    HorizontalSeparator
+      id: progressSeparator
+      anchors.top: progressTitle.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 1
+      margin-top: 6
+
+    Panel
+      id: characterOutfitPanel
+      size: 120 120
+      anchors.top: progressSeparator.bottom
+      anchors.left: parent.left
+      margin-top: 5
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      background-color: #3b2412
+
+      CreatureOutfitPass
+        id: characterOutfit
+        anchors.centerIn: parent
+
+    Panel
+      id: headerPanel
+      height: 50
+      anchors.top: characterOutfitPanel.top
+      anchors.left: characterOutfitPanel.right
+      anchors.right: parent.right
+      margin: 0 10 0 10
+      background-color: #3b2412
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      padding-right: 10
+
+      UIWidget
+        id: headerImage
+        size: 32 32
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        margin-left: 10
+        image-source: images/calendar.png
+        image-color: white
+
+      Panel
+        id: timePanel
+        size: 50 20
+        layout:
+          type: verticalBox
+          spacing: 2
+        anchors.left: headerImage.right
+        anchors.right: headerButton.left
+        anchors.verticalCenter: parent.verticalCenter
+        margin-left: 8
+        margin-right: 8
+
+        Label
+          id: headerTitle
+          text: "Fim da temporada"
+          color: white
+          color: #e0c578
+          text-align: left
+
+        Label
+          id: headerTime
+          text: "24 dias 00:00:00"
+          color: yellow
+          font: verdana-11px-rounded
+          text-align: left
+
+      Button
+        id: headerButton
+        text: "Upgrade"
+        width: 70
+        height: 24
+        anchors.right: collectAllButton.left
+        anchors.verticalCenter: parent.verticalCenter
+        margin-right: 6
+        tooltip: Adquirir passe vip
+        color: white
+        $hover:
+          color: #FFD700
+
+      Button
+        id: collectAllButton
+        text: "Coletar"
+        width: 80
+        height: 24
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        tooltip: Coletar todas as recompensas pendentes
+        color: white
+        $hover:
+          color: #FFD700
+
+    Panel
+      id: characterNamePanel
+      height: 20
+      anchors.top: headerPanel.bottom
+      anchors.left: characterOutfitPanel.right
+      anchors.right: parent.right
+      margin: 5 10 0 10
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      background-color: #3b2412
+
+      Label
+        id: characterNameLabel
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        color: #e0c578
+        margin-left: 6
+        text-align: left
+        text-auto-resize: true
+
+    Panel
+      id: passLevelPanel
+      height: 25
+      anchors.top: characterNamePanel.bottom
+      anchors.left: characterOutfitPanel.right
+      anchors.right: parent.right
+      margin: 5 10 0 10
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      background-color: #3b2412
+
+      Label
+        id: passLevelLabel
+        text: "Nível do Passe: 12"
+        color: #e0c578
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        margin-left: 6
+        text-align: left
+        text-auto-resize: true
+
+      UIButton
+        id: buyLevelButton
+        size: 35 17 
+        image-source: images/icons/add_level.png
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        margin-right: 6
+        tooltip: Comprar 1 nível de passe com pontos premium
+        color: white
+        $hover:
+          color: #FFD700
+
+
+    Panel
+      id: progressBarPanel
+      height: 15
+      anchors.top: passLevelPanel.bottom
+      anchors.left: characterOutfitPanel.right
+      anchors.right: parent.right
+      margin: 5 10 0 10
+      border-width: 1
+      border-color-top: #1e1e1e  
+      border-color-left: #1e1e1e 
+      border-color-bottom: #898A8C
+      border-color-right: #898A8C
+      background-color: #1a1510
+
+      ProgressBar
+        id: progressBarFill
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        size: 60 15
+        background-color: #7a7616
+
+      Label
+        id: xpLabel
+        text: "XP: 320/500"
+        anchors.centerIn: parent
+        text-align: center
+        color: white
+
+    Panel
+      id: upcomingRewardPanelFree
+      size: 225 150
+      anchors.top: characterOutfitPanel.bottom
+      anchors.left: parent.left      
+      padding: 1
+      margin-top: 10
+      border-width: 1
+      image-source: /images/ui/window_headless
+
+      Label
+        id: freeRewardTitle
+        text: "Próximas recompensas (Free)"
+        height: 25
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        text-align: center
+        color: #bbbbbb
+
+      HorizontalSeparator
+        anchors.top: freeRewardTitle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+      Panel
+        id: freeRewardItemsContainer
+        size: 200 100
+        anchors.top: freeRewardTitle.bottom
+        margin-top: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+        layout:
+          type: horizontalBox
+          spacing: 10
+
+        Panel
+          id: freeRewardItemsLeft
+          padding: 5
+          size: 95 100
+          border-width: 2
+          border-color: #894900
+          background-color: #3b2412
+
+          Label
+            text: "Free"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: #e0c578
+            
+          UIItem
+            id: item1
+            item-id: 2160
+            size: 64 64
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+        Panel
+          id: freeRewardItemsRight
+          padding: 5
+          size: 95 100
+          border-width: 2
+          border-color: #894900
+          background-color: #3b2412
+
+          Label
+            text: "Free"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: #e0c578
+
+          UIItem
+            id: item2
+            item-id: 2674
+            size: 64 64
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+    Panel
+      id: upcomingRewardPanelVip
+      size: 225 150
+      padding: 1
+      anchors.top: characterOutfitPanel.bottom
+      anchors.left: upcomingRewardPanelFree.right
+      margin-top: 10
+      margin-left: 10
+      border-width: 1
+      image-source: /images/ui/window_headless
+
+      Label
+        id: vipRewardTitle
+        text: "Próximas recompensas (VIP)"
+        height: 25
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        text-align: center
+        color: #e0c578
+
+      HorizontalSeparator
+        anchors.top: vipRewardTitle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+      Panel
+        id: vipRewardItemsContainer
+        size: 200 100
+        anchors.top: vipRewardTitle.bottom
+        margin-top: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+        layout:
+          type: horizontalBox
+          spacing: 10
+
+        Panel
+          id: vipRewardItemsLeft
+          padding: 5
+          size: 95 100
+          border-width: 2
+          border-color: #894900
+          background-color: #3b2412
+
+          Label
+            text: "VIP"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: #e0c578
+
+          UIItem
+            id: item1
+            item-id: 2494
+            size: 64 64
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+        Panel
+          id: vipRewardItemsRight
+          padding: 5
+          size: 95 100
+          border-width: 2
+          border-color: #894900
+          background-color: #3b2412
+
+          Label
+            text: "VIP"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: #e0c578
+
+          UIItem
+            id: item2
+            item-id: 2173
+            size: 64 64
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+  Panel
+    id: rewardsPanel
+    anchors.top: tabs.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    visible: false
+
+    Label
+      id: rewardsTitle
+      text: "Recompensas"
+      text-align: center
+      font: baby-14
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 10
+
+    HorizontalSeparator
+      id: rewardsSeparator
+      anchors.top: rewardsTitle.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 5
+    
+    UIScrollArea
+      id: rewardsScrollArea
+      anchors.top: rewardsSeparator.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      vertical-scrollbar: rewardsScrollBar
+      auto-resize-children: true
+      padding: 10
+
+      Panel
+        id: rewardsMainPanel
+        fit-children: true
+        auto-resize-children: true
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        layout:
+          type: horizontalBox
+          spacing: 10
+
+
+        Panel
+          id: rewardsLeftPanel
+          width: 210
+          margin-right: 10
+          fit-children: true
+          auto-resize-children: true
+
+          Label
+            text: "Recompensas Free"
+            text-align: center
+            font: baby-14
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 5
+            color: white
+
+          HorizontalSeparator
+            anchors.top: prev.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 4
+
+          Panel
+            id: rewardsListFree
+            anchors.top: prev.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 5
+            padding: 4
+            layout:
+              type: verticalBox
+              spacing: 5
+            auto-resize-children: true
+            fit-children: true
+        
+        Panel
+          id: rewardsRightPanel
+          width: 210
+          fit-children: true
+          auto-resize-children: true
+
+          Label
+            text: "Recompensas VIP"
+            text-align: center
+            font: baby-14
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 5
+            color: yellow
+
+          HorizontalSeparator
+            anchors.top: prev.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 4
+
+          Panel
+            id: rewardsListVip
+            anchors.top: prev.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            margin-top: 5
+            padding: 4
+            layout:
+              type: verticalBox
+              spacing: 5
+            auto-resize-children: true
+            fit-children: true
+
+    VerticalScrollBar
+      id: rewardsScrollBar
+      step: 20
+      pixels-scroll: true
+      anchors.top: rewardsScrollArea.top
+      anchors.bottom: rewardsScrollArea.bottom
+      anchors.right: parent.right
+
+  Button
+    id: closeButton
+    text: "Fechar"
+    width: 80
+    height: 20
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: -10
+    color: white
+    @onClick: modules.game_pass.hide()
+    $hover:
+      color: #FFD700

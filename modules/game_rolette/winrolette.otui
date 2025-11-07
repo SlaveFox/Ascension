@@ -1,0 +1,154 @@
+MainWindow
+  size: 810 460
+  image-source: assets/window
+
+  UIButton
+    size: 50 50
+    image-source: assets/closeb
+    anchors.top: parent.top
+    anchors.right: parent.right
+    tooltip: Fechar
+    @onClick: naoexibirwinprin()
+
+  Label
+    id: LootBoxs
+    size: 300 37
+    text: Gacha
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    margin-top: 20
+    image-source: assets/button
+    font: baby-20
+    text-align: center
+
+  UIButton
+    id: rare
+    size: 199 234
+    image-source: assets/rare
+    anchors.centerIn: parent
+    text:
+    text-offset: 0 168
+    opacity: 0.6
+    @onClick: abririnterfacebau("rare")
+    $hover:
+      opacity: 1
+
+  UIItem
+    id: rarekey
+    size: 32 32
+    image-source: assets/slot
+    anchors.top: rare.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-left: -80
+
+  UIWidget
+    id: rareinfo
+    size: 32 32
+    image-source: assets/slot2
+    anchors.bottom: rare.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-right: 0
+    margin-bottom: -30
+    tooltip: Recompensas do Bau
+    @onClick: abririnfo("rare")
+
+  Label
+    id: keysrare
+    size: 170 27
+    text:
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: rare.bottom
+    margin-bottom: -80
+    image-source: assets/button
+    font: baby-14
+    text-align: center
+
+  UIButton
+    id: common
+    size: 199 234
+    image-source: assets/common
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    text:
+    text-offset: 0 168
+    margin-left: 70
+    opacity: 0.6
+    @onClick: abririnterfacebau("common")
+    $hover:
+      opacity: 1
+
+  UIItem
+    id: commonkey
+    size: 32 32
+    image-source: assets/slot
+    anchors.top: common.top
+    anchors.left: common.left
+    margin-left: 3
+
+  UIWidget
+    id: commoninfo
+    size: 32 32
+    image-source: assets/slot2
+    anchors.left: common.left
+    anchors.bottom: common.bottom
+    margin-bottom: -30
+    margin-left: 84
+    tooltip: Recompensas do Bau
+    @onClick: abririnfo("common")
+
+  Label
+    id: keyscommon
+    size: 170 27
+    text:
+    anchors.left: common.left
+    anchors.bottom: common.bottom
+    margin-bottom: -80
+    margin-left: 23
+    image-source: assets/button
+    font: baby-14
+    text-align: center
+
+  UIButton
+    id: legendary
+    size: 199 234
+    image-source: assets/legendary
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    text:
+    text-offset: 0 168
+    margin-right: 70
+    opacity: 0.6
+    @onClick: abririnterfacebau("legendary")
+    $hover:
+      opacity: 1
+
+  UIItem
+    id: legendarykey
+    size: 32 32
+    image-source: assets/slot
+    anchors.top: legendary.top
+    anchors.right: legendary.right
+    margin-right: 163
+
+  UIWidget
+    id: legendaryinfo
+    size: 32 32
+    image-source: assets/slot2
+    anchors.right: legendary.right
+    anchors.bottom: legendary.bottom
+    margin-right: 83
+    margin-bottom: -30
+    tooltip: Recompensas do Bau
+    @onClick: abririnfo("legendary")
+
+  Label
+    id: keyslegendary
+    size: 170 27
+    text:
+    anchors.right: legendary.right
+    anchors.bottom: legendary.bottom
+    margin-right: 23
+    margin-bottom: -80
+    image-source: assets/button
+    font: baby-14
+    text-align: center

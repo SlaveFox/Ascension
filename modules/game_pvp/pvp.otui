@@ -1,0 +1,1275 @@
+PvPTimerWindow < Window
+  id: pvpTimerWindow
+  size: 220 60
+  text: "Arena Ativa"
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #FFD700
+  anchors.top: parent.top
+  anchors.right: parent.right
+  margin-top: 10
+  margin-right: 10
+
+  Label
+    id: timerLabel
+    text: "Tempo Restante: 15:00"
+    anchors.centerIn: parent
+    color: white
+    text-align: center
+    width: 200
+    height: 20
+
+PvPConfirmSlot < UIWidget
+  width: 68
+  height: 68
+  border-width: 1
+  border-color: #4c3a28
+  background-color: #2b1a0e
+
+  UICreature
+    id: view
+    anchors.fill: parent
+    margin: 4
+    old-scaling: true
+
+  UIWidget
+    id: shade
+    anchors.fill: parent
+    background-color: #000000AA
+
+confirmArenaWindow < Window
+  id: confirmArenaWindow
+  size: 450 200
+  text: "Confirmação de Entrada"
+  draggable: true
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #555555
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    UIWidget
+      id: teamsRow
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 90
+      margin-top: 6
+      layout:
+        type: horizontalBox
+        spacing: 8
+
+      PvPOutfitSlot
+        id: a1Slot
+
+      PvPOutfitSlot
+        id: a2Slot
+
+      UIWidget
+        id: vsBox
+        width: 30
+
+        Button
+          id: vsButton
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.verticalCenter: parent.verticalCenter
+          text: X
+          size: 28 24
+
+      PvPOutfitSlot
+        id: b1Slot
+
+      PvPOutfitSlot
+        id: b2Slot
+
+    UIWidget
+      id: footer
+      height: 30
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-top: 10
+
+      Button
+        id: declineButton
+        text: "Cancelar"
+        size: 130 24
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+
+      Button
+        id: acceptButton
+        text: "Confirmar"
+        size: 130 24
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+
+RankingRow < UIWidget
+  height: 44
+  border-width: 1
+  border-color: #4c3a28
+  background-color: #2b1a0e
+  padding-left: 8
+  padding-right: 8
+
+  UILabel
+    id: posLabel
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    text: "#1"
+    color: #E7D59A
+    width: 36
+
+  UILabel
+    id: pointsLabel
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    min-width: 84
+    text-align: right
+    text: "123 pts"
+    color: #AEE07A
+
+  UIWidget
+    id: nameCol
+    anchors.left: posLabel.right
+    anchors.right: pointsLabel.left
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    margin-left: 6
+    margin-right: 8
+
+    UILabel
+      id: nameLabel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
+      margin-top: 6
+      text: "Jogador"
+      color: #E7D59A
+
+    UILabel
+      id: wdlLabel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: nameLabel.bottom
+      margin-top: 2
+      text: "10J / 7-2-1"
+      color: #c8b894
+
+RankingWindow < Window
+  id: rankingWindow
+  size: 640 420
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Ranking
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    Label
+      id: rankTitle
+      text: Ranking (Ranked)
+      color: #E7D59A
+      height: 20
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+    Label
+      id: rankStats
+      text: "-"
+      color: #c8b894
+      height: 18
+      anchors.top: rankTitle.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+
+    UIWidget
+      id: filterRow
+      height: 26
+      anchors.top: rankStats.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+
+      TextEdit
+        id: rankSearch
+        placeholder: Buscar jogador
+        height: 24
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+    Panel
+      id: listContainer
+      anchors.top: filterRow.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: footer.top
+      margin-top: 6
+      border-width: 2
+      background-color: #2b1a0e
+      border-color-top: #222222
+      border-color-left: #222222
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+
+      UIScrollArea
+        id: rankingScroll
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: vScroll.left
+        anchors.bottom: parent.bottom
+        padding: 6
+        vertical-scrollbar: vScroll
+        margin-right: 2
+
+        Panel
+          id: rankingList
+          anchors.top: parent.top
+          anchors.left: parent.left
+          size: 520 0
+          fit-children: true
+          auto-resize-children: true
+          layout:
+            type: verticalBox
+            spacing: 4
+
+      VerticalScrollBar
+        id: vScroll
+        width: 12
+        step: 20
+        pixels-scroll: true
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+
+    UIWidget
+      id: footer
+      height: 34
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      Button
+        id: closeRankingButton
+        text: Fechar
+        size: 120 28
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+PvPHistoryRow < UIWidget
+  height: 48
+  border-width: 1
+  border-color: #4c3a28
+  background-color: #2b1a0e
+  padding-left: 6
+  padding-right: 6
+
+  UIWidget
+    id: outcomeBar
+    width: 6
+    anchors.left: parent.left
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    background-color: #555555
+
+  UILabel
+    id: rightMeta
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    width: 120
+    text-align: right
+    text: "+0 ELO"
+    color: #AEE07A
+
+  UILabel
+    id: title
+    anchors.left: outcomeBar.right
+    anchors.right: rightMeta.left
+    anchors.top: parent.top
+    margin-left: 8
+    margin-top: 6
+    margin-right: 8
+    text: "1x1 / A vs B"
+    color: #E7D59A
+
+  UILabel
+    id: subtitle
+    anchors.left: title.left
+    anchors.right: rightMeta.left
+    anchors.top: title.bottom
+    margin-top: 2
+    margin-right: 8
+    text: "Data / Apostas / Duração"
+    color: #c8b894
+
+
+HistoryWindow < Window
+  id: historyWindow
+  size: 680 420
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Histórico
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    Label
+      id: histTitle
+      text: Histórico de Partidas
+      color: #E7D59A
+      height: 20
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+    Label
+      id: histStats
+      text: "-"
+      color: #c8b894
+      height: 18
+      anchors.top: histTitle.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+
+    UIWidget
+      id: filterRow
+      height: 26
+      anchors.top: histStats.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+
+      TextEdit
+        id: searchInput
+        placeholder: Buscar por jogador ou modo
+        height: 24
+        anchors.left: parent.left
+        anchors.right: queueFilter.left
+        margin-right: 6
+
+      ComboBox
+        id: queueFilter    
+        width: 120
+        anchors.right: outcomeFilter.left
+        margin-right: 6
+
+      ComboBox
+        id: outcomeFilter
+        width: 120
+        anchors.right: modeFilter.left
+        margin-right: 6
+
+      ComboBox
+        id: modeFilter
+        width: 120
+        anchors.right: parent.right
+
+
+    Panel
+      id: listContainer
+      anchors.top: filterRow.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: footer.top
+      margin-top: 6
+      border-width: 2
+      background-color: #2b1a0e
+      border-color-top: #222222
+      border-color-left: #222222
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+
+      UIScrollArea
+        id: historyScroll
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: vScroll.left  
+        anchors.bottom: parent.bottom
+        padding: 6
+        vertical-scrollbar: vScroll
+        margin-right: 2
+
+        Panel
+          id: historyList
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.right: parent.right
+          auto-resize-children: true
+          layout:
+            type: verticalBox
+            spacing: 4
+
+      VerticalScrollBar
+        id: vScroll
+        width: 12
+        step: 20
+        pixels-scroll: true
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+
+    UIWidget
+      id: footer
+      height: 34
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      Button
+        id: closeHistoryButton
+        text: Fechar
+        size: 120 28
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+InviteDialogWindow < Window
+  id: inviteDialog
+  size: 340 150
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Prompt
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10 10 10 10   # top right bottom left
+
+    Label
+      id: promptInfo
+      text: Digite o nome do jogador:
+      color: #E7D59A
+      height: 16
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+    TextEdit
+      id: inviteInput
+      placeholder: Nome do jogador
+      height: 26
+      anchors.top: promptInfo.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+
+    UIWidget
+      id: btnRow
+      height: 32
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      Button
+        id: inviteCancelButton
+        text: Cancelar
+        size: 120 28
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+
+      Button
+        id: inviteOkButton
+        text: Convidar
+        size: 120 28
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+InviteAskWindow < Window
+  id: inviteAskWindow
+  size: 360 140
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Convite PvP
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    Label
+      id: inviteAskText
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 60
+      text-wrap: true
+      text: "Fulano convidou você. Aceitar?"
+      color: #E7D59A
+
+    UIWidget
+      id: btnRow
+      height: 32
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      Button
+        id: inviteDeclineButton
+        text: Recusar
+        size: 120 28
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+
+      Button
+        id: inviteAcceptButton
+        text: Aceitar
+        size: 120 28
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+PvPTypeRow < UIWidget
+  height: 30
+  border-width: 1
+  border-color: #666666
+  padding-left: 4
+  padding-right: 4
+
+  CheckBox
+    id: check
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text: Option
+
+PvPOutfitSlot < UIWidget
+  width: 80
+  border-width: 2
+  background-color: #3b2412
+  border-color-top: #222222
+  border-color-left: #222222
+  border-color-bottom: #6e6e6e
+  border-color-right: #6e6e6e
+
+  UICreature
+    id: view
+    size: 50 50
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 6
+    old-scaling: true
+
+  Label
+    id: label
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-top: 4
+    text: -
+    text-align: center
+    color: #E7D59A
+
+  UIWidget
+    id: shade
+    anchors.fill: parent
+    background-color: #000000AA
+    visible: false
+
+
+Window
+  id: pvpWindow
+  text: ARENA PVP
+  size: 600 430
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: self:hide()
+
+  UIWidget
+    id: body
+    anchors.fill: parent
+    margin-bottom: 28
+    layout:
+      type: horizontalBox
+      spacing: 8
+
+    UIWidget
+      id: leftCol
+      width: 170
+      layout:
+        type: verticalBox
+        spacing: 8
+
+      UIWidget
+        id: playerCard
+        border-width: 2
+        background-color: #3b2412
+        border-color-top: #222222
+        border-color-left: #222222
+        border-color-bottom: #6e6e6e
+        border-color-right: #6e6e6e
+        height: 120
+
+        UIButton
+          id: playerInfoButton
+          text: "?"
+          width: 20
+          font: baby-20
+          height: 20
+          anchors.top: parent.top
+          anchors.right: parent.right
+          margin-top: 4
+          margin-right: 4
+          tooltip: Informações do jogador!
+          color: white
+          $hover:
+            color: #FFD700
+
+        UICreature
+          id: playerView
+          size: 82 82
+          anchors.top: parent.top
+          anchors.horizontalCenter: parent.horizontalCenter
+          margin-top: 6
+          old-scaling: true
+
+        UILabel
+          id: playerName
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: prev.bottom
+          text: Player
+          text-align: center
+          color: #E7D59A
+          margin-top: 4
+
+      Button
+        id: inviteButton
+        text: "Convidar Parceiro"
+        size: 50 20
+
+      Button
+        id: inviteEnemyButton
+        text: "Desafiar Jogador"
+        size: 50 20
+
+      Label
+        id: pvpTypeTitle
+        text: PVP TYPE
+        color: #E7D59A
+        text-align: center
+        height: 18
+
+      Panel
+        id: pvpTypeContainer
+        border-width: 2
+        background-color: #3b2412
+        border-color-top: #222222
+        border-color-left: #222222
+        border-color-bottom: #6e6e6e
+        border-color-right: #6e6e6e
+        height: 140
+
+        UIScrollArea
+          id: pvpTypeScrollArea
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.right: pvpTypeScrollBar.left
+          anchors.bottom: parent.bottom
+          vertical-scrollbar: pvpTypeScrollBar
+          padding: 6
+
+          Panel
+            id: pvpTypeMainPanel
+            anchors.top: parent.top
+            height: 300
+            anchors.left: parent.left
+            anchors.right: parent.right
+            fit-children: true
+            auto-resize-children: true
+            layout:
+              type: verticalBox
+              spacing: 6
+
+        VerticalScrollBar
+          id: pvpTypeScrollBar
+          step: 20
+          pixels-scroll: true
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.right: parent.right
+
+      UIWidget
+        id: leftSpacer
+        layout:
+          type: verticalBox
+
+    UIWidget
+      id: rightCol
+      size: 400 170
+      layout:
+        type: verticalBox
+        spacing: 8
+
+      Panel
+        id: teamsPanel
+        height: 260
+        padding: 7
+        border-width: 2
+        background-color: #2b1a0e
+        border-color-top: #222222
+        border-color-left: #222222
+        border-color-bottom: #6e6e6e
+        border-color-right: #6e6e6e
+
+        Label
+          id: teamsTitle
+          text: TIMES
+          color: #E7D59A
+          text-align: center
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.right: parent.right
+
+        UIWidget
+          id: teamsRow
+          anchors.top: teamsTitle.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          height: 90
+          margin-top: 6
+          layout:
+            type: horizontalBox
+            spacing: 8
+
+          PvPOutfitSlot
+            id: slotA1
+
+          PvPOutfitSlot
+            id: slotA2
+
+          UIWidget
+            id: vsBox
+            width: 30
+
+            Button
+              id: vsButton
+              anchors.horizontalCenter: parent.horizontalCenter
+              anchors.verticalCenter: parent.verticalCenter
+              text: X
+              size: 28 24
+
+          PvPOutfitSlot
+            id: slotB1
+
+          PvPOutfitSlot
+            id: slotB2
+
+        Label
+          id: typeSectionTitle
+          text: PVP Type
+          color: #E7D59A
+          text-align: center
+          anchors.top: teamsRow.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          margin-top: 6
+          height: 16
+
+        HorizontalSeparator
+          id: typeSectionSep
+          anchors.top: typeSectionTitle.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          margin-top: 4
+
+        UIWidget
+          id: optionsPanel
+          anchors.top: typeSectionSep.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.bottom: parent.bottom
+          margin-top: 6
+
+          Panel
+            id: betGoldRow
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            height: 30
+            padding-left: 6
+            padding-right: 6
+            border-width: 1
+            border-color: #666666
+            background-color: #3b2412
+
+            CheckBox
+              id: optGold
+              text: Gold
+              anchors.left: parent.left
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+
+            TextEdit
+              id: goldInput
+              width: 110
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+              text: ""
+              placeholder: Gold Value
+
+          Panel
+            id: betEloRow
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: betGoldRow.bottom
+            margin-top: 6
+            height: 30
+            padding-left: 6
+            padding-right: 6
+            border-width: 1
+            border-color: #666666
+            background-color: #3b2412
+
+            CheckBox
+              id: optElo
+              text: Elo
+              anchors.left: parent.left
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+
+            TextEdit
+              id: eloInput
+              width: 110
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+              text: ""
+              placeholder: Elo Value
+
+
+          Panel
+            id: betPointsRow
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: betEloRow.bottom
+            margin-top: 6
+            height: 30
+            padding-left: 6
+            padding-right: 6
+            border-width: 1
+            border-color: #666666
+            background-color: #3b2412
+
+            CheckBox
+              id: optPoints
+              text: Points
+              anchors.left: parent.left
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+
+            TextEdit
+              id: pointsInput
+              width: 110
+              anchors.right: parent.right
+              anchors.verticalCenter: parent.verticalCenter
+              text: ""
+              placeholder: Points Value
+
+      Panel
+        id: modesPanel
+        height: 78
+        padding: 7
+        border-width: 2
+        background-color: #2b1a0e
+        border-color-top: #222222
+        border-color-left: #222222
+        border-color-bottom: #6e6e6e
+        border-color-right: #6e6e6e
+
+        Label
+          id: modesTitle
+          text: MODO DE JOGO
+          color: #E7D59A
+          text-align: center
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.right: parent.right
+          height: 16
+
+        HorizontalSeparator
+          id: modesSep
+          anchors.top: modesTitle.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          margin-top: 4
+
+        Button
+          id: casualButton
+          text: "Casual\n(Sem perdas)"
+          size: 160 36
+          anchors.top: modesSep.bottom
+          anchors.left: parent.left
+          margin-top: 8
+
+        Button
+          id: rankedButton
+          text: "Ranked\n(Perde tudo)"
+          size: 160 36
+          anchors.top: modesSep.bottom
+          anchors.right: parent.right
+          margin-top: 8
+
+  Button
+    id: rankingButton
+    text: Ranking
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+  Button
+    id: closeButton
+    text: Fechar
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    @onClick: pvp.hide()
+
+  Button
+    id: historyButton
+    text: Histórico
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+QueueWindow < Window
+  id: queueWindow
+  size: 350 200
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Fila de Matchmaking
+  @onEscape: pvp.queueLeave()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    Label
+      id: queueTitleLabel
+      text: Fila de Matchmaking - Casual
+      color: #E7D59A
+      font: baby-14
+      text-align: center
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 18
+
+    Label
+      id: queueModeLabel
+      text: Modo: 1x1
+      color: #c8b894
+      text-align: center
+      anchors.top: queueTitleLabel.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+      height: 16
+
+    Panel
+      id: queueStatusBox
+      anchors.top: queueModeLabel.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 65
+      margin-top: 8
+      margin-bottom: 8
+      border-width: 2
+      background-color: #2b1a0e
+      border-color-top: #222222
+      border-color-left: #222222
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+      padding: 8
+
+      Label
+        id: queueStatusLabel
+        text: Procurando partida Casual (1x1)
+        color: #AEE07A
+        text-align: center
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 18
+
+      Label
+        id: queueTimeLabel
+        text: Tempo na fila: 00:00
+        color: #FFD58A
+        text-align: center
+        anchors.top: queueStatusLabel.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 6
+        height: 18
+
+  Button
+    id: queueLeaveButton
+    text: Sair da Fila
+    size: 100 22
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+
+PlayerInfoWindow < Window
+  id: playerInfoWindow
+  size: 405 405
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  text: Perfil do Jogador
+  @onEscape: self:hide()
+
+  UIWidget
+    id: content
+    anchors.fill: parent
+    margin: 10
+
+    UIWidget
+      id: header
+      height: 100
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      border-width: 2
+      background-color: #3b2412
+      border-color-top: #222222
+      border-color-left: #222222
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+      padding-left: 8
+      padding-right: 8
+
+      UICreature
+        id: infoAvatar
+        size: 80 80
+        anchors.top: parent.top
+        anchors.left: parent.left
+        margin-top: 8
+        margin-left: 8
+        old-scaling: true
+
+      UILabel
+        id: infoName
+        anchors.top: parent.top
+        anchors.left: infoAvatar.right
+        anchors.right: parent.right
+        height: 22
+        margin-left: 10
+        margin-top: 8
+        text: "Jogador"
+        color: #EFD9A3
+        font: baby-20
+
+      UIWidget
+        id: pill
+        height: 20
+        anchors.top: infoName.bottom
+        anchors.left: infoAvatar.right
+        anchors.right: parent.right
+        margin-left: 10
+        margin-top: 4
+        background-color: #2b1a0e
+        border-width: 1
+        border-color: #705334
+        padding-left: 8
+        padding-right: 8
+
+        UILabel
+          id: infoDivision
+          anchors.fill: parent
+          text-align: left
+          color: #c8b894
+          text: "Divisão: Bronze III (0 pts)"
+
+      UIWidget
+        id: progressBox
+        anchors.left: infoAvatar.right
+        anchors.right: parent.right
+        anchors.top: pill.bottom
+        margin-left: 10
+        margin-top: 8
+        height: 16
+        border-width: 1
+        border-color: #4c3a28
+        background-color: #201309
+
+        UIWidget
+          id: progressFill
+          anchors.left: parent.left
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          width: 0
+          background-color: #AEE07A
+
+        UILabel
+          id: progressText
+          anchors.fill: parent
+          text-align: center
+          color: #1f140b
+          text: "0% / Próxima"
+
+    Panel
+      id: metrics
+      anchors.top: header.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: footer.top
+      margin-top: 8
+      margin-bottom: 15
+      padding: 8
+      border-width: 2
+      background-color: #2b1a0e
+      border-color-top: #222222
+      border-color-left: #222222
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+
+      UILabel
+        id: labelCurStreak
+        text: "Streak Atual:"
+        color: #E7D59A
+        width: 120
+        height: 18
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+      UILabel
+        id: valueCurStreak
+        text: "0"
+        color: #FFD58A
+        height: 18
+        anchors.top: labelCurStreak.top
+        anchors.left: labelCurStreak.right
+        margin-left: 6
+
+      UILabel
+        id: labelBestStreak
+        text: "Melhor Streak:"
+        color: #E7D59A
+        width: 140
+        height: 18
+        anchors.top: labelCurStreak.top
+        anchors.left: valueCurStreak.right
+        margin-left: 16
+
+      UILabel
+        id: valueBestStreak
+        text: "0"
+        color: #FFD58A
+        height: 18
+        anchors.top: labelCurStreak.top
+        anchors.left: labelBestStreak.right
+        margin-left: 6
+
+      HorizontalSeparator
+        id: sep1
+        anchors.top: labelCurStreak.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+
+      UILabel
+        id: labelRankNow
+        text: "Divisão Atual:"
+        color: #E7D59A
+        width: 120
+        height: 18
+        anchors.top: sep1.bottom
+        anchors.left: parent.left
+        margin-top: 6
+
+      UILabel
+        id: valueRankNow
+        text: "Bronze III"
+        color: #FFD58A
+        height: 18
+        anchors.top: labelRankNow.top
+        anchors.left: labelRankNow.right
+        margin-left: 6
+
+      UILabel
+        id: labelPts
+        text: "Pontos:"
+        color: #E7D59A
+        width: 80
+        height: 18
+        anchors.top: labelRankNow.top
+        anchors.left: valueRankNow.right
+        margin-left: 16
+
+      UILabel
+        id: valuePts
+        text: "0"
+        color: #FFD58A
+        height: 18
+        anchors.top: labelRankNow.top
+        anchors.left: labelPts.right
+        margin-left: 6
+
+      HorizontalSeparator
+        id: sep2
+        anchors.top: labelRankNow.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+
+      UILabel
+        id: labelBestPartnerTitle
+        text: "Melhor Parceiro:"
+        color: #E7D59A
+        width: 140
+        height: 18
+        anchors.top: sep2.bottom
+        anchors.left: parent.left
+        margin-top: 6
+
+      UILabel
+        id: valueBestPartner
+        text: "-"
+        color: #FFD58A
+        height: 18
+        anchors.top: labelBestPartnerTitle.top
+        anchors.left: labelBestPartnerTitle.right
+        anchors.right: parent.right
+        margin-left: 6
+
+      HorizontalSeparator
+        id: sep3
+        anchors.top: labelBestPartnerTitle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+
+      UILabel
+        id: seasonBlock
+        anchors.top: sep3.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        margin-top: 6
+        text: "Temporada X:\n- Melhor divisão: -\n- Maior pontos: -\n- Best streak: -\n- Melhor parceiro: -"
+        color: #c8b894
+
+    UIWidget
+      id: footer
+      height: 30
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+
+      Button
+        id: closePlayerInfoButton
+        text: Fechar
+        size: 132 28
+        anchors.horizontalCenter: parent.horizontalCenter

@@ -1,0 +1,79 @@
+Window
+  id: guildInputWindow
+  size: 200 150
+  anchors.centerIn: parent
+  padding: 10
+  visible: true
+  @onEscape: onGuildInputCancel()
+
+  Label
+    id: titleLabel
+    width: 80
+    text: "Guild Input"
+    text-offset: 0 -5
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 5
+
+  Label
+    id: promptLabel
+    text: "Digite o nome da guilda:"
+    anchors.top: titleLabel.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 5
+
+  TextEdit
+    id: guildNameEdit
+    anchors.top: promptLabel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 2
+    
+  UIWidget
+    id: joinListPanel
+    visible: false      
+    anchors.top: guildNameEdit.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: okButton.top
+    margin-top: 6
+    margin-bottom: 8
+
+  Label
+    id: warningLabel
+    text: ""
+    height: 35
+    anchors.top: joinListPanel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.horizontalCenter: parent.horizontalCenter
+    color: #FF0000
+    visible: false
+    wrap: true
+    text-align: center
+
+  UIButton
+    id: okButton
+    text: "OK"
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 25
+    @onClick: onGuildInputOK()
+    opacity: 0.7
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7
+
+  UIButton
+    id: cancelButton
+    text: "Cancelar"
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 25
+    @onClick: onGuildInputCancel()
+    opacity: 0.7
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7

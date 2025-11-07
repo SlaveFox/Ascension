@@ -1,0 +1,113 @@
+AlarmsWindow < MainWindow
+  !text: tr('Alarms')
+  size: 270 200
+  @onEscape: self:hide()
+
+  Label
+    id: playerAttack
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: parent.top
+    text-align: center
+    text: 
+
+  BotSwitch
+    id: playerpk
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: parent.top
+    text-align: center
+    text: Player PK
+
+  BotSwitch
+    id: playerDetected
+    anchors.left: parent.left
+    anchors.right: parent.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 4
+    text-align: center
+    text: Player na tela
+
+  CheckBox
+    id: playerDetectedLogout
+    anchors.top: playerDetected.top
+    anchors.left: parent.horizontalCenter
+    anchors.right: parent.right
+    margin-top: 3
+    margin-left: 4
+    text: Logout
+
+  BotSwitch
+    id: creatureDetected
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: playerDetected.bottom
+    margin-top: 4
+    text-align: center
+    text: Monstro na tela
+
+  BotSwitch
+    id: healthBelow
+    anchors.left: parent.left
+    anchors.top: prev.bottom
+    anchors.right: parent.horizontalCenter
+    text-align: center
+    margin-top: 4
+    text: vida < 50%
+
+  HorizontalScrollBar
+    id: healthValue
+    anchors.left: parent.horizontalCenter
+    anchors.right: parent.right
+    anchors.top: healthBelow.top
+    margin-left: 3
+    margin-top: 2
+    minimum: 1
+    maximum: 100
+    step: 1
+
+  BotSwitch
+    id: manaBelow
+    anchors.left: parent.left
+    anchors.top: healthBelow.bottom
+    anchors.right: parent.horizontalCenter
+    text-align: center
+    margin-top: 4
+    text: Mana < 50%
+
+  HorizontalScrollBar
+    id: manaValue
+    anchors.left: parent.horizontalCenter
+    anchors.right: parent.right
+    anchors.top: manaBelow.top
+    margin-left: 3
+    margin-top: 2
+    minimum: 1
+    maximum: 100
+    step: 1
+
+  BotSwitch
+    id: privateMessage
+    anchors.left: parent.left
+    anchors.top: manaBelow.bottom
+    anchors.right: parent.right
+    text-align: center
+    margin-top: 4
+    text: Mensagem no privado
+
+  HorizontalSeparator
+    id: separator
+    anchors.right: parent.right
+    anchors.left: parent.left
+    anchors.bottom: closeButton.top
+    margin-bottom: 8    
+
+  Button
+    id: closeButton
+    !text: tr('Fechar')
+    font: cipsoftFont
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    size: 45 21
+    margin-top: 15
+    margin-right: 5

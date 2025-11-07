@@ -1,0 +1,129 @@
+MenuButton < UIButton
+  size: 45 45
+  change-cursor-image: true
+  cursor: pointer
+  opacity: 0.8
+  $hover:
+    opacity: 1
+
+UIWidget
+  id: window2
+  size: 250 215
+  phantom: true
+  visible: false
+  image-source: images/extramenu
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.top: parent.top
+  margin-top: 60
+  margin-left: 180
+  padding-left: 13
+  focusable: false
+  phantom: true
+    // Primeira Linha de Botoes
+  MenuButton
+    !tooltip: tr('Power Up')
+    image-source: /images/topbuttons/powerup
+    anchors.top: parent.top
+    anchors.left: parent.left
+    @onClick: modules.game_powerup.exibir()
+    margin-top: 25
+  MenuButton
+    !tooltip: tr('Inventario')
+    image-source: /images/topbuttons/inventory
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_inventory.toggle()
+    margin-top: 25
+  MenuButton
+    !tooltip: tr('Player Info')
+    image-source: /images/topbuttons/stats
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_skills.toggle()
+    margin-top: 25
+  MenuButton
+    !tooltip: tr('Class Info')
+    image-source: /images/topbuttons/classinfo
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_classSystem.toggleClassSystemWindow()
+    margin-top: 25
+  MenuButton
+    !tooltip: tr('Profile')
+    image-source: /images/topbuttons/profile
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_inspect.inspect(g_game.getLocalPlayer():getName())
+    margin-top: 25
+  MenuButton
+    !tooltip: tr('Craft')
+    image-source: /images/topbuttons/craft
+    anchors.top: parent.top
+    anchors.left: parent.left
+    @onClick: modules.game_crafting.toggle()
+    margin-top: 69
+  MenuButton
+    !tooltip: tr('Mission Interface')
+    image-source: /images/topbuttons/tasks
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_missionInterface.MissionInterface.toggle()
+    margin-top: 69
+  MenuButton
+    !tooltip: tr('Resgatar Code')
+    image-source: /images/topbuttons/code
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_code.exibir()
+    margin-top: 69
+  MenuButton
+    !tooltip: tr('Bot')
+    image-source: /images/topbuttons/bot
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_bot.toggle()
+    margin-top: 69
+  MenuButton
+    !tooltip: tr('Tier')
+    image-source: /images/topbuttons/tier
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_tier.toggleTierWindow()
+    margin-top: 69
+  MenuButton
+    !tooltip: tr('Chests')
+    image-source: /images/topbuttons/chest
+    anchors.top: parent.top
+    anchors.left: parent.left
+    @onClick: modules.game_chest.exibir()
+    margin-top: 110
+  MenuButton
+    !tooltip: tr('Alliance')
+    image-source: /images/topbuttons/alliance
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_alliance.toggleAllianceWindow()
+    margin-top: 110
+  MenuButton
+    !tooltip: tr('Vocations')
+    image-source: /images/topbuttons/vocation
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_vocation.sendInfo()
+    margin-top: 110
+  MenuButton
+    !tooltip: tr('Guild Management')
+    image-source: /images/topbuttons/guild
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_guildManagement.toggleGuildManagementWindow()
+    margin-top: 110
+  MenuButton
+    !tooltip: tr('Ranking Info')
+    size: 45 45 
+    image-source: /images/topbuttons/ranking
+    anchors.top: parent.top
+    anchors.left: prev.right
+    @onClick: modules.game_rankings.toggleRankingsWindow()
+    margin-top: 110
+

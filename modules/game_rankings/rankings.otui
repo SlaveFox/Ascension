@@ -1,0 +1,114 @@
+CreatureOutfit < UIWidget
+  size: 48 48
+
+  UICreature
+    id: outfitBox
+    size: 64 64
+    anchors.centerIn: parent
+
+Window
+  id: rankingsWindow
+  size: 400 460
+  !text: tr('Rankings') 
+  text-offset: 0 1
+  @onEscape: self:hide()
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+
+  ComboBox
+    id: skillComboBox
+    options: ["level", "magic level", "fist", "distance", "sword", "axe", "club", "shield", "Elo Ranking", "Last Deaths"]
+    selected: "level"
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    width: 200
+    height: 24
+    border-width: 1
+    border-color: #aaaaaa
+    background-color: #2b2b2b
+
+  Panel
+    id: rankingScrollContainer
+    anchors.top: skillComboBox.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    height: 360
+    padding: 5
+    border-width: 1
+    border-color: #444444
+    background-color: #121212
+    radius: 8
+
+    VerticalScrollBar
+      id: rankingScrollBar
+      step: 18
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+
+    ScrollablePanel
+      id: rankingScroll
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: rankingScrollBar.left
+      vertical-scrollbar: rankingScrollBar
+      layout:
+        type: verticalBox
+        spacing: 5
+    
+  Button
+    id: closeButton
+    text: "Fechar"
+    width: 80
+    height: 24
+    anchors.top: rankingScrollContainer.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 5
+    @onClick: self:getParent():hide()
+    opacity: 0.8
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7
+
+RankEntry < Panel
+  size: 360 48
+  padding: 4
+  layout:
+    type: horizontalBox
+    spacing: 6
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+
+  Label
+    id: rankLabel
+    text: "#1"
+    color: #FFFFFF
+    text-align: center
+    width: 30
+    height: 32
+    margin-top: 4
+
+  CreatureOutfit
+    id: outfitWidget
+
+  Label
+    id: nameLabel
+    text: "Jogador"
+    color: #FFFFFF
+    width: 160
+    height: 32
+    text-align: left
+    margin-top: 4
+
+  Label
+    id: valueLabel
+    text: "150"
+    color: #AAAAAA
+    width: 70
+    height: 32
+    text-align: right
+    margin-top: 4

@@ -1,0 +1,441 @@
+OffsetWindow < MainWindow
+  id: OffsetWindow
+  size: 500 582
+  text: Offset Fixer
+  draggable: true
+  focusable: true
+  anchors.centerIn: parent
+
+  Label
+    id: idLabel
+    !text: tr('ID:')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 45
+    margin-left: 60
+
+  TextEdit
+    id: idInput
+    size: 86 24
+    anchors.left: idLabel.right
+    anchors.top: idLabel.top
+    margin-left: 10
+    background-color: #000000
+    border-color: #00991b
+    border-width: 1
+
+    $!text-color:
+      color: #00991b
+
+  Label
+    id: subidLabel
+    !text: tr('SUB ID:')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 15
+    margin-left: 35
+
+  TextEdit
+    id: subIdInput
+    size: 86 24
+    anchors.left: subidLabel.right
+    anchors.top: subidLabel.top
+    margin-left: 10
+    background-color: #000000
+    border-color: #00991b
+    border-width: 1
+
+    $!text-color:
+      color: #00991b
+
+  ComboBox
+    id: offsetComboBox
+    width: 100
+    anchors.left: idInput.right
+    anchors.top: idInput.top
+    margin-left: 20
+
+  ComboBox
+    id: displacementTypeComboBox
+    width: 160
+    anchors.left: offsetComboBox.right
+    anchors.top: offsetComboBox.top
+    margin-left: 10
+    !text: tr('Select Displacement Type')
+
+  ComboBox
+    id: effectOpacityComboBox
+    width: 140
+    anchors.left: offsetComboBox.right
+    anchors.top: offsetComboBox.top
+    margin-left: 10
+    visible: false
+    !text: tr('Effect or Item Mode')
+    @onOptionChange: OffsetManager.toggleOpacityMode()
+
+  Panel
+    id: preview
+    anchors.top: effectOpacityComboBox.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 25
+    size: 448 224
+    clipping: true
+
+    Panel
+      id: floor
+      anchors.centerIn: parent
+      size: 448 224
+      border: 4 #110c0a
+      background-color: #1a1a1a
+      layout: "anchor"
+
+      ChaseModeBox
+        id: movement
+        anchors.top: parent.top
+        anchors.left: parent.left
+        margin-top: 5
+        margin-left: 5
+        image-color: #dfdfdf
+        tooltip: Enable/Disable movement animation
+
+        $hover:
+          image-color: #ffffff
+
+      UIItem
+        id: itemView
+        size: 128 128
+        margin-right: 35
+        margin-bottom: 30
+        anchors.centerIn: parent
+
+      UIWidget
+        id: effectView
+        size: 64 64
+        anchors.centerIn: parent
+        phantom: true
+
+      UICreature
+        id: outfitView
+        anchors.centerIn: parent
+        size: 96 96 
+        margin-right: 10
+        margin-bottom: 1
+        outfit-shader: outfit_default
+
+  Panel
+    id: OpacityPanel
+    size: 250 18
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: preview.bottom
+    margin-top: 10
+    visible: false
+
+    Label
+      id: opacityLabel
+      !text: tr('Opacity:')
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 5
+      margin-left: 35
+
+    TextEdit
+      id: opacityInput
+      size: 86 24
+      anchors.left: opacityLabel.right
+      anchors.top: opacityLabel.top
+      margin-left: 5
+      margin-top: -3
+      background-color: #000000
+      border-color: #00991b
+      border-width: 1
+
+      $!text-color:
+        color: #00991b
+
+  Panel
+    id: OffsetPanel
+    size: 250 18
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: OpacityPanel.bottom
+    margin-top: 10
+    margin-left: -35
+
+    Label
+      id: offsetXLabel
+      !text: tr('Offset X:')
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 5
+
+    TextEdit
+      id: offsetX
+      size: 86 24
+      anchors.left: offsetXLabel.right
+      anchors.top: offsetXLabel.top
+      margin-left: 5
+      margin-top: -3
+      background-color: #000000
+      border-color: #00991b
+      border-width: 1
+
+      $!text-color:
+        color: #00991b
+
+    Label
+      id: offsetYLabel
+      !text: tr('Offset Y:')
+      anchors.left: offsetX.right
+      anchors.top: offsetXLabel.top
+      margin-left: 10
+
+    TextEdit
+      id: offsetY
+      size: 86 24
+      anchors.left: offsetYLabel.right
+      anchors.top: offsetYLabel.top
+      margin-left: 5
+      margin-top: -3
+      background-color: #000000
+      border-color: #00991b
+      border-width: 1
+
+      $!text-color:
+        color: #00991b
+
+  Panel
+    id: OpacityOutfit
+    size: 480 18
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: preview.bottom
+    margin-top: 10
+
+    Label
+      id: opacityLabel
+      !text: tr('Opacity:')
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 5
+      margin-left: 158
+
+    TextEdit
+      id: opacityInput
+      size: 86 24
+      anchors.left: opacityLabel.right
+      anchors.top: opacityLabel.top
+      margin-left: 5
+      margin-top: -3
+      background-color: #000000
+      border-color: #00991b
+      border-width: 1
+
+      $!text-color:
+        color: #00991b
+
+    CheckBox
+      id: subOutfitCheckBox
+      anchors.left: opacityLabel.left
+      anchors.top: opacityLabel.top
+      margin-left: -140
+      margin-top: -10
+      @onClick: OffsetManager.toggleSubOutfitDisplacement()
+
+    Label
+      id: subOutfitLabel
+      !text: tr('offset, wings etc')
+      anchors.left: subOutfitCheckBox.right
+      anchors.top: subOutfitCheckBox.top
+      margin-left: 3
+      margin-top: -1
+
+  Label
+    id: directionsLabel
+    !text: tr('Directions')
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: OffsetPanel.bottom
+    margin-top: 15
+
+  UIWidget
+    id: upButton
+    size: 42 42
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+    margin-top: -150
+    opacity: 1.0
+    image-source: /game_offset/images/cima
+    @onClick: OffsetManager.onUp()
+    $hover:
+      opacity: 0.7
+    $pressed:
+      opacity: 0.5
+
+  UIWidget
+    id: downButton
+    size: 42 42
+    anchors.horizontalCenter: upButton.horizontalCenter
+    anchors.top: upButton.bottom
+    margin-top: 130
+    opacity: 1.0
+    image-source: /game_offset/images/baixo
+    @onClick: OffsetManager.onDown()
+    $hover:
+      opacity: 0.7
+    $pressed:
+      opacity: 0.5
+
+  UIWidget
+    id: leftButton
+    size: 42 42
+    anchors.right: upButton.left
+    anchors.verticalCenter: upButton.verticalCenter
+    margin-right: 155
+    margin-top: 82
+    opacity: 1.0
+    image-source: /game_offset/images/esquerda
+    @onClick: OffsetManager.onLeft()
+    $hover:
+      opacity: 0.7
+    $pressed:
+      opacity: 0.5
+
+  UIWidget
+    id: rightButton
+    size: 42 42
+    anchors.left: upButton.right
+    anchors.verticalCenter: upButton.verticalCenter
+    margin-left: 155
+    margin-top: 82
+    opacity: 1.0
+    image-source: /game_offset/images/direita
+    @onClick: OffsetManager.onRight()
+    $hover:
+      opacity: 0.7
+    $pressed:
+      opacity: 0.5
+
+  UIWidget
+    id: ResetButton
+    size: 47 47
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: directionsLabel.top
+    margin-top: 15
+    margin-left: 100
+    opacity: 1.0
+    @onClick: OffsetManager.resetOffset()
+    $hover:
+      opacity: 0.7
+    $pressed:
+      opacity: 0.5
+
+  Panel
+    id: DirectionsPanel
+    size: 230 50
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: directionsLabel.bottom
+    margin-top: 10
+
+    UIWidget
+      id: imageLeft
+      size: 16 16
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-left: 30
+
+    CheckBox
+      id: checkLeft
+      size: 16 16
+      anchors.top: imageLeft.bottom
+      anchors.horizontalCenter: imageLeft.horizontalCenter
+      margin-top: 2
+      margin-left: 2
+      @onClick: OffsetManager.toggleDirection('left')
+
+    UIWidget
+      id: imageUp
+      size: 16 16
+      anchors.left: imageRight.right
+      anchors.top: parent.top
+      margin-left: 30
+
+    CheckBox
+      id: checkUp
+      size: 16 16
+      anchors.top: imageUp.bottom
+      anchors.horizontalCenter: imageUp.horizontalCenter
+      margin-top: 2
+      margin-left: 0
+      @onClick: OffsetManager.toggleDirection('up')
+
+    UIWidget
+      id: imageDown
+      size: 16 16
+      anchors.left: checkUp.right
+      anchors.top: parent.top
+      margin-left: 30
+
+    CheckBox
+      id: checkDown
+      size: 16 16
+      anchors.top: imageDown.bottom
+      anchors.horizontalCenter: imageDown.horizontalCenter
+      margin-top: 2
+      margin-left: 0
+      @onClick: OffsetManager.toggleDirection('down')
+
+    UIWidget
+      id: imageRight
+      size: 16 16
+      anchors.left: checkLeft.right
+      anchors.top: parent.top
+      margin-left: 30
+
+    CheckBox
+      id: checkRight
+      size: 16 16
+      anchors.top: imageRight.bottom
+      anchors.horizontalCenter: imageRight.horizontalCenter
+      margin-top: 2
+      margin-left: 0
+      @onClick: OffsetManager.toggleDirection('right')
+
+  Panel
+    id: buttonPanel
+    size: 350 70
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    margin-bottom: 1
+
+    Button
+      id: saveButton
+      size: 100 30
+      anchors.right: viewButton.left
+      anchors.top: viewButton.top
+      margin-right: 10
+      !text: tr('Apply')
+      @onClick: OffsetManager.saveOffset()
+
+    Button
+      id: viewButton
+      size: 100 30
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      margin-left: 10
+      !text: tr('View')
+      @onClick: OffsetManager.viewOffset()
+
+    Button
+      id: fecharButton
+      size: 100 30
+      anchors.horizontalCenter: viewButton.horizontalCenter
+      anchors.top: viewButton.bottom
+      margin-top: 10
+      !text: tr('Close')
+      @onClick: OffsetManager.toggle()
+
+    Button
+      id: deleteButton
+      size: 100 30
+      anchors.left: viewButton.right
+      anchors.top: viewButton.top
+      margin-left: 10
+      !text: tr('Delete')
+      @onClick: OffsetManager.deleteOffset()

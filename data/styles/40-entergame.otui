@@ -1,0 +1,6 @@
+EnterGameWindow < StaticMainWindow
+  size: 350 480
+  text: Login Account
+  font: baby-14
+  text-offset: 0 1
+  color: #FFD700

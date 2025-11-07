@@ -1,0 +1,31 @@
+UIWindow
+  id: resultWindow
+  size: 320 240
+  anchors.centerIn: parent
+  modal: true
+  movable: true
+  padding: 10
+  image-source: assets/window2
+
+  UIItem
+    id: itemDisplay
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 30
+    size: 64 64
+
+  UILabel
+    id: resultText
+    anchors.top: itemDisplay.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 20
+    font: baby-20
+    color: white
+
+  Button
+    id: closeButton
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 20
+    text: "Fechar"
+    @onClick: modules.game_rolette.naoexibir()

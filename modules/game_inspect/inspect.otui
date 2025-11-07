@@ -1,0 +1,723 @@
+MiniPanel < Panel
+  text-offset: 0 2
+  text-align: top
+  image-source: /images/ui/panel_bottom
+  image-border: 4
+  image-border-top: 20
+  image-border-bottom: 4
+  padding-left: 4
+  padding-bottom: 3
+  padding-top: 18
+  padding-right: 2
+
+HealthBar < ProgressBar
+  //image-source: /images/ui/progressbarhplife
+  image-border: 3
+  background-color: #ff4444
+
+ManaBar < ProgressBar
+  //image-source: /images/ui/progressbarhpmana
+  image-border: 4
+  background-color: #4444ff
+
+InspectSkillName < GameLabel
+  font: verdana-11px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  text: Magic Level
+
+InspectSkillValue < GameLabel
+  id: value
+  font: verdana-11px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+  text: 9
+
+InspectSkillBar < ProgressBar
+  id: percent
+  background-color: green
+  height: 5
+  margin-top: 15
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.top: parent.top
+  phantom: false
+
+MainWindow
+  id: inspectWindow
+  !text: 'Player Inspect'
+  size: 764 520
+  @onEscape: modules.game_inspect.toggle()
+
+  MiniPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 130 110
+    text: Outfit
+
+    UICreature
+      id: outfitInspectBox
+      size: 110 80
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-left: 10
+      fixed-creature-size: true
+
+  MiniPanel
+    anchors.top: parent.top
+    anchors.left: prev.right
+    size: 192 140
+    margin-left: 10
+    text: Basic Info
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Name:
+
+      Label
+        id: name
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: right
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Guild:
+
+      Label
+        id: guild
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: right
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Vocation:
+
+      Label
+        id: vocation
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: right
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Class:
+
+      Label
+        id: className
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: right
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Tier:
+
+      Label
+        id: tierStar
+        anchors.top: parent.top
+        anchors.right: parent.right
+        image-source: images/stars/Prata.png
+        color: #00000000
+        width: 60
+
+    HealthBar
+      id: healthBar
+      margin-top: 5
+      text: 100 / 100
+    
+    ManaBar
+      id: manaBar
+      margin-top: 2
+      text: 100 / 100
+      
+
+  MiniPanel
+    anchors.top: parent.top
+    anchors.left: prev.right
+    size: 192 140
+    margin-left: 10
+    text: Character Info
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Level:
+
+      Label
+        id: level
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Experience:
+
+      Label
+        id: exp
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Nation:
+
+      Label
+        id: Nacao
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Graduation:
+
+      Label
+        id: Graduacao
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Total Frags:
+
+      Label
+        id: doubleLoot
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: PowerUp Points:
+
+      Label
+        id: upgrade
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Graduation Points:
+
+      Label
+        id: graduation
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Alliance:
+
+      Label
+        id: attackSpeedBase
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+  MiniPanel
+    id: inventoryPanel
+    text: Inventory
+    anchors.top: prev.bottom
+    anchors.bottom: separator.top
+    anchors.left: parent.left
+    margin-top: 10
+    margin-bottom: 10
+    width: 130
+    
+    HeadSlot
+      anchors.top: parent.top
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 3
+
+    BodySlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    LegSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    FeetSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    NeckSlot
+      anchors.top: slot1.top
+      anchors.right: slot1.left
+      margin-top: 13
+      margin-right: 5
+
+    LeftSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    FingerSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    BackSlot
+      anchors.top: slot1.top
+      anchors.left: slot1.right
+      margin-top: 13
+      margin-left: 5
+
+    RightSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+    AmmoSlot
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: prev.horizontalCenter
+      margin-top: 3
+
+  MiniPanel
+    anchors.top: prev.top
+    anchors.bottom: separator.top
+    anchors.left: prev.right
+    size: 192 110
+    margin-bottom: 10
+    margin-left: 10
+    text: Skills
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    Panel
+      id: skill12
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Magic Level
+      InspectSkillValue
+        id: textMagic
+        text: 9
+      InspectSkillBar
+        background-color: red
+
+    Panel
+      id: skill1
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Fist Fighting
+      InspectSkillValue
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: skill2
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Club Fighting
+      InspectSkillValue
+      InspectSkillBar
+
+    Panel
+      id: skill3
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Sword Fighting
+      InspectSkillValue
+      InspectSkillBar
+
+    Panel
+      id: skill4
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Axe Fighting
+      InspectSkillValue
+      InspectSkillBar
+
+    Panel
+      id: skill5
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Distance Fighting
+      InspectSkillValue
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: skill6
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Shielding
+      InspectSkillValue
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: skill7
+      margin-top: 3
+      height: 21
+      phantom: false
+      InspectSkillName
+        text: Fishing
+      InspectSkillValue
+        text: 9
+      InspectSkillBar
+
+  MiniPanel
+    id: Account
+    anchors.top: prev.top
+    anchors.bottom: separator.top
+    anchors.left: prev.right
+    size: 192 110
+    margin-bottom: 30
+    margin-left: 10
+    text: Account Info
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+    visible: false
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Premium Points:
+
+      Label
+        id: premium
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Events Points:
+
+      Label
+        id: events
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: Frags Today:
+
+      Label
+        id: pk
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      height: 14
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: VIP Days:
+
+      Label
+        id: vipdays
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text-align: right
+        text-auto-resize: true
+
+    Panel
+      id: deathPanel
+      height: 110
+      margin-top: 5
+      layout: verticalBox
+
+      Label
+        text: Mortes Recentes
+        color: yellow
+
+      Panel
+        id: deathScrollContainer
+        height: 100
+        padding: 3
+
+        VerticalScrollBar
+          id: deathScrollBar  
+          step: 18
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.right: parent.right
+          visible: false
+
+        ScrollablePanel
+          id: deathScroll
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.left: parent.left
+          anchors.right: deathScrollBar.left
+          vertical-scrollbar: deathScrollBar
+          layout:
+            type: verticalBox
+            spacing: 2
+
+  MiniPanel
+    anchors.top: parent.top
+    anchors.left: prev.right
+    size: 192 310
+    margin-left: 10
+    text: Stats
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    Panel
+      id: stat2
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Health Bonus
+      InspectSkillValue
+        id: stat2Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat3
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Mana Bonus
+      InspectSkillValue
+        id: stat3Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat6
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Damage
+      InspectSkillValue
+        id: stat6Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat7
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Defense
+      InspectSkillValue
+        id: stat7Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat5
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Healing Bonus
+      InspectSkillValue
+        id: stat5Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat12
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Speed Bonus
+      InspectSkillValue
+        id: stat12Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat1
+      phantom: false
+      height: 21
+      InspectSkillName
+        text: Critical Chance
+      InspectSkillValue
+        id: stat1Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat4
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Critical Damge Bonus
+      InspectSkillValue
+        id: stat4Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat8
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Roubo de Health
+      InspectSkillValue
+        id: stat8Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat9
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Roubo de Chakra
+      InspectSkillValue
+        id: stat9Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat13
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Regeneration Bonus
+      InspectSkillValue
+        id: stat13Text
+        text: 9
+      InspectSkillBar
+
+    Panel
+      id: stat14
+      phantom: false
+      margin-top: 3
+      height: 21
+      InspectSkillName
+        text: Chakra Regeneration
+      InspectSkillValue
+        id: stat14Text
+        text: 9
+      InspectSkillBar
+
+  HorizontalSeparator
+    id: separator
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-bottom: 30
+
+  Button
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    text: Close
+    width: 60
+    @onClick: modules.game_inspect.hide()
+
+  OptionCheckBox
+    id: ShowItems
+    !text: tr('Show Items')	
+    !tooltip: tr('Mostrar/Ocultar os itens para os players')	
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 10
+    color: white
+    width: 100

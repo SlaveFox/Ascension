@@ -1,0 +1,237 @@
+WeekWidget < UIWidget
+  size: 62 24
+  anchors.top: parent.top
+  anchors.left: parent.left
+  image-source: images/flat_day
+  text-align: center
+  image-border: 2
+  font: verdana-11px-rounded
+
+DayWidget < UIWidget
+  size: 62 55
+  anchors.top: parent.top
+  anchors.left: parent.left
+  image-source: images/slot
+
+  UIWidget
+    id: name
+    size: 62 55
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-offset: 42 -30
+    font: verdana-11px-rounded
+    virtual: true
+    phantom: true
+
+  UIItem
+    id: item
+    size: 32 32
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 15
+    margin-bottom: 5
+    phantom: true
+
+  UIWidget
+    id: mask
+    size: 62 55
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    visible: false
+    phantom: true
+
+DRShopWidget < UIWidget
+  size: 150 60
+  image-source: images/slotshop
+  image-border: 3
+  margin-right: 20
+  margin-top: 20
+  font: verdana-11px-rounded
+
+  UIItem
+    id: item
+    virtual: true
+    size: 32 32
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: parent.left
+    margin-left: 0
+    phantom: true
+  UIWidget
+    id: name
+    anchors.top: parent.top
+    anchors.left: item.right
+    margin-left: 5
+    margin-top: 10
+    font: verdana-11px-rounded
+    phantom: true
+  UIWidget
+    id: price
+    anchors.bottom: parent.bottom
+    anchors.left: item.right
+    margin-left: 5
+    margin-bottom: 10
+    font: verdana-11px-rounded
+    phantom: true
+  UIButton
+    id: buy
+    size: 42 35
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 2
+    !tooltip: tr("Comprar")
+    image-source: images/buy
+    image-clip: 0 0 50 50
+
+    $hover !on:
+      image-clip: 50 0 50 50
+    $pressed !on:
+      image-clip: 100 0 50 50
+
+ShopPanel < ScrollablePanel
+  id: shopPanel
+  size: 475 400
+  anchors.top: calendarButton.bottom
+  anchors.horizontalCenter: parent.horizontalCenter
+  margin-top: 10
+  visible: false
+  vertical-scrollbar: shopScrollBar
+  layout:
+    type: grid
+    cell-size: 225 85
+    cell-spacing: 1
+    num-columns: 2
+
+ShopScrollBar < VerticalScrollBar
+  id: shopScrollBar
+  width: 15
+  anchors.top: shopPanel.top
+  anchors.bottom: shopPanel.bottom
+  anchors.right: shopPanel.right
+  margin: 3
+  step: 48
+  pixels-scroll: true
+  visible: false
+
+MonthPanel < UIWidget
+  id: monthPanel
+  size: 475 400
+  anchors.top: parent.top
+  anchors.horizontalCenter: parent.horizontalCenter
+  margin-top: 30
+
+  UIWidget
+    id: month
+    height: 20
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    text-auto-resize: true
+
+  UIWidget
+    id: prevMonth
+    size: 27 24
+    image-source: images/anterior
+    anchors.top: parent.top
+    anchors.left: parent.left
+    @onClick: requestCalendar(-1)
+    opacity: 0.8
+    $hover:
+      opacity: 1.0
+    
+    $pressed:
+      opacity: 0.9
+
+  UIWidget
+    id: nextMonth
+    size: 28 24
+    image-source: images/next
+    anchors.top: parent.top
+    anchors.right: parent.right
+    @onClick: requestCalendar(1)
+    opacity: 0.8
+    $hover:
+      opacity: 1.0
+    
+    $pressed:
+      opacity: 0.9
+
+  UIWidget
+    id: days
+    size: 475 370
+    anchors.top: month.bottom
+    margin-top: 10
+    anchors.horizontalCenter: parent.horizontalCenter
+
+CalendarButton < UIButton
+  id: calendarButton
+  image-source: images/buttons
+  anchors.top: parent.top
+  anchors.left: parent.left
+  margin: 10 0 0 10
+  size: 80 20
+  !text: tr("Calendario")
+  !tooltip: tr("Calendário")
+  @onClick: showCalendar()
+
+ShopButton < UIButton
+  id: shopButton
+  image-source: images/buttons
+  size: 80 20
+  anchors.top: parent.top
+  anchors.left: calendarButton.right
+  margin: 10 0 0 10
+  !text: tr("Shop")
+  !tooltip: tr("Shop")
+  @onClick: showShop()
+
+
+DRPoints < UIWidget
+  id: points
+  size: 130 20
+  margin: 10 10 0 0
+  anchors.top: parent.top
+  anchors.right: parent.right
+  image-source: images/buttons
+  !tooltip: tr("Points")
+
+CloseButton < UIWidget
+  id: close
+  size: 20 21
+  image-source: images/close
+  anchors.bottom: parent.bottom
+  anchors.right: parent.right
+  margin-right: 246
+  margin-bottom: 12
+  @onClick: self:getParent():hide()
+  opacity: 0.8
+  $hover:
+    opacity: 1.0
+  $pressed:
+    opacity: 0.9
+
+UIWindow
+  id: calendar
+  size: 511 502
+  anchors.centerIn: parent
+  image-source: images/background
+  padding: 0
+  draggable: true
+  save: true
+  focusable: true
+
+  ProgressBar
+    width: 200
+    id: progressBar
+    anchors.top: parent.top
+    anchors.left: parent.right
+    margin-left: -500
+    margin-top: 440
+
+  CalendarButton
+  ShopButton
+  DRPoints
+  CloseButton
+  MonthPanel
+  //RewardWidget
+  ShopPanel
+  ShopScrollBar

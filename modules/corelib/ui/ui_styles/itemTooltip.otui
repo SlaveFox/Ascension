@@ -1,0 +1,46 @@
+TooltipLabel < Label
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  text-align: center
+
+TooltipSeparator < HorizontalSeparator
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin-top: 3
+
+TooltipEmpty < UIWidget
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  phantom: true
+
+ItemTooltipPanel < Panel
+  id: itemTooltipWidget
+  anchors.fill: parent
+  padding: 5
+
+  Label
+    id: itemWeightLabel
+    font: ava
+    anchors.top: parent.top
+    anchors.right: parent.right
+    text-auto-resize: true
+    margin-top: 5
+    margin-right: 5
+    
+  UIItem
+    id: itemWidget
+    virtual: true
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 40 40
+    margin-top: 30
+    phantom: true
+
+  Panel
+    id: labels
+    anchors.fill: parent
+    anchors.top: prev.bottom
+    margin: 10 10 5 10

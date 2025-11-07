@@ -1,0 +1,250 @@
+Panel
+
+  MarketTabBar
+    id: leftTabBar
+    width: 107
+    height:25
+    anchors.top: parent.top
+    anchors.left: parent.left
+
+  Panel
+    id: leftTabContent
+    width: 180
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    anchors.bottom: parent.bottom
+    border-width: 1
+    border-color: #000000
+    visible: false
+
+  MarketRightTabBar
+    id: rightTabBar
+    width: 166
+    height:25
+    anchors.top: parent.top
+    anchors.right: parent.right
+
+  Panel
+    id: rightTabContent
+    anchors.top: prev.bottom
+    anchors.left: leftTabContent.left
+    anchors.right: prev.right
+    anchors.bottom: parent.bottom
+    margin-left:3
+    border-width: 1
+    border-color: #000000
+
+  UIItem
+    id: selectedOfferItem
+    phantom: true
+    size: 34 34
+    padding: 1
+    font: verdana-11px-rounded
+    border-color: white
+    anchors.top: rightTabBar.bottom
+    anchors.left: rightTabContent.left
+    margin-top: 290
+    margin-left: 6
+
+  Label
+    !text: tr('Procurar Item') .. ':'
+    id: findLabel
+    anchors.top: rightTabBar.bottom
+    anchors.left: rightTabContent.left
+    margin-top: 3
+    margin-left: 6
+    width: 30
+    font: verdana-11px-rounded
+    text-offset: 0 2
+
+  TextEdit
+    id: searchEdit
+    anchors.top: findLabel.bottom
+    anchors.left: findLabel.left
+    margin-top: 3
+    width: 113
+    @onTextChange: Market.updateCurrentItems()
+
+  ComboBox
+    id: CategorySelect
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 3
+    width: 164
+    @onOptionChange: Market.updateCurrentItems()
+    visible: false
+    options:
+      - All
+      - Gloves
+      - Others
+
+  Label
+    id: createLabel
+    !text: tr('Nova oferta:')
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: rightTabBar.top
+    anchors.left: rightTabContent.left
+    margin-top: 360
+    margin-left: 6
+
+  UIItem
+    id: selectedItem
+    phantom: true
+    size: 34 34
+    padding: 1
+    font: verdana-11px-rounded
+    border-color: white
+    anchors.top: rightTabBar.top
+    margin-top: 348
+    anchors.left: createLabel.right
+    margin-left: 2
+
+  Label
+    id: totalPriceLabel
+    !text: tr('Preço Total') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: rightTabBar.top
+    anchors.left: rightTabContent.left
+    margin-top: 375
+    margin-left: 6
+
+  SpinBox
+    id: totalPriceEdit
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    margin-top: 3
+    width: 75
+    minimum: 1
+    maximum: 999999999
+    focusable: true
+
+    $disabled:
+      color: #aaaaaa44
+
+  Label
+    id: piecePriceLabel
+    !text: tr('Preço') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: totalPriceLabel.top
+    anchors.left: prev.right
+    margin-left: 7
+
+  SpinBox
+    id: piecePriceEdit
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    margin-top: 3
+    width: 75
+    minimum: 0
+    maximum: 999999999
+    focusable: true
+
+    $disabled:
+      color: #aaaaaa44
+
+  Label
+    id: amountLabel
+    !text: tr('Quantidade') .. ':'
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: totalPriceLabel.top
+    anchors.left: amountEdit.left
+
+  PreviousButton
+    id: prevAmountButton
+    anchors.verticalCenter: piecePriceEdit.verticalCenter
+    anchors.left: piecePriceEdit.right
+    margin-left: 7
+    @onClick: Market.decrementAmount()
+
+  SpinBox
+    id: amountEdit
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 3
+    width: 55
+    buttons: false
+    minimum: 1
+    maximum: 100
+    focusable: true
+
+  NextButton
+    id: nextAmountButton
+    anchors.verticalCenter: piecePriceEdit.verticalCenter
+    anchors.left: prev.right
+    margin-left: 3
+    @onClick: Market.incrementAmount()
+
+  Button
+    id: selectItemButton
+    !text: tr('Selecionar')
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: prev.right
+    margin-left: 7
+    width: 90
+    @onClick: startChooseItem()
+
+  Button
+    id: createOfferButton
+    !text: tr('Criar oferta')
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: prev.right
+    margin-left: 7
+    width: 90
+
+  CheckBox
+    id: onlyOfferCheckBox
+    !text: tr('Receber Ofertas')
+    anchors.left: prev.left
+    anchors.bottom: createOfferButton.top
+    margin-bottom: 3
+    @onSetup: self:setChecked(false)
+    @onCheckChange: onlyOffer()
+    height: 16
+    width: 190
+
+  CheckBox
+    id: premiumPointsCheckBox
+    !text: tr('Item por Premium Points')
+    anchors.left: prev.left
+    anchors.bottom: createOfferButton.top
+    margin-bottom: 3
+    margin-left: 120
+    @onSetup: self:setChecked(false)
+    @onCheckChange: offerType()
+    height: 16
+    width: 190
+
+  CheckBox
+    id: eventsPointsCheckBox
+    !text: tr('Item por Events Points')
+    anchors.left: prev.left
+    anchors.bottom: createOfferButton.top
+    margin-bottom: -20
+    margin-left: 0
+    @onSetup: self:setChecked(false)
+    @onCheckChange: offerType()
+    height: 16
+    width: 190
+
+  CheckBox
+    id: anonymousCheckBox
+    !text: tr('Vender no Anonimato')
+    anchors.left: prev.left
+    anchors.bottom: createOfferButton.top
+    margin-bottom: 3
+    margin-left: 170
+    @onSetup: self:setChecked(false)
+    height: 16
+    width: 190
+
+  Label
+    id: feeLabel
+    font: verdana-11px-rounded
+    anchors.top: createOfferButton.bottom
+    anchors.left: createOfferButton.left
+    margin: 2

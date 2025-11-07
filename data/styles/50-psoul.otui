@@ -1,0 +1,373 @@
+EnterGamePsoul < StaticMainWindow
+PokeWidget < UIWidget
+  size: 42 42
+  image-source: /images/entergame/characterlist/pokeball
+  UICreature
+    id: outfit
+    size: 42 42
+    anchors.centerIn: parent
+    old-scaling: true
+PlayerListWidget < UIWidget
+  size: 192 345
+  image-source: /images/entergame/characterlist/unfocused
+
+  $focus:
+    image-source: /images/entergame/characterlist/focused
+
+  UIWidget
+    id: PlayerName
+    text-align: right
+    text-auto-resize: true
+    anchors.horizontalCenter: PlayerOutfit.horizontalCenter
+    anchors.verticalCenter: PlayerOutfit.verticalCenter
+    margin-top: -50
+    phantom: true
+    old-scaling: true
+  UICreature
+    id: PlayerOutfit
+    size: 44 44
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+    margin-top: -80
+    phantom: true
+    old-scaling: true
+  UIWidget
+    id: HpName
+    !text: tr('Hp')
+    text-align: left
+    text-auto-resize: true
+    anchors.top: PlayerOutfit.bottom
+    anchors.left: parent.left
+    margin-top: 20
+    margin-left: 25
+    phantom: true
+    old-scaling: true
+  UIWidget
+    id: progressHP
+    size: 116 9
+    image-source: /images/entergame/characterlist/progress_background
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-top: 3
+    margin-left: 20
+    UIProgressBar
+      id: progressbar
+      size: 108 3
+      background-color: #2ed026
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.verticalCenter
+  UIWidget
+    id: STMName
+    !text: tr('Stm')
+    text-align: left
+    text-auto-resize: true
+    anchors.top: HpName.bottom
+    anchors.left: HpName.left
+    margin-top: 10
+    phantom: true
+    old-scaling: true
+  UIWidget
+    id: progressSTM
+    size: 116 9
+    image-source: /images/entergame/characterlist/progress_background
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-top: 3
+    margin-left: 13
+    UIProgressBar
+      id: progressbar
+      size: 108 3
+      background-color: #e8290f
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.verticalCenter
+  UIWidget
+    id: EXPName
+    !text: tr('Exp')
+    text-align: left
+    text-auto-resize: true
+    anchors.top: STMName.bottom
+    anchors.left: STMName.left
+    margin-top: 10
+    phantom: true
+    old-scaling: true
+  UIWidget
+    id: progressEXP
+    size: 116 9
+    image-source: /images/entergame/characterlist/progress_background
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-top: 3
+    margin-left: 14
+    UIProgressBar
+      id: progressbar
+      size: 108 3
+      background-color: #26beea
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.verticalCenter
+  UIWidget
+    id: mapIcon
+    size: 12 10
+    image-source: /images/entergame/characterlist/map_icon
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 20
+    margin-bottom: 13
+    phantom: true
+  UIWidget
+    id: MapText
+    text-align: leftTop
+    anchors.top: mapIcon.top
+    anchors.left: mapIcon.right
+    margin-top: 0
+    margin-left: 5
+  PokeWidget
+    id: Poke1
+    visible: false
+    anchors.top: EXPName.bottom
+    anchors.left: EXPName.left
+    margin-top: 15
+    margin-left: 0
+  PokeWidget
+    id: Poke2
+    visible: false
+    anchors.top: Poke1.top
+    anchors.left: Poke1.right
+    margin-top: 0
+    margin-left: 10
+  PokeWidget
+    id: Poke3
+    visible: false
+    anchors.top: Poke2.top
+    anchors.left: Poke2.right
+    margin-top: 0
+    margin-left: 10
+  PokeWidget
+    id: Poke4
+    visible: false
+    anchors.top: Poke1.bottom
+    anchors.left: Poke1.left
+    margin-top: 10
+    margin-left: 0
+  PokeWidget
+    id: Poke5
+    visible: false
+    anchors.top: Poke4.top
+    anchors.left: Poke4.right
+    margin-top: 0
+    margin-left: 10
+  PokeWidget
+    id: Poke6
+    visible: false
+    anchors.top: Poke5.top
+    anchors.left: Poke5.right
+    margin-top: 0
+    margin-left: 10
+
+SocialButtons < UIButton
+  size: 26 25
+  image-color: #ffffff
+  change-cursor-image: true
+  cursor: pointer
+  $hover:
+    image-color: #c1c1c1
+  $pressed:
+    image-color: #cccccc
+  $disabled:
+    image-color: #dfdfdf88
+    opacity: 0.8
+    change-cursor-image: false
+EnterGameButton < UIButton
+  size: 257 76
+  image-color: #ffffff
+  change-cursor-image: true
+  cursor: pointer
+  $hover:
+    image-color: #c1c1c1
+  $pressed:
+    image-color: #cccccc
+  $disabled:
+    image-color: #dfdfdf88
+    opacity: 0.8
+    change-cursor-image: false
+ConfigButton < UIButton
+  size: 29 28
+  image-source: /images/entergame/config
+  image-color: #ffffff
+  change-cursor-image: true
+  cursor: pointer
+  $hover:
+    image-color: #c1c1c1
+  $pressed:
+    image-color: #cccccc
+  $disabled:
+    image-color: #dfdfdf88
+    opacity: 0.8
+    change-cursor-image: false
+
+CircularBox < UICheckBox
+  size: 24 9
+  text-align: left
+  text-offset: 30 0
+  color: #4b4d46
+  image-color: #dfdfdfff
+  image-rect: 0 0 24 9
+  image-source: /images/entergame/checkbox
+  change-cursor-image: true
+  font: verdana-11px-antialised
+  cursor: pointer
+
+  $hover !disabled:
+    color: #767773
+
+  $!checked:
+    image-clip: 0 9 24 9
+
+  $hover !checked:
+    image-clip: 0 0 24 9
+
+  $checked:
+    image-clip: 0 18 24 9
+
+  $hover checked:
+    image-clip: 0 18 24 9
+
+  $disabled:
+    image-color: #dfdfdf88
+    color: #dfdfdf88
+    opacity: 0.8
+    change-cursor-image: false
+
+TextEditEntergame < UITextEdit
+  font: window
+  color: #272727
+  size: 86 22
+  opacity: 1
+  image-source: /images/ui/textedit
+  selection-color: #272727
+  selection-background-color: #cccccc
+  change-cursor-image: true
+  $disabled:
+    color: #27272788
+    opacity: 0.5
+    change-cursor-image: false
+
+PsoulVerticalScrollBar < UIScrollBar
+  orientation: vertical
+  width: 15
+  height: 39
+  pixels-scroll: true
+
+  UIButton
+    id: decrementButton
+    visible: false
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 14 14
+    image-clip: 15 0 15 15
+    opacity: 0.7
+    $hover:
+      size: 15 15
+      opacity: 1.0
+    $pressed:
+      size: 13 13
+      opacity: 1.0
+    $disabled:
+      opacity: 0.5
+
+  UIButton
+    id: incrementButton
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 14 14
+    image-clip: 15 15 15 15
+    $hover:
+      size: 15 15
+      opacity: 1.0
+    $pressed:
+      size: 13 13
+      opacity: 1.0
+    $disabled:
+      opacity: 0.5
+
+  ChatScrollBarSlider
+    margin-right: 1
+    image-source: /images/game/chat/slider
+
+ChatScrollBarSlider < UIButton
+  id: sliderButton
+  anchors.centerIn: parent
+  size: 14 160
+  image-source: /images/game/chat/slider
+  image-border: 5
+  image-color: #e4e4e4
+  opacity: 0.8
+  image-border-top: 5
+  image-border-bottom: 5
+  $hover:
+    opacity: 1.0
+  $pressed:
+    opacity: 1.0
+  $disabled:
+    opacity: 0.5
+
+PsoulScrollBarSlider < UIButton
+  id: sliderButton
+  anchors.centerIn: parent
+  size: 160 13
+  image-source: /images/entergame/slider2
+  opacity: 0.8
+  image-border-left: 5
+  image-border-right: 5
+  $hover:
+    opacity: 1.0
+  $pressed:
+    opacity: 1.0
+  $disabled:
+    opacity: 0.5
+
+PsoulHorizontalScrollBar < UIScrollBar
+  orientation: horizontal
+  height: 15
+  width: 39
+  pixels-scroll: true
+
+  $disabled:
+    color: #bbbbbb88
+
+  UIButton
+    id: decrementButton
+    visible: false
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 14 14
+    image-clip: 0 15 15 15
+    opacity: 0.7
+    $hover:
+      size: 15 15
+      opacity: 1.0
+    $pressed:
+      size: 13 13
+      opacity: 1.0
+    $disabled:
+      opacity: 0.5
+
+  UIButton
+    id: incrementButton
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    size: 14 14
+    image-clip: 15 15 15 15
+    opacity: 0.7
+    $hover:
+      size: 15 15
+      opacity: 1.0
+    $pressed:
+      size: 13 13
+      opacity: 1.0
+    $disabled:
+      opacity: 0.5
+
+  PsoulScrollBarSlider
+    margin-bottom: 1

@@ -1,0 +1,9 @@
+Module
+  name: game_forgeSystem
+  description: "Forja de Slots"
+  author: "Raposo"
+  sandboxed: true
+  autoload: true
+  scripts: [ "forgeSystem" ]
+  @onLoad: forgeSystem.init()
+  @onUnload: forgeSystem.terminate()

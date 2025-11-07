@@ -1,0 +1,10 @@
+Module
+  name: game_rolette
+  description:
+  author: Thony
+  website:
+  security:
+  sandboxed: true
+  scripts: [ rolette ]
+  @onLoad: init()
+  @onUnload: terminate()

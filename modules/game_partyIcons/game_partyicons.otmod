@@ -1,0 +1,10 @@
+Module
+  name: game_partyicons
+  description:
+  author: Thony
+  website: none
+  sandboxed: true
+  autoload-priority: 1000
+  scripts: [ game_partyicons.lua ]
+  @onLoad: init()
+  @onUnload: terminate()

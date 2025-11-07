@@ -1,0 +1,244 @@
+DebuffHudCustomizer < Window
+  id: debuffhudCustomizer
+  text: Buff HUD  Customizer
+  size: 330 400
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+
+  UIWidget
+    id: body
+    anchors.fill: parent
+    margin: 5
+
+    UIWidget
+      id: moveRow
+      height: 20
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      layout:
+        type: horizontalBox
+        spacing: 5
+
+      CheckBox
+        id: moveToggle
+        tooltip: Ative o checkbox para poder movimentar o widget de posição
+
+      Label
+        id: moveToggleLabel
+        text: Movimentação do Widget
+        margin-left: 2
+
+    UIWidget
+      id: paletteRow
+      height: 20
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 6
+      layout:
+        type: horizontalBox
+        spacing: 5
+
+      CheckBox
+        id: paletteBgToggle
+        text: Background Color
+      Label
+        text: Background color
+      CheckBox
+        id: paletteMaskToggle
+        text: Mask Color
+      Label
+        text: Mask color
+
+    Panel
+      id: colorBoxPanel
+      anchors.top: paletteRow.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 117
+      margin-top: 4
+      layout:
+        type: grid
+        cell-size: 15 15
+        cell-spacing: 2
+        num-columns: 19
+        num-lines: 7
+
+    Label
+      id: bgOpacityLabel
+      text: Opacidade do Fundo: 60%
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 6
+
+    HorizontalScrollBar
+      id: bgOpacityScroll
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+      minimum: 0
+      maximum: 100
+      step: 1
+      value: 60
+
+    Label
+      id: maskOpacityLabel
+      text: Opacidade da Máscara: 65%
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 6
+
+    HorizontalScrollBar
+      id: maskOpacityScroll
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+      minimum: 0
+      maximum: 100
+      step: 1
+      value: 65
+
+    Label
+      text: Tamanho dos ícones
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin-top: 6
+
+    UIWidget
+      id: sizeRow
+      height: 20
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 4
+      layout:
+        type: horizontalBox
+        spacing: 10
+
+      CheckBox
+        id: size26Toggle
+      Label
+        text: 26x26
+
+      CheckBox
+        id: size32Toggle
+      Label
+        text: 32x32
+
+      CheckBox
+        id: size64Toggle
+      Label
+        text: 64x64
+
+    Button
+      id: resetBtn
+      text: Reset to Defaults
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      width: 130
+      height: 22
+
+    Button
+      id: closeBtn
+      text: Close
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      width: 90
+      height: 22
+
+
+CooldownItem < UIWidget
+  size: 26 26
+
+  UIWidget
+    id: baseImage
+    anchors.fill: parent
+    image-source: /images/ui/item
+    phantom: true
+
+  UIWidget
+    id: greyMask
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    background-color: #808080
+    opacity: 0.65
+    phantom: true
+
+  Label
+    id: timerLabel
+    phantom: true
+    width: 15
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: -1
+    font: baby-10
+    text-align: center
+
+
+Panel
+  id: debuffhudWindow
+  &save: true
+  size: 75 30
+  movable: true
+  image-source:
+  phantom: true
+
+  UIWidget
+    id: miniwindowTopBar
+    phantom: true
+    visible: false
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+  UIButton
+    id: closeButton
+    phantom: true
+    visible: false
+  UIButton
+    id: minimizeButton
+    phantom: true
+    visible: false
+  UIButton
+    id: lockButton
+    phantom: true
+    visible: false
+
+  VerticalScrollBar
+    id: miniwindowScrollBar
+    phantom: true
+    visible: false
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+  ResizeBorder
+    id: bottomResizeBorder
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: contentsPanel
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    phantom: true
+    background-color: blue
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+
+    UIWidget
+      phantom: true
+      anchors.fill: parent
+      id: iconContainer
+
+      ScrollablePanel
+        id: infoPanel
+        phantom: true
+        anchors.fill: parent
+        layout:
+          type: verticalBox
+          spacing: 3

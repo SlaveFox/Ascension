@@ -1,0 +1,10 @@
+Module
+  name: game_shop
+  description: Sistema de Shop
+  author: Anyone
+  website: dbonewage.online
+  sandboxed: true
+  security: jR$5p@9Qz!
+  scripts: [ shop ]
+  @onLoad: init()
+  @onUnload: terminate()

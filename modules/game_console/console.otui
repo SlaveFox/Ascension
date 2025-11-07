@@ -1,0 +1,4 @@
+ConsolePanel
+  id: consolePanel
+  phantom: true
+  opacity: 0.8

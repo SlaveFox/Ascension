@@ -1,0 +1,89 @@
+TrackerProgressBar < UIWidget
+  size: 50 14
+  image-source: /images/ui/panel_map
+
+  UIWidget
+    image-source: images/tracker/progress_bar
+    anchors.centerIn: parent
+    phantom: true
+
+  UIWidget
+    id: fill
+    image-source: images/tracker/fill
+    anchors.left: parent.left
+    phantom: true
+
+  Label
+    id: value
+    text-auto-resize: true
+    anchors.centerIn: parent
+    phantom: true
+    color: #c0c0c0
+
+TrackerCreature < UIWidget
+  UICreature
+    size: 18 18
+    id: creature
+    anchors.left: parent.left
+    anchors.top: parent.top
+    old-scaling: true
+    margin-left: 3
+
+  Label
+    id: name
+    anchors.left: parent.left
+    anchors.top: prev.top
+    color: #c0c0c0
+    margin-left: 25
+
+  TrackerProgressBar
+    id: progressFillLeft
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 20
+    margin-left: 3
+
+  TrackerProgressBar
+    id: progressFillMiddle
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 2
+
+  TrackerProgressBar
+    id: progressFillRight
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 2
+
+MiniWindow
+  id: trackerWindow
+  !text: tr('Bestiary Tracker')
+  height: 100
+  icon: images/tracker-icon
+  icon-size: 12 12
+  icon-clip: 0 0 12 12
+  &save: true
+
+  UIButton
+    id: bestiaryWindowButton
+    anchors.top: lockButton.top
+    anchors.right: lockButton.left
+    margin-right: 2
+    size: 12 12
+    image-source: /images/topbuttons/bestiary
+    @onClick: modules.game_bestiary.toggle()
+    
+  MiniWindowContents
+    id: contentsPanel
+    padding: 5
+    layout:
+      type: grid
+      cell-spacing: 10
+      cell-size: 192 32
+      flow: true
+  
+  UIWindow
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-bottom: 2
+    margin-left: 2

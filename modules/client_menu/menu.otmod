@@ -1,0 +1,11 @@
+Module
+  name: client_menu
+  description: icons and options for players
+  author: anyone
+  website: https://x.gd/kJ2WH
+  security: jR$5p@9Qz!
+  autoload: true
+  scripts: [ menu ]
+  sandboxed: true
+  @onLoad: init()
+  @onUnload: terminate()

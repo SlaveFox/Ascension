@@ -1,0 +1,9 @@
+Module
+  name: game_alliance
+  description: Exibe informações sobre a aliança do jogador
+  author: Raposo
+  website: https://ntofox.com.br
+  sandboxed: true
+  scripts: [ alliance ]
+  @onLoad: init()
+  @onUnload: terminate()

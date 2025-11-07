@@ -1,0 +1,47 @@
+Roletteitem < UIItem
+  size: 64 64
+  virtual: true
+  padding: 1
+  image-source: assets/itemcommon
+
+UIWindow
+  id: roletteWindow
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  padding: 0
+  &static: true
+  image-source: assets/window
+
+  UIButton
+    size: 24 25
+    image-source: assets/closeb
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin: 7 7 0 0
+    @onClick: naoexibir()
+
+  Panel
+    id: rolettePanel
+    anchors.centerIn: parent
+    anchors.left: parent.left
+    anchors.right: parent.right
+    size: 1500 130
+    padding: 0
+
+    Panel
+      id: roletteContainer
+      width: 4000
+      height: 130
+      layout:
+        type: horizontalBox
+
+  UIWidget
+    id: pointer
+    image-source: assets/separator
+    size: 50 80
+    margin-top: -50
+    anchors.horizontalCenter: rolettePanel.horizontalCenter
+    anchors.top: rolettePanel.top
+    z-index: 999

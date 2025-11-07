@@ -1,0 +1,10 @@
+Module
+  name: game_classSystem
+  description: Interface do sistema de classes
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [ ClassSystem ]
+  dependencies: [ game_interface ]
+  @onLoad: ClassSystem.init()
+  @onUnload: ClassSystem.terminate()

@@ -1,0 +1,44 @@
+Window
+  id: GuildSelectionWindow
+  text: "SELECIONE SUA GUILD IMG"
+  image-source: images/window
+  color: #FFE5CC
+  size: 375 461
+  anchors.top: parent.top
+  anchors.centerIn: parent
+  text-offset: -20 44
+  font: montserrat-18
+
+  ScrollablePanel
+    id: GuildBar
+    margin-top: 70
+    anchors.fill: parent
+    vertical-scrollbar: scrollGuildList
+    layout:
+      type: grid
+      cell-size: 105 107
+      cell-spacing: 4
+      flow: true
+
+  VerticalScrollBar
+    id: scrollGuildList
+    anchors.top: GuildBar.top
+    anchors.bottom: GuildBar.bottom
+    anchors.right: GuildBar.right
+    step: 14
+    margin-right: 0
+    pixels-scroll: true
+    visible: true
+
+  UIButton
+    id: buttonClose
+    size: 45 45
+    image-source: images/closeb
+    opacity: 1.0
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: -2
+    margin-right: 3
+    @onClick: modules.game_guildManagement.CloseGuildImg()
+    $hover:
+      image-source: images/closeb1

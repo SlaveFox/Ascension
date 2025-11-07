@@ -1,0 +1,233 @@
+MainWindow
+  id: editWindow
+  !text: tr("Adicione suas custom")
+  font: verdana-11px-rounded
+  color: green
+  @onEscape: self:hide()
+  size: 550 250
+  $mobile:
+    size: 550 240
+
+  Panel
+    id: manager
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 152
+    
+    Label
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      text-auto-resize: true
+      text-align: center
+      text-wrap: true
+      !text: tr("")
+      color: pink
+      font: verdana-11px-rounded
+
+    HorizontalSeparator
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 3
+      height: 2
+      
+    Panel
+      id: upload
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.horizontalCenter
+      anchors.bottom: parent.bottom
+      margin-top: 3
+
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: center
+        text-wrap: true
+        !text: tr(" ")
+
+      Label
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 7
+        text-auto-resize: true
+        text-align: center
+        text-wrap: true
+        !text: tr("Suas Customs:")
+        font: verdana-11px-rounded
+        color: yellow
+
+      ComboBox
+        id: config
+        !text: tr(' ')
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 4
+        margin-left: 20
+        margin-right: 20
+        text-offset: 3 0
+
+      Button
+        id: submit
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        !text: tr('Carregar Configuracao')
+        margin-top: 4
+        margin-left: 40
+        margin-right: 40
+        @onClick: modules.game_bot.uploadConfig()
+        
+    Panel
+      id: download
+      anchors.top: prev.top
+      anchors.left: parent.horizontalCenter
+      anchors.right: parent.right      
+      anchors.bottom: parent.bottom
+
+      Label
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        text-auto-resize: true
+        text-align: center
+        text-wrap: true
+        !text: tr(" ")
+
+      Label
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 7
+        text-auto-resize: true
+        text-align: center
+        font: verdana-11px-rounded
+        text-wrap: true
+        !text: tr("Coloque seu codigo:")
+        color: yellow
+
+      TextEdit
+        id: config
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 4
+        margin-left: 20
+        margin-right: 20
+        
+      Button
+        id: submit
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        !text: tr('Baixar Custom')
+        margin-top: 4
+        margin-left: 40
+        margin-right: 40
+        @onClick: modules.game_bot.downloadConfig()   
+
+    Button
+      id: documentationButton
+      !text: tr('Diretorio do Bot')
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: prev.bottom
+      margin-top: -20
+      width: 250
+      @onClick: g_platform.openDir(g_resources.getWriteDir() .. "bot")     
+        
+  HorizontalSeparator
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 3
+    height: 2
+  
+  Panel
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right    
+    margin-top: 5
+    height: 10
+    $mobile:
+      visible: false
+
+    Label
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      text-auto-resize: true
+      text-align: center
+      text-wrap: true
+      !text: tr("Discord: Luiz#7159")
+      color: red
+      font: verdana-11px-rounded
+
+    Label
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: prev.bottom
+      height: 20
+      width: 400
+      margin-top: 5
+      editable: false
+      !text: tr(' ')
+      text-align: center
+
+    Label
+      margin-top: 5
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      text-auto-resize: true
+      text-align: center
+      text-wrap: true
+      !text: tr(" ")
+
+
+    Label
+      margin-top: 5
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      height: 175
+      image-fixed-ratio: true
+      image-size: 500 105
+
+    Label
+      margin-top: 3
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      text-auto-resize: true
+      text-align: center
+      text-wrap: true
+      !text: tr("Discord: Luiz#7159")
+      font: verdana-11px-rounded
+      color: pink
+
+    Label
+      margin-top: 3
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      text-auto-resize: true
+      text-align: center
+      text-wrap: true
+      !text: tr(" ")
+
+
+
+
+  Button
+    id: cancelButton
+    !text: tr('Fechar')
+    color: yellow
+    font: verdana-11px-rounded
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    width: 60
+    @onClick: self:getParent():hide()

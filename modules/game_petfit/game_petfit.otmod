@@ -1,0 +1,9 @@
+Module
+  name: game_petfit
+  actor: thony
+  autoload: true
+  autoload-priority: 1000
+  sandboxed: true
+  scripts: [ game_petfit ]
+  @onLoad: init()
+  @onUnload: terminate()

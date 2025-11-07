@@ -1,0 +1,10 @@
+Module
+  name: game_dungeonSystem
+  description: Interface do sistema de Dungeons
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [ dungeonSystem ]
+  dependencies: [ game_interface ]
+  @onLoad: init()
+  @onUnload: terminate()

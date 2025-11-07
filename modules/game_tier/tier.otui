@@ -1,0 +1,527 @@
+GoldValueTemplateTier < UIWidget
+  size: 100 20
+  border-width: 1
+  border-color-bottom: #6e6e6e
+  border-color-right: #6e6e6e
+  border-color-top: #222222
+  border-color-left: #222222
+  background-color: #1e1e1e
+  padding-right: 4
+
+  UIItem
+    id: icon
+    size: 30 30
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    item-id: 3043
+
+  Label
+    id: text
+    text: 100000
+    anchors.left: icon.right
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    text-align: left
+    color: #CCCCCC
+    text-auto-resize: true
+
+PremiumValueTemplateTier < UIWidget
+  size: 80 20
+  border-width: 1
+  border-color-bottom: #6e6e6e
+  border-color-right: #6e6e6e
+  border-color-top: #222222
+  border-color-left: #222222
+  background-color: #1e1e1e
+  padding-left: 4
+  padding-right: 4
+
+  UIWidget
+    id: icon
+    size: 20 20
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/diamond
+
+  Label
+    id: text
+    text: 0
+    anchors.left: icon.right
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #CCCCCC
+    text-auto-resize: true
+  
+RingTemplate < UIWidget
+  size: 32 32
+
+  UIWidget
+    id: fill
+    size: 26 26
+    anchors.centerIn: parent
+    image-source: images/fill
+    visible: false
+
+  UIWidget
+    id: ringImage
+    anchors.fill: parent
+    image-source: images/ring
+
+  UIWidget
+    id: rank
+    size: 20 20
+    anchors.centerIn: parent
+    image-source: images/bronze
+
+SlotTemplate < UIItem
+  size: 35 35
+  background-color: #3b2412
+  border-width: 1
+  border-color-bottom: #898A8C
+  border-color-right: #898A8C
+  border-color-top: #1e1e1e
+  border-color-left: #1e1e1e
+  item-id: 0
+
+  UILabel
+    id: qty
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-right: 2
+    margin-bottom: 1
+    color: #FFFFFF
+    text: ""
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+
+
+Window
+  id: tierWindow
+  size: 450 400
+  border-width: 2
+  border-color: #dbae5c
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: modules.game_tier.closeTierWindow()
+
+  Label
+    id: titleLabel
+    text: Tier System
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-left: 25
+    font: baby-20
+    color: #dbae5c
+    text-auto-resize: true
+
+  GoldValueTemplateTier
+    id: goldValue
+    anchors.top: parent.top
+    anchors.right: premiumValue.left
+    margin-right: 5
+
+  PremiumValueTemplateTier
+    id: premiumValue
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-right: 5
+
+  Panel
+    id: ringRow
+    height: 72
+    anchors.top: titleLabel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 8
+    margin-left: 5
+    margin-right: 5
+
+    ProgressBar
+      id: ringProgress
+      height: 4
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.left: ring1.right
+      anchors.right: ring6.left
+      background-color: #805734
+
+    UIWidget
+      id: ring1
+      size: 80 80
+      anchors.left: parent.left
+      anchors.verticalCenter: parent.verticalCenter
+
+      UIWidget
+        id: ring1Fill
+        size: 80 80
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring1RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring1Rank
+        size: 48 48
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+    UIWidget
+      id: ring2
+      size: 32 32
+      anchors.left: ring1.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 30
+
+      UIWidget
+        id: ring2Fill
+        size: 26 26
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring2RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring2Rank
+        size: 20 20
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+
+    UIWidget
+      id: ring3
+      size: 32 32
+      anchors.left: ring2.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 30
+
+      UIWidget
+        id: ring3Fill
+        size: 26 26
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring3RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring3Rank
+        size: 20 20
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+
+    UIWidget
+      id: ring4
+      size: 32 32
+      anchors.left: ring3.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 30
+
+      UIWidget
+        id: ring4Fill
+        size: 26 26
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring4RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring4Rank
+        size: 20 20
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+
+    UIWidget
+      id: ring5
+      size: 32 32
+      anchors.left: ring4.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 30
+
+      UIWidget
+        id: ring5Fill
+        size: 26 26
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring5RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring5Rank
+        size: 20 20
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+
+    UIWidget
+      id: ring6
+      size: 32 32
+      anchors.left: ring5.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 30
+
+      UIWidget
+        id: ring6Fill
+        size: 26 26
+        anchors.centerIn: parent
+        image-source: images/fill
+
+      UIWidget
+        id: ring6RingImage
+        anchors.fill: parent
+        image-source: images/ring
+
+      UIWidget
+        id: ring6Rank
+        size: 20 20
+        anchors.centerIn: parent
+        image-source: images/bronze
+
+  Panel
+    id: contentRow
+    anchors.top: ringRow.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-top: 8
+    margin-left: 5
+    margin-right: 5
+    margin-bottom: 5
+
+    Panel
+      id: leftBigPanel
+      width: 180
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      image-source: /images/ui/window_headless
+      border-width: 1
+      border-color-top: #898A8C 
+      border-color-left: #898A8C
+      border-color-bottom: #1e1e1e 
+      border-color-right: #1e1e1e 
+
+      Panel
+        id: leftTop
+        background-color: #3b2412
+        border-width: 1
+        border-color-bottom: #898A8C 
+        border-color-right: #898A8C
+        border-color-top: #1e1e1e 
+        border-color-left: #1e1e1e 
+        size: 160 110
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        margin-bottom: 55
+
+        UICreature
+          id: creatureBox
+          size: 100 100
+          anchors.centerIn: parent
+          old-scaling: true
+
+      Panel
+        id: leftBottom
+        height: 110
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: leftTop.bottom
+        margin: 10 6 6 6
+
+        ProgressBar
+          id: upgradeProgress
+          height: 14
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.right: parent.right
+          background-color: #dbae5c
+
+          Label
+            id: timeLabel
+            anchors.centerIn: parent
+            text: 00:00:00
+            text-auto-resize: true
+
+        Panel
+          id: itemSlots
+          height: 35
+          anchors.top: upgradeProgress.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          margin-top: 10
+          padding-left: 5
+          layout:
+            type: horizontalBox
+
+        Button
+          id: actionButton
+          size: 120 20
+          anchors.top: itemSlots.bottom
+          anchors.horizontalCenter: parent.horizontalCenter
+          margin-top: 10
+          text: Iniciar Upgrade
+          color: white
+          $hover:
+            color: #dbae5c
+
+    Panel
+      id: statsPanel
+      anchors.top: parent.top
+      anchors.left: leftBigPanel.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 8
+      image-source: /images/ui/window_headless
+      border-width: 1
+      border-color-top: #898A8C
+      border-color-left: #898A8C
+      border-color-bottom: #1e1e1e
+      border-color-right: #1e1e1e
+
+      Panel
+        id: statsContent
+        anchors.fill: parent
+        background-color: #3b2412
+        border-width: 1
+        border-color-bottom: #898A8C
+        border-color-right: #898A8C
+        border-color-top: #1e1e1e
+        border-color-left: #1e1e1e
+        margin: 10
+
+        Label
+          id: statName
+          text: Nome: -
+          anchors.left: parent.left
+          font: baby-14
+          anchors.top: parent.top
+          margin-left: 4
+          margin-top: 4
+          color: #ffffff
+          text-auto-resize: true
+
+        Label
+          id: statRank
+          text: Rank: -
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statName.bottom
+          margin-left: 4
+          margin-top: 2
+          color: #dbae5c
+          text-auto-resize: true
+
+        Label
+          id: statDano
+          text: Dano: -
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statRank.bottom
+          margin-left: 4
+          margin-top: 2
+          color: #ffb27c
+          text-auto-resize: true
+
+        Label
+          id: statDefesa
+          text: Defesa: -
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statDano.bottom
+          margin-left: 4
+          margin-top: 2
+          color: #ffeb7c
+          text-auto-resize: true
+
+        Label
+          id: statVida
+          text: Vida: -
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statDefesa.bottom
+          margin-left: 4
+          margin-top: 2
+          color: #7cff7c
+          text-auto-resize: true
+
+        Label
+          id: statMana
+          text: Mana: -
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statVida.bottom
+          margin-left: 4
+          margin-top: 2
+          color: #7cc5ff
+          text-auto-resize: true
+
+        Label
+          id: evolveTitle
+          text: Ao evoluir:
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: statMana.bottom
+          margin-left: 4
+          margin-top: 6
+          color: #ffffff
+          text-auto-resize: true
+
+        Label
+          id: evolveVida
+          text: +x% de vida
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: evolveTitle.bottom
+          margin-left: 8
+          margin-top: 2
+          color: #7cff7c
+          text-auto-resize: true
+
+        Label
+          id: evolveMana
+          text: +x% de mana
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: evolveVida.bottom
+          margin-left: 8
+          margin-top: 2
+          color: #7cc5ff
+          text-auto-resize: true
+
+        Label
+          id: evolveAtaque
+          text: +x% de ataque
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: evolveMana.bottom
+          margin-left: 8
+          margin-top: 2
+          color: #ffb27c
+          text-auto-resize: true
+
+        Label
+          id: evolveDefesa
+          text: +x% de defesa
+          font: baby-14
+          anchors.left: parent.left
+          anchors.top: evolveAtaque.bottom
+          margin-left: 8
+          margin-top: 2
+          color: #ffeb7c
+          text-auto-resize: true

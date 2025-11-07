@@ -1,0 +1,226 @@
+Window
+  id: classSelectionWindow
+  size: 600 320
+  layout: anchor
+  anchors.centerIn: parent
+  padding: 10 0 10 20
+  visible: false
+  image-source: images/ClassSelectionBG.png
+  @onEscape: self:hide()
+
+  Label
+    id: title
+    text: "Selecione sua Classe"
+    font: baby-20
+    text-auto-resize: true
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    text-align: center
+
+  Panel
+    id: mainPanel
+    layout: horizontalBox
+    anchors.top: title.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    padding: 10 10 30 0
+
+    Panel
+      id: danoPanel
+      image-source: images/BG.png
+      size: 180 180
+
+      Label
+        id: danoImage
+        size: 160 160
+        image-source: images/ClassImages/Damage.png
+        anchors.centerIn: parent
+
+
+    Panel
+      id: tankPanel
+      image-source: images/BG.png
+      size: 180 180
+      margin: 0 10 0 10
+
+      Label
+        id: tankImage
+        size: 160 160
+        image-source: images/ClassImages/Tank.png
+        anchors.centerIn: parent
+
+    Panel
+      id: suportePanel
+      image-source: images/BG.png
+      size: 180 180
+
+      Label
+        id: suporteImage
+        size: 160 160
+        image-source: images/ClassImages/Support.png
+        anchors.centerIn: parent
+
+  Panel
+    id: buttonPanel
+    layout: horizontalBox
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: 5
+    height: 20
+
+    UIButton
+      id: buttonDano
+      text: "Damage"
+      margin-left: 45
+      image-source: images/Buttons/button.png
+      @onClick: ClassSelection.showClassDetail("Dano")
+      color: white
+      opacity: 0.8
+      $hover:
+        opacity: 1
+        color: #FFD700
+      $pressed:
+        opacity: 0.7
+
+    UIButton
+      id: buttonTank
+      text: "Tank"
+      margin-left: 92
+      image-source: images/Buttons/button.png
+      @onClick: ClassSelection.showClassDetail("Tank")
+      color: white
+      opacity: 0.8
+      $hover:
+        opacity: 1
+        color: #FFD700
+      $pressed:
+        opacity: 0.7
+      
+
+    UIButton
+      id: buttonSuporte
+      text: "Suporte"
+      margin-left: 97
+      image-source: images/Buttons/button.png
+      @onClick: ClassSelection.showClassDetail("Suporte")
+      color: white
+      opacity: 0.8
+      $hover:
+        opacity: 1
+        color: #FFD700
+      $pressed:
+        opacity: 0.7
+        
+  Panel
+    id: detailPanel
+    layout: anchor
+    anchors.fill: parent
+    visible: false
+
+    Panel
+      id: benefitsPanel
+      layout: horizontalBox
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right      
+      anchors.bottom: parent.bottom
+      margin-top: 23
+      padding: 10 10 30 0
+
+      Panel
+        id: benefit1Panel
+        image-source: images/BG.png
+        layout: verticalBox
+        size: 180 180
+
+        Label
+          id: benefit1Image
+          size: 60 95
+          margin: 30 30 0 30
+          scale-image: true
+
+        Label
+          id: benefit1Text
+          text-align: center
+          text-wrap: true
+          size: 50 80
+          text-auto-resize: true
+          margin: 10 25 0 25
+
+      Panel
+        id: benefit2Panel
+        image-source: images/BG.png
+        layout: verticalBox
+        size: 180 180
+        margin: 0 10 0 10
+
+        Label
+          id: benefit2Image
+          size: 60 95
+          margin: 30 30 0 30
+          scale-image: true
+
+        Label
+          id: benefit2Text
+          text-align: center
+          text-wrap: true
+          size: 50 80
+          text-auto-resize: true
+          margin: 10 25 0 25
+
+      Panel
+        id: benefit3Panel
+        image-source: images/BG.png
+        layout: verticalBox
+        size: 180 180
+
+        Label
+          id: benefit3Image
+          size: 60 95
+          margin: 30 30 0 30
+          scale-image: true
+
+        Label
+          id: benefit3Text
+          text-align: center
+          text-wrap: true
+          size: 50 80
+          text-auto-resize: true
+          margin: 10 25 0 25
+
+    UIButton
+      id: selectButton
+      text: "Selecionar"
+      anchors.bottom: parent.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      size: 70 25
+      margin-right: 10
+      image-source: images/Buttons/button.png
+      @onClick: ClassSelection.selectClass()
+      color: white
+      opacity: 0.8
+      $hover:
+        opacity: 1
+        color: #FFD700
+      $pressed:
+        opacity: 0.7
+
+
+    UIButton
+      id: backButton
+      text: "Voltar"
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      margin-right: 30
+      size: 70 20
+      image-source: images/Buttons/button.png
+      @onClick: ClassSelection.showMainPanel()
+      color: white
+      opacity: 0.8
+      $hover:
+        opacity: 1
+        color: #FFD700
+      $pressed:
+        opacity: 0.7

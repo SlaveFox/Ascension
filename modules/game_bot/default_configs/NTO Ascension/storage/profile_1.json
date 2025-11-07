@@ -1,0 +1,205 @@
+{
+  "healing6": {
+    "max": 50,
+    "title": "HP%",
+    "on": false,
+    "min": 0,
+    "text": "fuga"
+  },
+  "autoHelpMessage": "",
+  "foodItems": [
+    {
+      "count": 1,
+      "id": 3582
+    },
+    {
+      "count": 1,
+      "id": 3577
+    }
+  ],
+  "isUsing": false,
+  "ingame_hotkeys": "",
+  "sense": "nome",
+  "uniqueVarName": "spell",
+  "Combo1Text": "",
+  "buff2": "",
+  "manatrainer": {
+    "max": 90,
+    "title": "mana%",
+    "on": false,
+    "min": 0,
+    "text": "Power Down"
+  },
+  "autoHealthItemPanel2": {
+    "max": 60,
+    "item": 3029,
+    "min": 0
+  },
+  "advancedFriendHealer": {
+    "itemHeal": false,
+    "minFriendHp": 40,
+    "id": 3029,
+    "minMana": 60,
+    "distance": 8,
+    "spellHeal": false,
+    "spellName": "magia de cura"
+  },
+  "Combo5Text": "",
+  "autoTradeMessage": "",
+  "autoHealthItemPanel1": {
+    "max": 60,
+    "item": 3029,
+    "min": 0
+  },
+  "_macros": {
+    "": false,
+    "Buff": false,
+    "ENEMY": true,
+    "Target": true,
+    "Auto Haste": true,
+    "Hold Target": false,
+    "Stop Cave/target": false,
+    "Anti-Push": false,
+    "Vocation Summon": true,
+    "Bug Map": false,
+    "Summon": false,
+    "Sense Target": false,
+    "Anti Paralyze": false,
+    "attack enemy": true,
+    "Enemy": false,
+    "Combo": false,
+    "Auto Enemy": false,
+    "Monstro Hp %": false,
+    "Attack LOW HP": true,
+    "Atk Enemy Target": false,
+    "Sense": false,
+    "Follow Attack": false,
+    "Atacar Seguindo": false,
+    "Hold Target [ESC Cancel]": false,
+    "Target teste": true
+  },
+  "Combo3Text": "",
+  "ingame_hotkeys2": "",
+  "ComboText": "",
+  "healing5": {
+    "max": 33,
+    "title": "HP%",
+    "on": false,
+    "min": 0,
+    "text": "fuga"
+  },
+  "afkMsg": "",
+  "moneyItems": [
+    {
+      "count": 1,
+      "id": 3031
+    },
+    {
+      "count": 1,
+      "id": 3035
+    }
+  ],
+  "autoHealthPanel1": {
+    "max": 99,
+    "item": 266,
+    "enabled": true,
+    "min": 0,
+    "text": "big regeneration"
+  },
+  "_icons": {
+    "buffz": {
+      "y": 0.27157001414427,
+      "x": 0,
+      "enabled": false
+    },
+    "Sense": {
+      "y": 0.2970297029703,
+      "x": 0,
+      "enabled": false
+    },
+    "luis": {
+      "y": 0.36067892503536,
+      "x": 0.08,
+      "enabled": true
+    },
+    "Buff": {
+      "y": 0.19236209335219,
+      "x": 0,
+      "enabled": false
+    },
+    "Combo": {
+      "y": 0.089108910891089,
+      "x": 0,
+      "enabled": false
+    },
+    "Auto PT": {
+      "y": 0.22065063649222,
+      "x": 0.12235294117647,
+      "enabled": false
+    }
+  },
+  "Combo6Text": "",
+  "healing4": {
+    "max": 18,
+    "title": "HP%",
+    "on": false,
+    "min": 0,
+    "text": "fuga"
+  },
+  "Combo2Text": "",
+  "autofollow": {
+    "player": "nome"
+  },
+  "Combo4Text": "",
+  "autoAntiParalyzeText": "concentrate chakra feet",
+  "autoManaItemPanel1": {
+    "max": 60,
+    "item": 268,
+    "min": 0
+  },
+  "alarms": {
+    "playerpk": false,
+    "playerDetected": false,
+    "healthValue": 50,
+    "healthBelow": false,
+    "playerAttack": false,
+    "manaBelow": false,
+    "privateMessage": false,
+    "manaValue": 39,
+    "enabled": false,
+    "playerDetectedLogout": false,
+    "creatureDetected": false
+  },
+  "playerList": {
+    "enemyList": [
+
+    ],
+    "outfits": false,
+    "groupMembers": false,
+    "marks": false,
+    "blackList": [
+
+    ],
+    "friendList": [
+
+    ]
+  },
+  "buff": "",
+  "_configs": {
+    "targetbot_configs": {
+      "selected": "others",
+      "enabled": false
+    },
+    "cavebot_configs": {
+      "enabled": false
+    }
+  },
+  "autoHasteText": "concentrate chakra feet",
+  "healing3": {
+    "max": 35,
+    "title": "HP%",
+    "on": true,
+    "min": 0,
+    "text": "Chakra Defense"
+  }
+}

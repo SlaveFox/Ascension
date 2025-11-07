@@ -1,0 +1,107 @@
+Window
+  id: classSystemWindow
+  size: 250 215
+  layout: anchor
+  anchors.centerIn: parent
+  text: "Sistema de Classes"
+  text-offset: 0 1
+  padding: 10
+  visible: false
+  @onEscape: self:hide()
+
+  Label
+    id: classNameLabel
+    text: "Classe Atual:"
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 15
+    margin-left: 20
+    text-align: left
+    height: 20
+    text-auto-resize: true
+
+  Label
+    id: className
+    text: "-"
+    anchors.top: classNameLabel.top
+    anchors.left: classNameLabel.right
+    margin-left: 10
+    text-align: left
+    height: 20
+    text-auto-resize: true
+
+  Label
+    id: levelLabel
+    text: "Nível:"
+    anchors.top: className.bottom
+    anchors.left: parent.left
+    margin-top: 15
+    margin-left: 20
+    text-align: left
+    height: 20
+    text-auto-resize: true
+
+  Label
+    id: level
+    text: "-"
+    anchors.top: levelLabel.top
+    anchors.left: levelLabel.right
+    margin-left: 15
+    text-align: left
+    height: 20
+    text-auto-resize: true
+
+  ProgressBar
+    id: experienceBar
+    anchors.top: level.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    height: 5
+    background-color: #00aaff
+
+  Label
+    text: "Atributos:"
+    anchors.top: experienceBar.bottom
+    anchors.left: parent.left
+    margin-top: 15
+    margin-left: 20
+
+  Panel
+    id: attributesPanel
+    layout: verticalBox
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    padding: 10
+    spacing: 10
+    margin-left: 15
+
+    Label
+      id: attribute1
+      text: "Atributo 1: -"
+      text-wrap: false
+      text-align: left
+
+    Label
+      id: attribute2
+      text: "Atributo 2: -"
+      text-wrap: false
+      text-align: left
+
+    Label
+      id: attribute3
+      text: "Atributo 3: -"
+      text-wrap: false
+      text-align: left
+
+  Button
+    id: closeButton
+    text: "Fechar"
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 10
+    width: 100
+    height: 25
+    @onClick: self:getParent():hide()

@@ -1,0 +1,11 @@
+Module
+  name: game_newsletter
+  description: Interface do sistema de Newsletter
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [ newsletter ]
+  interfaces: [ newsletter ]
+  dependencies: [ game_interface ]
+  @onLoad: init()
+  @onUnload: terminate()

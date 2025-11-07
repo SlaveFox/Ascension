@@ -1,0 +1,10 @@
+Module
+  name: game_rankings
+  description: Interface do sistema de rankings
+  author: Raposo
+  website: https://github.com/seuprojeto
+  sandboxed: true
+  scripts: [ rankings ]
+  dependencies: [ game_interface ]
+  @onLoad: init()
+  @onUnload: terminate()

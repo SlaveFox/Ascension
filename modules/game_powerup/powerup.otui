@@ -1,0 +1,69 @@
+PowerUpFill < UIWidget
+  width: 70
+  height: 70
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  image-source: images/stats/fill
+  opacity: 1
+  phantom: true
+
+PowerUpButton < UIButton
+  width: 70
+  height: 70
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+
+
+
+UIWindow
+  id: powerUpWindow
+  size: 350 430
+  text: "Ascension Power Up"
+  image-source: images/background1
+  padding: 10
+  anchors.centerIn: parent
+  @onEscape: naoexibir()
+
+  Label
+    id: points
+    text: "Power Up\nPoints\n{0}"
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+    width: 100
+    height: 80
+    text-align: center
+    font: baby-14
+    color: white
+
+  Button
+    id: reset
+    text: "Reset"
+    anchors.top: points.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    width: 60
+    height: 23
+    opacity: 1
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.8
+    @onClick: confirmResetPowerUpPoints()
+
+  Panel
+    id: statsRing
+    size: 380 380
+    anchors.centerIn: parent
+
+  Button
+    id: close
+    text: "Close"
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    width: 70
+    height: 25
+    opacity: 1
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.8
+    @onClick: naoexibir()

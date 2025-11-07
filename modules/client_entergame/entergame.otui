@@ -1,0 +1,343 @@
+EnterGameWindow
+  id: enterGame
+  @onEnter: EnterGame.doLogin()
+
+  Panel
+    id: loginPanel
+    anchors.fill: parent
+
+    MenuLabel
+      id: loginLabel
+      text: Account or Email:
+      font: baby-20
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-left: 30
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: accountNameTextEdit
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: loginLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Login
+
+    MenuLabel
+      id: passwordLabel
+      text: Password:
+      font: baby-20
+      anchors.left: accountNameTextEdit.left
+      anchors.top: accountNameTextEdit.bottom
+      margin-top: 15
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: accountPasswordTextEdit
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: passwordLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Password
+
+    CheckBox
+      id: rememberPasswordBox
+      anchors.left: accountNameTextEdit.left
+      anchors.top: accountPasswordTextEdit.bottom
+      cursor: pointer
+      margin-top: 10
+
+    Label
+      id: rememberLabel
+      text: Remember Login
+      anchors.left: rememberPasswordBox.right
+      anchors.verticalCenter: rememberPasswordBox.verticalCenter
+      margin-left: 6
+      font: baby-14
+      text-auto-resize: true
+      color: white
+
+    Panel
+      id: serverSelectorPanel
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: rememberPasswordBox.bottom
+      margin-top: 10
+      width: 220
+      height: 52
+      on: true
+      focusable: false
+
+      $on:
+        visible: true
+        margin-top: 0
+      $!on:
+        visible: false
+        margin-top: -52
+
+      HorizontalSeparator
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        margin-top: 10
+
+      MenuLabel
+        id: serverLabel1
+        !text: tr('Server')
+        anchors.left: parent.left
+        anchors.top: prev.bottom
+        text-auto-resize: true
+        margin-top: 5
+
+      ComboBox
+        id: serverSelector
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: serverLabel1.bottom
+        width: 220
+        margin-top: 2
+        margin-right: 3
+        menu-scroll: true
+        menu-height: 65
+        menu-scroll-step: 25
+        text-offset: 5 2
+        @onOptionChange: EnterGame.onServerChange()
+
+    Panel
+      id: customServerSelectorPanel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: serverSelectorPanel.bottom
+      height: 52
+      on: true
+      focusable: true
+
+      $on:
+        visible: true
+        margin-top: 0
+      $!on:
+        visible: false
+        margin-top: -52
+
+      HorizontalSeparator
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        margin-top: 8
+
+      MenuLabel
+        id: serverLabel2
+        !text: tr('IP:PORT or URL')
+        anchors.left: parent.left
+        anchors.top: prev.bottom
+        margin-top: 8
+        text-auto-resize: true
+
+      TextEdit
+        id: serverHostTextEdit
+        !tooltip: tr('Make sure that your client uses\nthe correct game client version')
+        anchors.left: parent.left
+        anchors.top: serverLabel2.bottom
+        margin-top: 2
+        width: 150
+
+      MenuLabel
+        id: clientLabel
+        !text: tr('Version')
+        anchors.left: serverHostTextEdit.right
+        anchors.top: serverLabel2.bottom
+        text-auto-resize: true
+        margin-left: 10
+
+      ComboBox
+        id: clientVersionSelector
+        anchors.top: serverHostTextEdit.top
+        anchors.bottom: serverHostTextEdit.bottom
+        anchors.left: clientLabel.right
+        anchors.right: parent.right
+        menu-scroll: true
+        menu-height: 125
+        menu-scroll-step: 25
+        margin-right: 3
+
+    Button
+      id: loginButton
+      text: Login
+      font: baby-20
+      !tooltip: tr('Login!')
+      size: 120 30
+      anchors.top: customServerSelectorPanel.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 20
+      cursor: pointer
+      @onClick: EnterGame.doLogin()
+      color: white
+      $hover:
+        color: #FFD700
+
+    UIButton
+      id: registerButton
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: loginButton.bottom
+      margin-top: 10
+      text: Don't have an account? Create one
+      tooltip: Create an account
+      height: 35
+      change-cursor-image: true
+      cursor: pointer
+      @onClick: Createaccount()
+      color: white
+      $hover:
+        color: #FFD700
+
+    Panel
+      id: socialPanel
+      layout: horizontalBox
+      anchors.top: registerButton.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 20
+      size: 100 50
+
+      UIButton
+        id: discordButton
+        !tooltip: tr('Participe do Grupo do Discord!')
+        image-source: img/discord
+        size: 50 50
+        margin-right: 10
+        cursor: pointer
+        @onClick: g_platform.openUrl("https://discord.gg/6RJu8nqvua")
+
+      UIButton
+        id: instagramButton
+        !tooltip: tr('Siga-nos no Instagram!')
+        image-source: img/instagram
+        size: 50 50
+        cursor: pointer
+        @onClick: g_platform.openUrl("https://www.instagram.com/ntoascension/?utm_source=ig_web_button_share_sheet")
+
+    Label
+      id: serverInfoLabel
+      font: verdana-11px-rounded
+      anchors.top: discordButton.bottom
+      anchors.left: parent.left
+      margin-top: 10
+      color: green
+      text-auto-resize: true
+
+  Panel
+    id: createAccountPanel
+    anchors.fill: parent
+    visible: false
+
+    MenuLabel
+      id: usernameLabel
+      text: Username:
+      font: baby-20
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-left: 30
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: accountText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: usernameLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Enter your username
+
+    MenuLabel
+      id: emailLabel
+      text: Email:
+      font: baby-20
+      anchors.left: accountText.left
+      anchors.top: accountText.bottom
+      margin-top: 5
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: emailText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: emailLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Enter your email
+
+    MenuLabel
+      id: passwordLabel2
+      text: Password:
+      font: baby-20
+      anchors.left: emailText.left
+      anchors.top: emailText.bottom
+      margin-top: 5
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: passwordText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: passwordLabel2.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Enter your password
+
+    MenuLabel
+      id: captchaLabel
+      text: Captcha:
+      font: baby-20
+      anchors.left: passwordText.left
+      anchors.top: passwordText.bottom
+      margin-top: 5
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: captchaText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: captchaLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Enter captcha
+
+    Label
+      id: captchaImage
+      size: 250 40
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: captchaText.bottom
+      margin-top: 10
+      font: baby-20
+      phantom: true
+      color: white
+      text-align: center
+      image-source: img/base
+
+    Button
+      id: sendButton
+      text: Register
+      font: baby-20
+      size: 200 40
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: captchaImage.bottom
+      margin-top: 10
+      cursor: pointer
+      color: white
+      @onClick: EnviarConta()
+      $hover:
+        color: #FFD700
+
+    Button
+      id: backButton
+      text: Back
+      font: baby-14
+      size: 120 35
+      anchors.top: sendButton.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 15
+      cursor: pointer
+      @onClick: VoltardoCreate()
+      color: white
+      $hover:
+        color: #FFD700

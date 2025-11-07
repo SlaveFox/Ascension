@@ -1,0 +1,711 @@
+CharacterWidget < UIWidget
+  height: 60
+  margin-bottom: 4
+  layout: anchor
+  padding: 6
+  background-color: #333333cc
+  focusable: true
+
+  &updateOnStates: |
+    function(self)
+      local name  = self:getChildById('name')
+      local level = self:getChildById('level')
+      local world = self:getChildById('worldName')
+      if name  then name:setOn(self:isFocused()) end
+      if level then level:setOn(self:isFocused()) end
+      if world then world:setOn(self:isFocused()) end
+    end
+
+  @onFocusChange: self:updateOnStates()
+  @onSetup: self:updateOnStates()
+
+  $focus:
+    background-color: #666666cc
+
+  Panel
+    id: characterInfo
+    layout: horizontalBox
+    anchors.left: parent.left
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 80
+    margin-left: 10
+
+    UICreature
+      id: outfit
+      size: 40 80
+      old-scaling: true
+
+    Panel
+      layout: verticalBox
+      margin-top: 5
+      width: 200
+
+      Label
+        id: name
+        color: white
+        font: verdana-11px-rounded
+        text-auto-resize: true
+        background-color: alpha
+
+      Label
+        id: level
+        color: #bbbbbb
+        font: verdana-11px-rounded
+        text-auto-resize: true
+        background-color: alpha
+
+      Label
+        id: vocation
+        color: #bbbbbb
+        font: verdana-11px-rounded
+        text-auto-resize: true
+        background-color: alpha
+
+  Label
+    id: worldName
+    text: ""
+    color: #bbbbbb
+    font: verdana-11px-rounded
+    text-auto-resize: true
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 5
+    margin-right: 5
+    background-color: alpha
+    &baseText: '(%s)'
+  $on:
+    color: #ffffff
+
+
+StaticMainWindow
+  id: charactersWindow
+  !text: tr('Character List')
+  visible: false
+  size: 680 460
+  font: baby-14
+  text-offset: 0 1
+  @onEnter: CharacterList.doLogin()
+  @onEscape: CharacterList.hide(true)
+
+
+  Panel
+    id: listPanel
+    anchors.fill: parent
+    on: true
+
+    TextList
+      id: characters
+      background-color: #565656
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: characterListScrollBar.left
+      anchors.bottom: accountStatusCaption.top
+      margin-bottom: 5
+      padding: 1
+      focusable: false
+      vertical-scrollbar: characterListScrollBar
+      auto-focus: first
+
+    VerticalScrollBar
+      id: characterListScrollBar
+      anchors.top: parent.top
+      anchors.bottom: accountStatusCaption.top
+      anchors.right: parent.right
+      margin-bottom: 5
+      step: 14
+      pixels-scroll: true
+
+    Label
+      id: accountStatusCaption
+      !text: tr('Account Status') .. ':'
+      anchors.left: parent.left
+      anchors.bottom: separator.top
+      margin-bottom: 5
+
+    Label
+      id: accountStatusLabel
+      !text: tr('Free Account')
+      anchors.right: parent.right
+      anchors.bottom: separator.top
+      margin-bottom: 5
+      text-auto-resize: true
+      $on:
+        color: #FF0000
+
+    HorizontalSeparator
+      id: separator
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: next.top
+      margin-bottom: 10
+
+    Button
+      id: autoReconnect
+      !text: tr('Auto reconnect: On')
+      width: 140
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      image-color: green
+      $!on:
+        image-color: red
+        !text: tr('Auto reconnect: Off')
+
+    Button
+      id: buttonOk
+      !text: tr('Ok')
+      width: 64
+      anchors.right: next.left
+      anchors.bottom: parent.bottom
+      margin-right: 10
+      @onClick: CharacterList.doLogin()
+
+    Button
+      id: buttonCancel
+      !text: tr('Cancel')
+      width: 64
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      @onClick: CharacterList.hide(true)
+
+    Button
+      id: Createchar
+      !text: tr('Criar Char')
+      width: 100
+      margin-right: 150
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      @onClick: Createchar()
+
+    Button
+      id: DeleteChar
+      !text: tr('Deletar Char')
+      width: 100
+      margin-right: 263
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      @onClick: showDeleteCharacterUI()
+
+    Button
+      id: AlterarSenha
+      !text: tr('Account Info')
+      width: 100
+      margin-right: 380
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      @onClick: showAlterarSenhaUI()
+
+  Panel
+    id: createCharacterPanel
+    anchors.fill: parent
+    visible: false
+
+    Panel
+      id: vocationWrap
+      size: 610 220
+      padding: 5
+      background-color: #3b2412
+      border-width: 1
+      border-color-top: #222222  
+      border-color-left: #222222  
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      margin-top: 12
+
+      ScrollablePanel
+        id: vocationList
+        anchors.left: parent.left
+        anchors.right: vocationScrollBar.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        layout:
+          type: grid
+          cell-size: 140 96
+          cell-spacing: 6
+          flow: true
+        background-color: alpha
+        clip: true
+        focusable: true
+        vertical-scrollbar: vocationScrollBar
+
+      VerticalScrollBar
+        id: vocationScrollBar
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        width: 14
+        step: 60
+        pixels-scroll: true
+
+
+    MenuLabel
+      id: nameLabel
+      text: Character Name:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: vocationWrap.bottom
+      margin-top: 5
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: characterNameText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: nameLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Enter character name
+
+    MenuLabel
+      id: captchaLabel
+      text: Captcha:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: characterNameText.bottom
+      margin-top: 5
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: CaptchaText
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: captchaLabel.bottom
+      width: 250
+      margin-top: 5
+      placeholder: Digite o captcha
+
+    MenuLabel
+      id: CaptchaLabel
+      size: 250 40
+      font: baby-20
+      color: white
+      image-source: img/base
+      anchors.top: CaptchaText.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 5
+      text-align: center
+
+    Button
+      id: cancelButton
+      text: Cancel
+      font: baby-14
+      size: 120 20
+      anchors.left: parent.left
+      anchors.top: CaptchaLabel.bottom
+      margin-left: 30
+      margin-top: 10
+      cursor: pointer
+      @onClick: CreateCharacter.cancel()
+      color: white
+      $hover:
+        color: #FFD700
+
+    Button
+      id: createCharButton
+      text: Create
+      font: baby-14
+      size: 120 20
+      anchors.right: parent.right
+      anchors.top: cancelButton.top
+      margin-left: 12
+      cursor: pointer
+      @onClick: CreateCharacter.submit()
+      color: white
+      $hover:
+        color: #FFD700
+
+
+  Panel
+    id: deleteCharacterPanel
+    anchors.fill: parent
+    visible: false
+
+    Panel
+      id: deleteWrap
+      size: 610 250
+      padding: 5
+      background-color: #3b2412
+      border-width: 1
+      border-color-top: #222222  
+      border-color-left: #222222  
+      border-color-bottom: #6e6e6e
+      border-color-right: #6e6e6e
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      margin-top: 12
+
+      ScrollablePanel
+        id: deleteCharList
+        anchors.left: parent.left
+        anchors.right: deleteScrollBar.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        layout:
+          type: grid
+          cell-size: 140 96
+          cell-spacing: 6
+          flow: true
+        background-color: alpha
+        clip: true
+        focusable: true
+        vertical-scrollbar: deleteScrollBar
+
+      VerticalScrollBar
+        id: deleteScrollBar
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        width: 14
+        step: 60
+        pixels-scroll: true
+
+    MenuLabel
+      id: passwordLabelDel
+      text: Password:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: deleteWrap.bottom
+      margin-top: 12
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: PasswordConfirm
+      width: 250
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: passwordLabelDel.bottom
+      margin-top: 5
+      placeholder: Digite sua senha
+
+    MenuLabel
+      id: confirmPasswordLabelDel
+      text: Confirm Password:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: PasswordConfirm.bottom
+      margin-top: 8
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: PasswordConfirm2
+      width: 250
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: confirmPasswordLabelDel.bottom
+      margin-top: 5
+      placeholder: Repita sua senha
+
+    Button
+      id: voltarDelete
+      text: Cancel
+      font: baby-14
+      size: 120 20
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      margin-left: 30
+      margin-top: 12
+      cursor: pointer
+      color: white
+      @onClick: closeDeleteCharacterUI()
+      $hover:
+        color: #FFD700
+
+    Button
+      id: confirmDelete
+      text: Delete
+      font: baby-14
+      size: 120 20
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-right: 30
+      cursor: pointer
+      color: white
+      enabled: false
+      @onClick: confirmDeletion()
+      $hover:
+        color: #FFD700
+
+
+
+  Panel
+    id: changePasswordPanel
+    anchors.fill: parent
+    visible: false
+
+    MenuLabel
+      id: emailLabel
+      text: Email:
+      font: baby-20
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 12
+      margin-left: 30
+      text-auto-resize: true
+
+    UIButton
+      id: EmailValue
+      font: baby-20
+      color: white
+      anchors.left: emailLabel.right
+      anchors.top: emailLabel.top
+      margin-left: 8
+      @onClick: CopyLabel("EmailValue")
+      text-auto-resize: true
+      tooltip: Clique para copiar seu email
+      $hover:
+        color: #FFD700
+
+    MenuLabel
+      id: recKeyLabel
+      text: Recovery Key:
+      font: baby-20
+      anchors.left: parent.left
+      anchors.top: emailLabel.bottom
+      margin-top: 8
+      margin-left: 30
+      text-auto-resize: true
+
+    UIButton
+      id: RecoveryKeyValue
+      font: baby-20
+      color: white
+      anchors.left: recKeyLabel.right
+      anchors.top: recKeyLabel.top
+      margin-left: 8
+      @onClick: CopyLabel("RecoveryKeyValue")
+      text-auto-resize: true
+      tooltip: Clique para copiar sua Recovery Key
+      $hover:
+        color: #FFD700
+
+    HorizontalSeparator
+      id: cpSep
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: recKeyLabel.bottom
+      margin-top: 12
+
+    MenuLabel
+      id: oldLabel
+      text: Senha Antiga:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: cpSep.bottom
+      margin-top: 16
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: OldPassword
+      width: 300
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: oldLabel.bottom
+      margin-top: 6
+      placeholder: ********
+
+    MenuLabel
+      id: newLabel
+      text: Senha Nova:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: OldPassword.bottom
+      margin-top: 12
+      text-align: left
+      text-auto-resize: true
+
+    PasswordTextEdit
+      id: NewPassword
+      width: 300
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: newLabel.bottom
+      margin-top: 6
+      placeholder: ********
+    MenuLabel
+      id: captchaLabelCP
+      text: Captcha:
+      font: baby-20
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: NewPassword.bottom
+      margin-top: 12
+      text-align: left
+      text-auto-resize: true
+
+    TextEdit
+      id: CaptchaTextCP
+      width: 250
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: captchaLabelCP.bottom
+      margin-top: 6
+      placeholder: Digite o captcha
+
+    MenuLabel
+      id: CaptchaLabelCP
+      size: 250 40
+      font: baby-20
+      color: white
+      image-source: img/base
+      anchors.left: CaptchaTextCP.left
+      anchors.top: CaptchaTextCP.bottom
+      margin-top: 6
+      text-align: center
+
+    Button
+      id: voltarChange
+      text: Cancel
+      font: baby-14
+      size: 120 20
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      margin-left: 30
+      margin-bottom: 12
+      cursor: pointer
+      color: white
+      @onClick: closeAlterarSenhaUI()
+      $hover:
+        color: #FFD700
+
+    Button
+      id: confirmChange
+      text: Save
+      font: baby-14
+      size: 120 20
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-right: 30
+      margin-bottom: 12
+      cursor: pointer
+      color: white
+      @onClick: changePassword()
+      $hover:
+        color: #FFD700
+
+VocationRow < Panel
+  layout: horizontalBox
+  height: 96
+  margin-bottom: 6
+
+
+VocationCard < Panel
+  size: 140 96
+  margin-right: 6
+  background-color: #00000066
+  focusable: true
+  $on:
+    background-color: #ffffff22
+  $hover:
+    background-color: #ffffff11
+
+  UICreature
+    id: vocOutfit
+    size: 64 64
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 8
+    old-scaling: true
+
+  Label
+    id: vocName
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 6
+    color: white
+    font: verdana-11px-rounded
+    text-auto-resize: true
+
+  Panel
+    id: selBorder
+    anchors.fill: parent
+    visible: false
+    phantom: true
+
+    Panel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
+      height: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      height: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.left: parent.left
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      width: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.right: parent.right
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      width: 2
+      background-color: #FFD700
+
+CharCard < Panel
+  size: 140 96
+  margin-right: 6
+  background-color: #00000066
+  focusable: true
+  $on:
+    background-color: #ffffff22
+  $hover:
+    background-color: #ffffff11
+
+  UICreature
+    id: charOutfit
+    size: 64 64
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 8
+    old-scaling: true
+
+  Label
+    id: charName
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 6
+    color: white
+    font: verdana-11px-rounded
+    text-auto-resize: true
+
+  Panel
+    id: selBorder
+    anchors.fill: parent
+    visible: false
+    phantom: true
+
+    Panel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
+      height: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      height: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.left: parent.left
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      width: 2
+      background-color: #FFD700
+
+    Panel
+      anchors.right: parent.right
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      width: 2
+      background-color: #FFD700

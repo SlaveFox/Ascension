@@ -1,0 +1,9 @@
+Module
+  name: game_calendar
+  description: Calendar Reward
+  author: Fixed By Aion
+  sandboxed: true
+  autoload: true
+  scripts: [ calendar]
+  @onLoad: init()
+  @onUnload: terminate()

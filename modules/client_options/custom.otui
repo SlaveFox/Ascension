@@ -1,0 +1,216 @@
+OptionPanel
+  Label
+    text: Client user features profile
+
+  ComboBox
+    id: profile
+    margin-top: 3
+    @onOptionChange: modules.client_options.setOption(self:getId(), self.currentIndex)
+    @onSetup: |
+      self:addOption("1")
+      self:addOption("2")
+      self:addOption("3")
+      self:addOption("4")
+      self:addOption("5")
+      self:addOption("6")
+      self:addOption("7")
+      self:addOption("8")
+      self:addOption("9")
+      self:addOption("10")
+
+  Label
+
+  OptionCheckBox
+    id: topBar
+    !text: tr('Show customizable top status bar')
+
+  OptionCheckBox
+    id: topHealtManaBar
+    !text: tr('Show player top health and mana bar')
+
+  OptionCheckBox
+    id: showHealthManaCircle
+    !text: tr('Show health and mana circle')
+    $mobile:
+      visible: false
+
+  Label
+    margin-top: 5
+    text: Show Bottom Action Bars:
+
+  Panel
+    margin-top: 2
+    height: 16
+    layout:
+      type: horizontalBox
+
+    OptionCheckBox
+      id: actionbar1
+      !text: tr('Bar 1')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar2
+      !text: tr('Bar 2')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar3
+      !text: tr('Bar 3')
+      width: 60
+
+  Label
+    text: Show Left Action Bars:
+    $mobile:
+      visible: false
+
+  Panel
+    margin-top: 2
+    height: 16
+
+    $mobile:
+      visible: false
+
+    layout:
+      type: horizontalBox
+
+    OptionCheckBox
+      id: actionbar4
+      !text: tr('Bar 1')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar5
+      !text: tr('Bar 2')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar6
+      !text: tr('Bar 3')
+      width: 60
+
+  Label
+    text: Show Right Action Bars:
+    $mobile:
+      visible: false
+
+  Panel
+    margin-top: 2
+    height: 16
+    layout:
+      type: horizontalBox
+
+    $mobile:
+      visible: false
+
+    OptionCheckBox
+      id: actionbar7
+      !text: tr('Bar 1')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar8
+      !text: tr('Bar 2')
+      width: 60
+
+    OptionCheckBox
+      id: actionbar9
+      !text: tr('Bar 3')
+      width: 60
+
+  OptionCheckBox
+    id: HDActive
+    !text: tr('Enable HD Mode')
+
+  Label
+
+  OptionCheckBox
+    id: actionbarLock
+    !text: tr('Disable action bar hotkeys when chat mode is on')
+  
+  Label
+    id: debuffLabel
+    height: 40
+
+    Button
+      id: editBuffHud
+      !text: tr('Edit Buff HUD')
+      width: 100
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 10
+      @onClick: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_debuffhud')
+        end
+        if debuffhud and debuffhud.move then
+          debuffhud.move()
+        end
+        
+    CheckBox
+      id: enableDebuffHud
+      anchors.left: editBuffHud.right
+      anchors.top: editBuffHud.top
+      margin-left: 10
+      text: Ativar Debuff HUD
+      tooltip: Liga/Desliga o Debuff HUD por completo
+      @onSetup: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_debuffhud')
+        end
+        if debuffhud and debuffhud.isEnabled then
+          self:setChecked(debuffhud.isEnabled() and true or false)
+        else
+          self:setChecked(true)
+        end
+      @onCheckChange: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_debuffhud')
+        end
+        if debuffhud and debuffhud.setEnabled then
+          debuffhud.setEnabled(self:isChecked() and true or false)
+        end
+
+  Label
+    id: showinfoLabel
+    height: 40
+
+    Button
+      id: editShowInfo
+      !text: tr('Edit Show Info')
+      width: 120
+      anchors.left: parent.left
+      anchors.top: parent.top
+      margin-top: 10
+      tooltip: Abrir configura��es do Show Info
+      @onClick: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_showinfo')
+        end
+        if ShowInfo and ShowInfo.customize then
+          ShowInfo.customize()
+        end
+
+    CheckBox
+      id: enableShowInfo
+      anchors.left: editShowInfo.right
+      anchors.top: editShowInfo.top
+      margin-left: 10
+      text: Ativar Show Info
+      tooltip: Liga/Desliga o Show Info por completo
+      @onSetup: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_showinfo')
+        end
+        if ShowInfo and ShowInfo.isEnabled then
+          self:setChecked(ShowInfo.isEnabled() and true or false)
+        else
+          self:setChecked(true)
+        end
+      @onCheckChange: |
+        if g_modules and g_modules.ensureModuleLoaded then
+          g_modules.ensureModuleLoaded('game_showinfo')
+        end
+        if ShowInfo and ShowInfo.setEnabled then
+          ShowInfo.setEnabled(self:isChecked() and true or false)
+        end

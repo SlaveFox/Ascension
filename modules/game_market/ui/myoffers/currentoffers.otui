@@ -1,0 +1,190 @@
+OfferTableRow < TableRow
+  font: verdana-11px-monochrome
+  color: #cccccc
+  height: 15
+
+OfferTableColumn < TableColumn
+  font: verdana-11px-monochrome
+  background-color: alpha
+  text-offset: 5 0
+  color: #cccccc
+  width: 80
+
+OfferTableWarningColumn < OfferTableColumn
+  color: #e03d3d
+
+OfferTableHeaderRow < TableHeaderRow
+  font: verdana-11px-monochrome
+  color: #cccccc
+  height: 20
+
+OfferTableHeaderColumn < SortableTableHeaderColumn
+  font: verdana-11px-monochrome
+  text-offset: 2 0
+  color: #cccccc
+
+  $focus:
+    background-color: #294f6d
+    color: #ffffff
+
+Panel
+  background-color: #22283399
+  margin: 1
+
+  Button
+    id: sellCancelButton
+    !text: tr('Cancelar')
+    anchors.right: parent.right
+    anchors.bottom: next.bottom
+    margin-right: 6
+    width: 80
+    enabled: false
+
+  Label
+    !text: tr('Vender')
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 44
+    margin-left: 6
+    visible: false
+
+  Table
+    id: mySellingTable
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    anchors.right: parent.right
+    height: 150
+    margin-top: 5
+    margin-bottom: 5
+    margin-right: 6
+    padding: 1
+    focusable: false
+    background-color: #222833
+    border-width: 1
+    border-color: #191f27
+    table-data: mySellingTableData
+    row-style: OfferTableRow
+    column-style: OfferTableColumn
+    header-column-style: false
+    header-row-style: false
+
+    OfferTableHeaderRow
+      id: header
+      OfferTableHeaderColumn
+        !text: tr('Item')
+        width: 160
+      OfferTableHeaderColumn
+        !text: tr('Moeda')
+        width: 125
+      OfferTableHeaderColumn
+        !text: tr('Preço')
+        width: 125
+      OfferTableHeaderColumn
+        !text: tr('Quantidade')
+        width: 110
+      OfferTableHeaderColumn
+        !text: tr('Válido até')
+        width: 110
+
+  TableData
+    id: mySellingTableData
+    anchors.bottom: mySellingTable.bottom
+    anchors.left: mySellingTable.left
+    anchors.right: mySellingTable.right
+    margin-top: 2
+    vertical-scrollbar: mySellingTableScrollBar
+
+  VerticalScrollBar
+    id: mySellingTableScrollBar
+    anchors.top: mySellingTable.top
+    anchors.bottom: mySellingTable.bottom
+    anchors.right: mySellingTable.right
+    step: 28
+    pixels-scroll: true
+
+  Label
+    !text: tr('Comprar')
+    font: verdana-11px-rounded
+    text-offset: 0 2
+    anchors.top: mySellingTable.bottom
+    anchors.left: mySellingTable.left
+    margin-top: 20
+    margin-left: 6
+    visible: false
+
+  Table
+    id: myBuyTable
+    anchors.top: prev.bottom
+    anchors.left: prev.left
+    anchors.right: parent.right
+    height: 125
+    margin-top: 5
+    margin-bottom: 5
+    margin-right: 6
+    padding: 1
+    focusable: false
+    background-color: #222833
+    border-width: 1
+    border-color: #191f27
+    table-data: myBuyTableData
+    row-style: OfferTableRow
+    column-style: OfferTableColumn
+    header-column-style: false
+    header-row-style: false
+
+    OfferTableHeaderRow
+      id: header
+      OfferTableHeaderColumn
+        !text: tr('Comprador')
+        width: 125
+      OfferTableHeaderColumn
+        !text: tr('Oferta')
+        width: 500
+
+  TableData
+    id: myBuyTableData
+    anchors.bottom: myBuyTable.bottom
+    anchors.left: myBuyTable.left
+    anchors.right: myBuyTable.right
+    margin-top: 2
+    vertical-scrollbar: myBuyTableScrollBar
+
+  VerticalScrollBar
+    id: myBuyTableScrollBar
+    anchors.top: myBuyTable.top
+    anchors.bottom: myBuyTable.bottom
+    anchors.right: myBuyTable.right
+    step: 28
+    pixels-scroll: true
+
+  Button
+    id: contactButton
+    !text: tr('Enviar Mensagem')
+    anchors.right: parent.right
+    anchors.top: myBuyTable.bottom
+    margin-top: 2
+    margin-right: 6
+    width: 110
+    enabled: false
+
+  Button
+    id: acceptButton
+    !text: tr('Aceitar Oferta')
+    anchors.right: contactButton.left
+    anchors.top: myBuyTable.bottom
+    margin-right: 6
+    margin-top: 2
+    width: 110
+    enabled: false
+
+  Button
+    id: refuseButton
+    !text: tr('Recusar Oferta')
+    anchors.right: acceptButton.left
+    anchors.top: myBuyTable.bottom
+    margin-right: 6
+    margin-top: 2
+    width: 110
+    enabled: false

@@ -1,0 +1,9 @@
+Module
+  name: game_bosstracker
+  description: Boss Cooldown Tracker System
+  author: NTO Ascension
+  sandboxed: true
+  scripts: [bosstracker.lua]
+  @onLoad: BossTracker.init()
+  @onUnload: BossTracker.terminate()
+

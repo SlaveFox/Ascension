@@ -1,0 +1,84 @@
+PreyCreature < Panel
+  height: 28
+  margin-top: 3
+
+  UICreature
+    id: creature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    old-scaling: true
+    margin-right: 5
+    anchors.bottom: parent.bottom
+    size: 27 27
+
+  Label
+    id: noCreature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    size: 20 20
+    icon-source: prey/prey_inactive
+    phantom: true
+    visible: false
+
+  Label
+    id: preyType
+    anchors.left: prev.right
+    margin-left: 10
+    anchors.verticalCenter: parent.verticalCenter
+    size: 20 20
+    phantom: false
+
+  Label
+    id: creatureName
+    anchors.left: prev.right
+    margin-left: 5
+    anchors.top: parent.top
+    anchors-bottom: parent.bottom
+    anchors.right: parent.right
+    text: Inactive
+    font: verdana-11px-rounded
+    text-align: left
+    phantom: false     
+
+  ProgressBar
+    id: time
+    anchors.left: prev.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: 2
+    height: 6
+    background-color: #C28400
+    phantom: false    
+
+MiniWindow
+  id: preyTracker
+  !text: tr('Preys')
+  height: 150
+  icon: /images/topbuttons/prey
+  &autoOpen: true
+  &save: true
+  
+  MiniWindowContents
+    id: contentsPanel
+    padding-left: 5
+    padding-right: 5
+    padding-top: 5
+    layout: verticalBox
+
+    Label
+      !text: tr('Prey Creatures')
+      font: verdana-11px-rounded   
+
+    HorizontalSeparator
+      margin-top: 1
+
+    PreyCreature
+      id: slot1
+      margin-top: 5
+
+    PreyCreature
+      id: slot2
+
+    PreyCreature
+      id: slot3

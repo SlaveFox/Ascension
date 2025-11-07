@@ -1,0 +1,227 @@
+TextMenuButton < Label
+  text-align: center
+
+MenuButton < UIButton
+  size: 37 37
+  image-color: #dadada
+  change-cursor-image: true
+  cursor: pointer
+
+MenuButton2 < UIButton
+  size: 19 37
+  image-color: #dadada
+  change-cursor-image: true
+  cursor: pointer
+
+UIWidget
+  id: window2
+  size: 1000 150
+  phantom: true
+  visible: false
+  image-source: images/buttons_background
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.top: parent.top
+  margin-top: 0
+  focusable: false
+  phantom: true
+  Panel
+    id: playerInfo
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: Dungeon.left
+    margin: 5 5 5 25
+
+    TextMenuButton
+      id: name
+      size: 150 15
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-top: 22
+      opacity: 0
+
+    UIButton
+      id: textpoints
+      tooltip: Point's
+      text-offset: 0 1
+      image-source: images/points
+      size: 20 15
+      anchors.verticalCenter: name.verticalCenter
+      anchors.left: name.right
+
+    TextMenuButton
+      id: points
+      tooltip: Points
+      text-auto-resize: true
+      anchors.top: prev.bottom
+      anchors.left: parent.left
+      margin: 2 0 0 170
+      margin-top: -15
+      color: black
+
+    UIButton
+      id: textmoney
+      tooltip: Gold's
+      size: 20 15
+      text-offset: 3 1
+      image-source: images/gold
+      anchors.left: prev.right
+      anchors.top: prev.top
+      margin-left: 20
+
+    Label
+      id: money
+      text-offset: 3 1
+      text-auto-resize: true
+      anchors.left: prev.right
+      anchors.top: prev.top
+      margin-left: 0
+      color: black
+
+    UIButton
+      id: textclasse
+      tooltip: Player Vocation
+      size: 20 15
+      text-offset: 3 1
+      image-source: images/vocation
+      anchors.left: prev.right
+      anchors.top: prev.top
+      margin-left: 20
+
+    Label
+      id: classe
+      tooltip: Player Vocation
+      text-auto-resize: true
+      text-offset: 3 1
+      anchors.left: prev.right
+      anchors.top: prev.top
+      margin-left: 0
+      color: black
+
+  MenuButton
+    id: Dungeon
+    !tooltip: tr('Dungeon')
+    size: 200 30
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.verticalCenter: parent.verticalCenter
+    margin-top: 20
+    height: 25
+    margin-right: -120
+    visible: false
+    $mobile:
+      margin-right: -70
+      visible: true
+  MenuButton
+    !tooltip: tr('Options')
+    id: Options
+    image-source: /data/images/topbuttons/options
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: -75
+  MenuButton
+    !tooltip: tr('Pass')
+    id: Pass
+    image-source: /data/images/topbuttons/pass
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+  MenuButton
+    id: Shop
+    !tooltip: tr('Shop')
+    image-source: /data/images/topbuttons/shop
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+  MenuButton
+    id: Goal
+    !tooltip: tr('Goal')
+    image-source: /data/images/topbuttons/goal
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+  MenuButton
+    id: Battle
+    !tooltip: tr('Battle')
+    image-source: /data/images/topbuttons/battle
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+  MenuButton
+    id: Minimap
+    !tooltip: tr('Minimap')
+    image-source: /data/images/topbuttons/minimap
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+  MenuButton
+    id: Bestiary
+    !tooltip: tr('Bestiary')
+    image-source: /data/images/topbuttons/bestiary
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+    $onClick:
+      Bestiary.onOpenBestiary()
+  MenuButton
+    id: ZoomIn
+    !tooltip: tr('ZoomIn')
+    image-source: /data/images/topbuttons/zoomin
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+    visible: false
+    $onClick: g_app.scaleUp()
+    $mobile:
+      visible: true
+  MenuButton
+    id: ZoomOut
+    !tooltip: tr('ZoomOut')
+    image-source: /data/images/topbuttons/zoomout
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-top: 20
+    width: 25
+    height: 25
+    margin-left: 1
+    visible: false
+    $onClick: g_app.scaleDown()
+    $mobile:
+      visible: true
+
+  MenuButton2
+    !tooltip: tr('More')
+    id: otherMenu
+    image-source: /data/images/topbuttons/menu
+    anchors.top: parent.top
+    anchors.left: Bestiary.right
+    width: 25
+    height: 25
+    margin-top: 20
+    margin-left: 1
+    $mobile:
+      anchors.left: ZoomOut.right

@@ -1,0 +1,8 @@
+Module
+  name: game_pass
+  description: Battle Pass System Window
+  author: Raposo
+  sandboxed: true
+  scripts: [pass.lua]
+  @onLoad: modules.game_pass.init()
+  @onUnload: modules.game_pass.terminate()

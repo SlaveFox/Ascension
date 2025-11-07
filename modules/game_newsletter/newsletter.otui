@@ -1,0 +1,185 @@
+NewsFloatingPanel < UIWindow
+  id: newsFloatingPanel
+  size: 60 60
+  draggable: true
+  image-source: images/floatingButton
+  tooltip: Novidades Disponíveis!
+
+  anchors.right: parent.right
+  anchors.top: parent.top
+  margin-right: 220
+  margin-top: 80
+
+NewsDetailWindow < UIWindow
+  id: newsDetailWindow
+  size: 400 300
+  text: "Detalhes da Atualização"
+  image-source: /images/ui/window
+  text-offset: 0 1
+  border-width: 1
+  border-color: #FFD700
+  background-color: #121212
+  anchors.centerIn: parent
+  @onEscape: self:destroy()
+
+  UILabel
+    id: detailTitle
+    text: "Título"
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 20
+    font: verdana-11px-rounded
+    color: #FFD700
+    text-align: center
+    text-wrap: true
+    width: 400
+
+  UILabel
+    id: detailDate
+    text: "00/00/0000"
+    anchors.top: detailTitle.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 5
+    font: verdana-11px-rounded
+    color: #AAAAAA
+
+  Panel
+    id: detailDescriptionPanel
+    anchors.top: detailDate.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    margin-left: 20
+    margin-right: 20
+    height: 200
+    background-color: #1a1a1a
+    border-width: 1
+    border-color: #333333
+
+    ScrollablePanel
+      id: detailDescriptionScroll
+      anchors.fill: parent
+      vertical-scrollbar: detailScrollBar
+      layout:
+        type: verticalBox
+        spacing: 5
+
+    VerticalScrollBar
+      id: detailScrollBar
+      step: 20
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      visible: false
+
+  Button
+    id: closeDetailButton
+    text: "Fechar"
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 10
+    width: 120
+    height: 24
+    @onClick: modules.game_newsletter.closeDetail(self)
+
+NewsWindow < UIWindow
+  id: newsWindow
+  size: 450 400
+  text: "Newsletter - Atualizações Recentes"
+  border-width: 1
+  image-source: /images/ui/window
+  font: baby-14
+  border-color: #FFD700
+  background-color: #121212
+  anchors.centerIn: parent
+  @onEscape: modules.game_newsletter.close()
+
+  Panel
+    id: newsListPanel
+    size: 410 330
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 20
+    padding: 5
+    background-color: #1a1a1a
+    border-width: 1
+    border-color: #333333
+
+    VerticalScrollBar
+      id: newsScrollBar
+      step: 20
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      visible: false
+
+    ScrollablePanel
+      id: newsListScroll
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      vertical-scrollbar: newsScrollBar
+      layout:
+        type: verticalBox
+        spacing: 5
+
+
+  Button
+    id: closeButton
+    text: "Fechar"
+    width: 120
+    height: 24
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 15
+    @onClick: modules.game_newsletter.close()
+
+
+NewsEntry < UIWidget
+  size: 530 80
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  padding: 6
+  radius: 4
+
+  $hover:
+    background-color: #2a2a2a
+  $focus:
+    border-color: #FFD700
+
+  Label
+    id: titleLabel
+    text: "Título"
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 4
+    margin-left: 10
+    font: verdana-11px-rounded
+    color: #FFD700
+    text-wrap: true
+    width: 450
+
+  Label
+    id: dateLabel
+    text: "00/00/0000"
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 4
+    margin-right: 10
+    font: verdana-11px-rounded
+    color: #AAAAAA
+
+  Label
+    id: descriptionLabel
+    text: "Descrição da atualização"
+    anchors.top: titleLabel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    margin-left: 10
+    margin-right: 10
+    font: verdana-11px-rounded
+    color: white
+    text-wrap: true

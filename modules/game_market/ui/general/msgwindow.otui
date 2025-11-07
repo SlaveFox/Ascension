@@ -1,0 +1,55 @@
+MsgWindow < MainWindow
+  id: msgWindow
+  size: 336 178
+  image-source: images/background
+
+  UIButton
+    id: logoName
+    color: white
+    size: 254 48
+    image-source: images/logo
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: -10
+    //padding: 17 0 0 17
+    margin-left: 30
+    visible: true
+
+  TextEdit
+    id: textBox
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 20
+    margin-left: 63
+    width: 210
+
+  UIButton
+    id: buttonCancel
+    image-source: images/cancelar
+    //size: 99 24
+    anchors.left: textBox.horizontalCenter
+    anchors.right: textBox.right
+    anchors.top: textBox.bottom
+    margin-top: 7
+    opacity: 0.8
+    $hover:
+      opacity: 1.0
+    
+    $pressed:
+      opacity: 0.9
+
+  UIButton
+    id: buttonOk
+    image-source: images/enviar
+    //size: 99 24
+    anchors.right: textBox.horizontalCenter
+    anchors.left: textBox.left
+    anchors.top: textBox.bottom
+    margin-top: 7
+    margin-right: 6
+    opacity: 0.8
+    $hover:
+      opacity: 1.0
+    
+    $pressed:
+      opacity: 0.9

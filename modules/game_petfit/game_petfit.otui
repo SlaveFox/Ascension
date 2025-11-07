@@ -1,0 +1,52 @@
+CreatureOutfit < UIWidget
+  size: 90 90
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  margin-left: 0
+  margin-top: 0
+  UICreature
+    id:outfitBox
+    size: 150 150
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+Window
+  text: SKIN PET
+  color: #FFE5CC
+  size: 250 300
+  anchors.top: parent.top
+  text-offset: 0 1
+  anchors.centerIn: parent
+
+  ScrollablePanel
+    id: Petbar
+    margin-left: 20
+    margin-bottom: 20
+    anchors.fill: parent
+    vertical-scrollbar: scrollCategoryList
+    layout:
+      type: grid
+      cell-size: 200 100
+      cell-spacing: 1
+      flow: true
+
+  VerticalScrollBar
+    id: scrollCategoryList
+    anchors.top: Petbar.top
+    anchors.bottom: Petbar.bottom
+    anchors.right: Petbar.right
+    step: 25
+    pixels-scroll: true
+    visible: true
+
+  Button
+    id: buttonClose
+    size: 50 20
+    margin-bottom: -10
+    text: Fechar
+    opacity: 1
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_petfit.closePetWindow()
+    $hover:
+      opacity: 0.7

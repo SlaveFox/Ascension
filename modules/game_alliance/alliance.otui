@@ -1,0 +1,387 @@
+Window
+  id:   
+  size: 400 280
+  text: Informações da Aliança
+  anchors.centerIn: parent
+  text-offset: 0 1
+  padding: 10
+  visible: false
+  @onEscape: closeWindow()
+
+
+  UIWidget
+    id: tabs
+    size: 400 40
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+    Button
+      id: generalTab
+      text: "Geral"     
+      size: 80 20
+      anchors.left: parent.left
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 10
+      border-style: solid
+      @onClick: switchToTab('generalPanel')
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    Button
+      id: statsTab
+      text: "Estatísticas"
+      size: 100 20
+      anchors.left: generalTab.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 10
+      border-style: solid
+      @onClick: switchToTab('statsPanel')
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    Button
+      id: missionsTab
+      text: "Missões"
+      size: 80 20
+      anchors.left: statsTab.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 10
+      border-style: solid
+      @onClick: switchToTab('missionsPanel')
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    Button
+      id: targetTab
+      text: "Alvo"
+      size: 80 20
+      anchors.left: missionsTab.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 10
+      border-style: solid
+      @onClick: switchToTab('targetPanel')
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+  Panel
+    id: contentPanel
+    anchors.top: tabs.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: closeButton.top
+    margin-bottom: 10
+
+    Panel
+      id: generalPanel
+      anchors.fill: parent
+      visible: true
+      
+      Label
+        text: "Informações do membro"
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin: 10 0 10 0
+
+      Label
+        id: playerNameLabel
+        text: "Nome do Jogador:"
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: playerName
+        text: "-"
+        anchors.top: playerNameLabel.top
+        anchors.left: playerNameLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: allianceNameLabel
+        text: "Alliance:"
+        anchors.top: playerName.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: allianceName
+        text: "-"
+        anchors.top: allianceNameLabel.top
+        anchors.left: allianceNameLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: playerRankLabel
+        text: "Rank atual:"
+        anchors.top: allianceName.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: playerRank
+        text: "-"
+        anchors.top: playerRankLabel.top
+        anchors.left: playerRankLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+        
+      Label
+        id: playerKillsLabel
+        text: "Kills:"
+        anchors.top: playerRank.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: playerKills
+        text: "-"
+        anchors.top: playerKillsLabel.top
+        anchors.left: playerKillsLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: attributesLabel
+        text: "Atributos:"
+        anchors.top: playerKills.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: attributes
+        text: "-"
+        anchors.top: attributesLabel.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin: 5 10 0 25
+        text-wrap: true
+        text-auto-resize: true
+
+
+    Panel
+      id: statsPanel
+      anchors.fill: parent
+      visible: false
+
+      Label
+        text: "Estatísticas da Aliança"
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin: 10 0 0 0
+
+      Label
+        id: allianceRankLabel
+        text: "Alliance Rank:"
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: allianceRank
+        text: "-"
+        anchors.top: allianceRankLabel.top
+        anchors.left: allianceRankLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        text: "Competição entre Facções:"
+        anchors.top: allianceRank.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin: 10 0 0 0
+
+      UIWidget
+        id: factionCompetition
+        layout: verticalBox
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin: 10 10 0 25
+        text-wrap: true
+        text-auto-resize: true
+        
+      Label
+        id: membersLabel
+        text: "Membros:"
+        anchors.top: factionCompetition.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: members
+        text: "-"
+        anchors.top: membersLabel.top
+        anchors.left: membersLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: onlineMembersLabel
+        text: "Membros Online:"
+        anchors.top: members.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: onlineMembers
+        text: "-"
+        anchors.top: onlineMembersLabel.top
+        anchors.left: onlineMembersLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+
+    Panel
+      id: missionsPanel
+      anchors.fill: parent
+      visible: false
+      layout: verticalBox
+      padding: 10
+      margin-top: 10
+
+      Label
+        id: mission1
+        text: "-"
+        margin: 10 10 0 25
+        text-wrap: true
+        text-auto-resize: true
+
+    Panel
+      id: targetPanel
+      anchors.fill: parent
+      visible: false
+
+      Label
+        text: "Informações do Alvo"
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin: 10 0 0 0
+
+      Label
+        id: targetNameLabel
+        text: "Nome:"
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: targetName
+        text: "-"
+        anchors.top: targetNameLabel.top
+        anchors.left: targetNameLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: targetVocationLabel
+        text: "Vocation:"
+        anchors.top: targetName.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: targetVocation
+        text: "-"
+        anchors.top: targetVocationLabel.top
+        anchors.left: targetVocationLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: targetLevelLabel
+        text: "Nível:"
+        anchors.top: targetVocation.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: targetLevel
+        text: "-"
+        anchors.top: targetLevelLabel.top
+        anchors.left: targetLevelLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: targetFactionLabel
+        text: "Alliance:"
+        anchors.top: targetLevel.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: targetFaction
+        text: "-"
+        anchors.top: targetFactionLabel.top
+        anchors.left: targetFactionLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+      Label
+        id: targetTimeLeftLabel
+        text: "Tempo Restante:"
+        anchors.top: targetFaction.bottom
+        anchors.left: parent.left
+        margin: 10 10 0 25
+
+      Label
+        id: targetTimeLeft
+        text: "-"
+        anchors.top: targetTimeLeftLabel.top
+        anchors.left: targetTimeLeftLabel.right
+        anchors.right: parent.right
+        margin-left: 5
+        text-wrap: true
+        text-auto-resize: true
+
+  Button
+    id: closeButton
+    text: "Fechar"
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin: 10 0 0 0
+    size: 80 22
+    padding: 10
+    @onClick: closeWindow()
+    opacity: 0.9
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.9

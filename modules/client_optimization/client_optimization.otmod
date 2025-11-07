@@ -1,0 +1,10 @@
+Module
+  name: client_optimization
+  description: Global client performance optimization system
+  author: Performance Team
+  website: https://github.com/otclient
+  reloadable: true
+
+  @onLoad: |
+    dofile 'optimization'
+

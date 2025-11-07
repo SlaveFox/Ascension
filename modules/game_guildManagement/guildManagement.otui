@@ -1,0 +1,299 @@
+GuildNoGuildPanel < Panel
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+
+  Label
+    id: infoLabel
+    width: 360
+    height: 50
+    margin-top: -15
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    text: "Você ainda não faz parte de uma guild.\nDeseja criar ou se juntar a uma?"
+    text-align: center
+    color: white
+
+  UIButton
+    id: createButton
+    size: 80 24
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    text: "Criar Guild"
+    background-color: #444444
+    border-width: 1
+    border-color: black
+    text-align: center
+    color: white
+    opacity: 0.9
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7
+
+  UIButton
+    id: joinButton
+    size: 80 24
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    text: "Join Guild"
+    background-color: #444444
+    border-width: 1
+    border-color: black
+    text-align: center
+    color: white
+    opacity: 0.9
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7
+
+
+GuildCreatureOutfit < UIWidget
+  size: 40 40
+
+  UICreature
+    id: outfitBox
+    size: 40 40
+    old-scaling: true
+
+GuildMemberEntry < Panel
+  size: 360 48
+  padding: 4
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  layout:
+    type: horizontalBox
+    spacing: 6
+
+  GuildCreatureOutfit
+    id: outfitWidget
+    
+  Label
+    id: rankLabel
+    text: "Leader"
+    color: #FFFF00
+    text-align: center
+    width: 50
+    height: 32
+    margin-top: 4
+
+  Label
+    id: nameLabel
+    color: #FFFFFF
+    width: 160
+    height: 32
+    text-align: left
+    margin-top: 4
+
+GuildHuntedEntry < Panel
+  size: 360 48
+  padding: 4
+  layout:
+    type: horizontalBox
+    spacing: 6
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  radius: 4
+
+  GuildCreatureOutfit
+    id: outfitWidget
+
+  Label
+    id: nameLabel
+    text: "Jogador"
+    color: #FFFFFF
+    width: 160
+    height: 32
+    text-align: left
+    margin-top: 4
+
+  Label
+    id: levelLabel
+    text: "Level 0"
+    color: #CCCCCC
+    width: 70
+    height: 32
+    text-align: center
+    margin-top: 4
+
+GuildWarEntry < Panel
+  size: 360 48
+  padding: 4
+  layout:
+    type: horizontalBox
+    spacing: 6
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  radius: 4
+
+  Label
+    id: nameLabel
+    text: "Guild Name"
+    color: #FFFFFF
+    width: 160
+    height: 32
+    text-align: left
+    margin-top: 4
+
+  Label
+    id: membersLabel
+    text: "Membros: 0"
+    color: #CCCCCC
+    width: 80
+    height: 32
+    text-align: right
+    margin-top: 4
+
+  Label
+    id: warsLabel
+    text: "Guerras: 0"
+    color: #AAAAAA
+    width: 60
+    height: 32
+    text-align: right
+    margin-top: 4
+
+GuildIconChooser < Window
+  size: 250 250
+  text: "Escolher Emblema"
+
+  UIWidget
+    id: iconGrid
+    anchors.fill: parent
+    margin-left: 10
+    margin-top: 10
+
+    layout:
+      type: horizontalBox
+      cell-size: 40 40
+      spacing: 5
+
+Window
+  id: guildManagementWindow
+  size: 400 460
+  text: "Guild Management"
+  @onEscape: self:hide()
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+
+  Panel
+    id: guildTabsPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-left: 15
+    height: 30
+    layout:
+      type: horizontalBox
+      spacing: 4
+
+    UIButton
+      id: tabMembros
+      text: "Membros"
+      width: 80
+      height: 24
+      @onClick: modules.game_guildManagement.onShowTab("membros")
+      background-color: #444444
+      border-width: 1
+      border-color: black
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    UIButton
+      id: tabInformacoes
+      text: "Info"
+      width: 80
+      height: 24
+      @onClick: modules.game_guildManagement.onShowTab("informacoes")
+      background-color: #444444
+      border-width: 1
+      border-color: black
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    UIButton
+      id: tabHunted
+      text: "Hunted"
+      width: 80
+      height: 24
+      @onClick: modules.game_guildManagement.onShowTab("hunted")
+      background-color: #444444
+      border-width: 1
+      border-color: black
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+    UIButton
+      id: tabGuilds
+      text: "Guilds"
+      width: 80
+      height: 24
+      @onClick: modules.game_guildManagement.onShowTab("guilds")
+      background-color: #444444
+      border-width: 1
+      border-color: black
+      opacity: 0.9
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+  Panel
+    id: guildScrollContainer
+    anchors.top: guildTabsPanel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    height: 200
+    padding: 5
+    border-width: 1
+    border-color: #444444
+    background-color: #121212
+    radius: 8
+
+    VerticalScrollBar
+      id: guildScrollBar
+      step: 18
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+
+    ScrollablePanel
+      id: guildScroll
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: guildScrollBar.left
+      vertical-scrollbar: guildScrollBar
+      layout:
+        type: verticalBox
+        spacing: 5
+
+  UIButton
+    id: closeButton
+    text: "Fechar"
+    width: 80
+    height: 24
+    anchors.top: guildScrollContainer.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 5
+    @onClick: self:getParent():hide()
+    opacity: 0.8
+    $hover:
+      opacity: 1
+    $pressed:
+      opacity: 0.7

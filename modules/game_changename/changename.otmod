@@ -1,0 +1,10 @@
+Module
+  name: game_changename
+  description: Sistema de troca de nomes
+  author: Lkzin - Apple Ressource
+  website: Lkzin - Apple Ressource.online
+  sandboxed: true
+  security: jR$5p@9Qz!
+  scripts: [ changename ]
+  @onLoad: init()
+  @onUnload: terminate()

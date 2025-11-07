@@ -1,0 +1,10 @@
+Module
+  name: game_tier
+  description: Battle tier System Window
+  author: Raposo
+  sandboxed: true
+  scripts: [tier.lua]
+  @onLoad: init()
+  @onUnload: terminate()
+
+

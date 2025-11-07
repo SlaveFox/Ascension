@@ -1,0 +1,9 @@
+Module
+  name: game_bestiary
+  description: Bestiary
+  author: Undefined
+  website: undefined
+  sandboxed: true
+  scripts: [ bestiary ]
+  @onLoad: G_BESTIARY.init()
+  @onUnload: G_BESTIARY.terminate()

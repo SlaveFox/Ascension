@@ -1,0 +1,9 @@
+Module
+  name: game_market
+  description: pxg_market based
+  author: Vyctor17
+  website:
+  sandboxed: true
+  scripts: [ offerstatistic, marketoffer, marketprotocol, market ]
+  @onLoad: init()
+  @onUnload: terminate()

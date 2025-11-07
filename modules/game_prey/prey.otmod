@@ -1,0 +1,8 @@
+Module
+  name: game_prey
+  description: Prey System Window
+  author: Raposo
+  sandboxed: true
+  scripts: [prey.lua]
+  @onLoad: Prey.init()
+  @onUnload: Prey.terminate()

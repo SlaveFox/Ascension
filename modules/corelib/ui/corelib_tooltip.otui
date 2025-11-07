@@ -1,0 +1,27 @@
+Panel
+  id: backgroundTooltip
+  phantom: true
+  focusable: false
+
+  Panel
+    id: panelHeader
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 100
+    font: Spiegel-18px
+    Item
+      id: itemImage
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.horizontalCenter: parent.horizontalCenter
+
+    Label
+      id: name
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 70
+      height: 200
+      width: 200
+      text-align: center
+      font: Spiegel-18px
+      visible: false

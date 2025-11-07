@@ -1,0 +1,57 @@
+OtherMenuButton < UIButton
+  opacity: 0.7
+  $on:
+    opacity: 1
+    
+OtherTopMenu < ShowPanel
+  size: 192 117
+  image-source: /data/images/topbuttons/backb
+  padding: 3
+  focusable: false
+
+  ScrollablePanel
+    id: moduleList
+    anchors.fill: parent
+    layout:
+      type: grid
+      cell-size: 37 37
+      cell-spacing: 0
+      flow: true
+
+Panel
+  size: 820 120
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.top: parent.top
+  margin-top: 1
+  focusable: false
+
+  UIButton
+    id: menuButton
+    text: 
+    tooltip: Abrir Menu
+    height: 42
+    width:195
+    text-offset: 0 3
+    margin-top: 0
+    image-source: images/dropdown
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    change-cursor-image: true
+    cursor: pointer
+    opacity: 1.0
+    @onClick: toggleButtons()
+    $hover:
+      opacity: 1
+    $on:
+      image-source:
+      text: Ocultar
+      font: baby-14
+      tooltip: Fechar menu
+      margin-top: 10
+      width: 75
+
+  OtherTopMenu
+    id: otherMenu
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-left: 2

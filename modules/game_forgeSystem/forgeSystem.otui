@@ -1,0 +1,252 @@
+ForgeItemWidget < UIWidget
+  size: 190 30
+  background-color: #333333
+  border-width: 1
+  border-color: gray
+  padding: 5
+  margin: 1 0 0 1
+
+  UIItem
+    id: itemIcon
+    size: 42 42
+    anchors.left: parent.left
+    border-width: 1
+    border-color: gray
+    anchors.verticalCenter: parent.verticalCenter
+    padding: 3
+
+  Label
+    id: itemText
+    text: "Nome do Item"
+    color: white
+    anchors.left: itemIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    text-auto-resize: true
+    margin-left: 10
+    margin-top: 0
+
+ForgeMaterialWidget < UIWidget
+  size: 190 30
+  background-color: #444444
+  border-width: 1
+  border-color: gray
+  padding: 2
+
+  UIItem
+    id: materialIcon
+    size: 32 32
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+
+  Label
+    id: materialText
+    text-wrap: true
+    text-auto-resize: true
+    color: white
+    anchors.left: materialIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 10
+    width: 100
+
+Window
+  id: forgePanel
+  size: 500 400
+  anchors.centerIn: parent
+  text: "Forja de Slots"
+  draggable: true
+  visible: false
+  image-source: Images/ForgeBG.png
+  @onEscape: forgeSystem.close()
+
+  Panel
+    id: contentPanel
+    anchors.fill: parent
+
+    Panel
+      id: leftPanel
+      size: 190 300
+      anchors.left: parent.left
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 10
+
+      UIButton
+        id: helpButton
+        size: 23 23
+        text: "?"
+        image-source: Images/tinyButton.png
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        margin-bottom: 5
+        margin-left: 5
+        border-width: 1
+        font-size: 14
+        text-color: white      
+        opacity: 1
+        $pressed:
+          opacity: 0.7
+        
+      Label
+        id: equippedItemsLabel
+        text: "Itens para forjar"
+        color: white
+        margin-left: 20
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 200
+
+      ScrollablePanel
+        id: equippedItemsContainer
+        size: 190 250
+        anchors.top: equippedItemsLabel.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin-top: 10
+        padding-right: 15
+        background-color: #222222
+        vertical-scrollbar: equippedItemsScrollBar
+        layout:
+          type: grid
+          cell-size: 175 60
+          cell-spacing: 1
+          num-columns: 1
+
+      VerticalScrollBar
+        id: equippedItemsScrollBar
+        anchors.top: equippedItemsContainer.top
+        anchors.bottom: equippedItemsContainer.bottom
+        anchors.right: equippedItemsContainer.right
+        step: 50
+        pixels-scroll: true
+        visible: true
+
+    Panel
+      id: rightPanel
+      size: 250 250
+      anchors.right: parent.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-right: 10
+      background-color: #222222
+      border-width: 2
+      border-color: gray
+
+      UIButton
+        id: clearMainItemButton
+        size: 23 23
+        text: "X"
+        image-source: Images/tinyButton.png
+        anchors.top: parent.top
+        anchors.left: parent.left
+        margin-top: 5
+        margin-left: 5
+        font-size: 12
+        text-color: white      
+        tooltip: Voltar para seleção de itens
+        opacity: 1
+        $pressed:
+          opacity: 0.7
+
+      UIItem
+        id: mainItemBox
+        size: 50 50
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        margin-top: 10
+        background-color: #333333
+        border-width: 2
+        border-color: gray
+        draggable: false
+        phantom: true
+        enabled: false
+
+
+      Panel
+        id: materialSlots
+        size: 180 50
+        anchors.top: mainItemBox.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin-top: 10
+        margin-left: 9
+        layout:
+          type: grid
+          num-columns: 3
+          cell-size: 48 48
+          cell-spacing: 10
+
+        UIItem
+          id: materialSlot1
+          size: 32 32
+          background-color: #444444
+          border-width: 2
+          border-color: gray
+          enabled: false
+
+        UIItem
+          id: materialSlot2
+          size: 32 32
+          background-color: #444444
+          border-width: 2
+          border-color: gray
+          enabled: false
+
+        UIItem
+          id: materialSlot3
+          size: 32 32
+          background-color: #444444
+          border-width: 2
+          border-color: gray
+          enabled: false
+
+      Label
+        id: upgradeValueLabel
+        text: "Escolha um material para ver os detalhes."
+        color: yellow
+        anchors.top: materialSlots.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 150 
+        text-auto-resize: false
+        text-wrap: true
+        text-align: center
+        height: 100
+
+      Panel
+        id: forgeControls
+        size: 250 20
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin-bottom: 10
+        layout:
+          type: horizontalBox
+          align: center
+          fit-children: true
+
+        CheckBox
+          id: successBoostCheckbox
+          tooltip: Aumentar chance (+custo)
+          margin-right: 10
+
+        UIButton
+          id: forgeButton
+          text: "Imbuir"
+          width: 80
+          image-source: Images/BaseBtn.png
+          opacity: 1
+          $pressed:
+            opacity: 0.7
+          @onClick: forgeSystem.startForging()
+
+    UIButton
+      id: closeButton
+      image-source: Images/BaseBtn.png
+      size: 70 20
+      text: "Fechar"
+      anchors.bottom: parent.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-right: 5
+      tooltip: Fechar
+      @onClick: forgeSystem.close()
+      opacity: 0.8
+      $hover:
+        opacity: 1
+      $pressed:
+        opacity: 0.7
+
+      

@@ -1,0 +1,436 @@
+DungeonTimerWindow < UIWindow
+  size: 220 60
+  text: "Dungeon Ativa"
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #FFD700
+  anchors.top: parent.top
+  anchors.right: parent.right
+  margin-top: 10
+  margin-right: 10
+
+  Label
+    id: timerLabel
+    text: "Tempo Restante: 15:00"
+    anchors.centerIn: parent
+    color: white
+    text-align: center
+    width: 200
+    height: 20
+
+confirmDungeonWindow < UIWindow
+  size: 320 170
+  text: "Confirmação de Entrada"
+  draggable: true
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #555555
+  anchors.centerIn: parent
+  @onEscape: self:destroy()
+
+  Label
+    id: confirmText
+    text: "..."
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 15
+    color: white
+    text-align: center
+    text-wrap: true
+    width: 280
+    height: 40
+
+  Panel
+    id: partyPreviewPanel
+    size: 250 50
+    anchors.top: confirmText.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 10
+    layout:
+      type: horizontalBox
+      spacing: 5
+
+  UIButton
+    id: acceptButton
+    text: "Aceitar"
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 25
+    margin-bottom: 10
+    width: 120
+    height: 24
+    image-source: images/button
+
+  UIButton
+    id: declineButton
+    text: "Recusar"
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 25
+    margin-bottom: 10
+    width: 120
+    height: 24
+    image-source: images/button
+
+
+inviteWindow < UIWindow
+  size: 250 95
+  text: "Convidar Jogador"
+  draggable: true
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #555555
+  anchors.centerIn: parent
+  @onEscape: self:destroy()
+
+  UITextEdit
+    id: playerNameInput
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 20
+    margin-left: 20
+    margin-right: 20
+    height: 30
+    background-color: #2a2a2a
+    text-color: white
+    border-width: 1
+    border-color: #666666
+
+  UIButton
+    id: confirmInviteButton
+    text: "Convidar"
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 15
+    width: 100
+    height: 24
+    image-source: images/button
+
+
+inviteReceivedWindow < UIWindow
+  size: 300 140
+  text: "Convite para Dungeon"
+  draggable: true
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #555555
+  anchors.centerIn: parent
+  @onEscape: self:destroy()
+
+  Label
+    id: inviteText
+    text: "..."
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 20
+    color: white
+    text-align: center
+    text-wrap: true
+    width: 260
+    height: 40
+
+  UIButton
+    id: acceptButton
+    text: "Aceitar"
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-left: 30
+    margin-bottom: 15
+    width: 100
+    height: 24
+    image-source: images/button
+
+  UIButton
+    id: declineButton
+    text: "Recusar"
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-right: 30
+    margin-bottom: 15
+    width: 100
+    height: 24
+    image-source: images/button
+
+Window
+  id: dungeonWindow
+  size: 600 470
+  !text: tr('Sistema de Dungeons')
+  image-source: images/background
+  @onEscape: modules.game_dungeon.closeDungeonWindow()
+  anchors.centerIn: parent
+  border-width: 1
+  border-color: #FFD770
+
+  Panel
+    id: dungeonListPanel
+    size: 220 390
+    padding: 3
+    anchors.left: parent.left
+    anchors.top: parent.top
+    background-color: #1a1a1a
+    border-width: 1
+    border-color: #333333
+
+    VerticalScrollBar
+      id: dungeonScrollBar
+      step: 18
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      visible: false
+
+    ScrollablePanel
+      id: dungeonListScroll
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      vertical-scrollbar: dungeonScrollBar
+      layout:
+        type: verticalBox
+        spacing: 2
+
+  Panel
+    id: dungeonDetailsPanel
+    size: 340 390
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin: 0 0 5 0
+    padding: 10
+    background-color: #121212
+    border-width: 1
+    border-color: #444444
+    image-source: images/dungeons/castle_garden
+
+    Label
+      id: dungeonName
+      text: "Caverna Sombria"
+      anchors.top: parent.top
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #FFD700
+      text-align: center
+      text-wrap: true
+      width: 300
+
+    Panel
+      id: keyPanel
+      size: 40 40
+      anchors.top: dungeonName.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 5
+      visible: false
+
+      UIItem
+        id: keyItem
+        anchors.centerIn: parent
+        width: 40
+        height: 40
+        virtual: true
+
+    Label
+      id: dungeonDescription
+      text: ""
+      anchors.top: keyPanel.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #CCCCCC
+      text-align: center
+      text-wrap: true
+      text-auto-resize: true
+      width: 250
+
+    Label
+      id: dungeonObjective
+      text: ""
+      anchors.top: dungeonDescription.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #FFFFFF
+      text-align: center
+      text-wrap: true
+      text-auto-resize: true
+      width: 250
+
+    Label
+      id: dungeonEstimatedTime
+      text: "Tempo Estimado: 15 minutos"
+      anchors.top: dungeonObjective.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #FFFFFF
+      text-align: center
+      text-wrap: true
+      text-auto-resize: true
+      width: 250
+
+    Label
+      id: dungeonReward
+      text: ""
+      anchors.top: dungeonEstimatedTime.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #FFFFFF
+      text-align: center
+      text-wrap: true
+      text-auto-resize: true
+      width: 300
+
+    Label
+      id: dungeonRewardLabel
+      text: "Recompensas"
+      anchors.top: dungeonReward.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #FFD700
+      text-align: center
+
+    Panel
+      id: rewardPanel
+      size: 300 50
+      anchors.top: dungeonRewardLabel.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 5
+
+      ScrollablePanel
+        id: rewardItemList
+        anchors.top: parent.top 
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 48
+        layout:
+          type: horizontalBox
+          spacing: 6
+        horizontal-scrollbar: rewardScrollBar
+        auto-scrollbars: false
+
+      HorizontalScrollBar
+        id: rewardScrollBar
+        anchors.top: rewardItemList.bottom
+        anchors.left: rewardItemList.left
+        anchors.right: rewardItemList.right
+        height: 5
+        step: 20
+        visible: false
+
+    Panel
+      id: partyPreviewPanel
+      size: 300 50
+      anchors.top: rewardPanel.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      layout:
+        type: horizontalBox
+        spacing: 5
+        align: center
+
+    UIButton
+      id: enterDungeonButton
+      text: "Entrar na Dungeon"
+      width: 150
+      height: 24
+      image-source: images/button
+      anchors.bottom: parent.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-bottom: 10
+      @onClick: modules.game_dungeon.enterSelectedDungeon()
+
+
+  UIButton
+    id: closeButton
+    text: "Fechar"
+    width: 100
+    height: 24
+    image-source: images/button
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    @onClick: modules.game_dungeon.closeDungeonWindow()
+
+DungeonEntry < UIWidget
+  size: 200 55
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  padding: 4
+
+  $hover:
+    background-color: #2a2a2a
+  $focus:
+    border-color: #FFD700
+
+  Label
+    id: nameLabel
+    text: ""
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 5
+    margin-left: 10
+    color: white
+    text-align: left
+    text-auto-resize: true
+
+  Label
+    id: levelLabel
+    text: ""
+    anchors.top: nameLabel.bottom
+    anchors.left: parent.left
+    margin-top: 3
+    margin-left: 10
+    color: #AAAAAA
+    text-align: left
+    text-auto-resize: true
+
+  UIWidget
+    id: playerCountLabel
+    text: ""
+    anchors.top: nameLabel.bottom
+    anchors.right: parent.right
+    margin-top: 3
+    margin-right: 10
+    width: 40
+    height: 18
+    tooltip: Máximo de jogadores nessa dungeon
+
+PartyMemberWidget < UIWidget
+  size: 50 50
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+  padding: 2
+  radius: 4
+
+  UICreature
+    id: outfitBox
+    size: 46 46
+    anchors.centerIn: parent
+    old-scaling: true
+    scale: 1
+
+PartyEmptySlot < UIWidget
+  size: 48 48
+  background-color: #1a1a1a
+  border-width: 1
+  border-color: #333333
+
+  UIButton
+    id: addButton
+    text: "+"
+    anchors.fill: parent
+    text-align: center
+    color: green
+    tooltip: Adicionar jogador à dungeon
+
+DungeonRewardSlot < UIItem
+  size: 40 40
+  virtual: true
+  background-color: #1c1c1c
+  border-width: 1
+  border-color: #666666
+  margin: 2
+
+  Label
+    id: itemCount
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    color: white

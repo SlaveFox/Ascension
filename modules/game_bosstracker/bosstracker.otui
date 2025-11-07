@@ -1,0 +1,84 @@
+BossCreature < Panel
+  height: 28
+  margin-top: 3
+
+  UICreature
+    id: creature
+    anchors.top: parent.top
+    anchors.left: parent.left
+    old-scaling: true
+    margin-right: 5
+    anchors.bottom: parent.bottom
+    size: 27 27
+
+  Label
+    id: bossName
+    anchors.left: prev.right
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-left: 5
+    text: No Boss
+    font: verdana-11px-rounded
+    text-align: left
+    phantom: false
+
+  Label
+    id: timeLabel
+    anchors.left: prev.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: 2
+    text: Ready
+    font: verdana-11px-rounded
+    text-align: left
+    text-color: #00FF00
+    phantom: false
+
+  ProgressBar
+    id: cooldownBar
+    anchors.left: prev.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    height: 4
+    background-color: #333333
+    phantom: false
+
+MiniWindow
+  id: bossTracker
+  !text: tr('Boss Tracker')
+  height: 200
+  icon: /images/topbuttons/tier
+  &autoOpen: false
+  &save: true
+  
+  MiniWindowContents
+    id: contentsPanel
+    padding-left: 5
+    padding-right: 5
+    padding-top: 5
+    layout: verticalBox
+
+    Label
+      !text: tr('Boss Cooldowns')
+      font: verdana-11px-rounded
+      text-align: center
+      text-color: #FFD700
+
+    HorizontalSeparator
+      margin-top: 1
+
+    BossCreature
+      id: boss1
+      margin-top: 5
+
+    BossCreature
+      id: boss2
+
+    BossCreature
+      id: boss3
+
+    BossCreature
+      id: boss4
+
+    BossCreature
+      id: boss5

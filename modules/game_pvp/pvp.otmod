@@ -1,0 +1,8 @@
+Module
+  name: game_pvp
+  description: Battle pvp System Window
+  author: Raposo
+  sandboxed: true
+  scripts: [pvp.lua]
+  @onLoad: pvp.init()
+  @onUnload: pvp.terminate()

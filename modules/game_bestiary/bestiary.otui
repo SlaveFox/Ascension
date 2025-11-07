@@ -1,0 +1,1323 @@
+ResistProgressBar < UIWidget
+  size: 80 16
+  icon-align: left
+
+  UIWidget
+    id: fill
+    size: 65 4
+    anchors.left: next.left
+    anchors.top: next.top
+    background-color: red
+    margin-top: 1
+
+  UIWidget
+    id: bar
+    image-source: images/resist-bar
+    anchors.centerIn: parent
+    margin-left: 5
+
+BestiaryProgressBar < UIWidget
+  size: 63 20
+  image-source: /images/ui/panel_map
+
+  UIWidget
+    image-source: images/progress_bar
+    anchors.centerIn: parent
+    phantom: true
+
+  UIWidget
+    id: fill
+    image-source: images/fill
+    anchors.left: parent.left
+    phantom: true
+
+  Label
+    id: value
+    text-auto-resize: true
+    anchors.centerIn: parent
+    phantom: true
+
+TripleProgressBar < UIWidget
+  size: 101 9
+  background-color: #333333
+  
+  ResistIcon
+    id: resistIcon
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+  
+  ProgressBar
+    id: section1
+    size: 31 6
+    anchors.top: parent.top
+    anchors.left: resistIcon.right
+    margin-left: 5
+    background-color: #00ff00
+    max: 100
+    
+  ProgressBar
+    id: section2
+    size: 31 6
+    anchors.top: parent.top
+    anchors.left: section1.right
+    margin-left: 1
+    background-color: #00ff00
+    max: 100
+    
+  ProgressBar
+    id: section3
+    size: 31 6
+    anchors.top: parent.top
+    anchors.left: section2.right
+    margin-left: 1
+    background-color: #00ff00
+    max: 100
+
+BestiaryLoot < UIWidget
+  image-source: images/button-item
+  padding: 3
+  size: 32 32
+
+  UIItem
+    id: item
+    anchors.fill: parent
+    image-color: alpha
+
+BestiaryLootObject < UIWidget
+  height: 100
+
+  Label
+    id: type
+    width: 96
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: parent.left
+    margin-left: 10
+
+  ScrollablePanel
+    id: items
+    focusable: false
+    height: 32
+    width: 525
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: type.right
+    margin-left: 20
+    layout:
+      type: grid
+      cell-spacing: 2
+      cell-size: 32 32
+      flow: true
+      fit-children: true
+
+    BestiaryLoot
+      id: 1
+
+    BestiaryLoot
+      id: 2
+
+    BestiaryLoot
+      id: 3
+
+    BestiaryLoot
+      id: 4
+
+    BestiaryLoot
+      id: 5
+
+    BestiaryLoot
+      id: 6
+
+    BestiaryLoot
+      id: 7
+
+    BestiaryLoot
+      id: 8
+
+    BestiaryLoot
+      id: 9
+
+    BestiaryLoot
+      id: 10
+
+    BestiaryLoot
+      id: 11
+
+    BestiaryLoot
+      id: 12
+
+    BestiaryLoot
+      id: 13
+
+    BestiaryLoot
+      id: 14
+
+    BestiaryLoot
+      id: 15
+
+BestiaryCreatureIcon < UIWidget
+  size: 16 14
+  Label
+    id: value
+    !text: ('10000')
+    font: verdana-9px
+    anchors.top: parent.top
+    anchors.left: parent.right
+
+BestiaryDifficulty < UIWidget
+  size: 9 9
+  image-source: images/icons/difficulty-inactive
+  !tooltip: tr('Dificuldade: ')
+
+OccurrenceDifficulty < UIWidget
+  size: 9 9
+  image-source: images/icons/occurrence-inactive
+  !tooltip: tr('Ocorrencia: ')
+
+CharmDifficulty < UIWidget
+  size: 64 15
+  !tooltip: tr('Charms: ')
+  
+  UIWidget
+    id: charmIcon
+    size: 9 9
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/ui/icon_charms
+    
+  Label
+    id: charmValue
+    text: "15"
+    anchors.top: parent.top
+    anchors.left: charmIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #ffffff
+    text-auto-resize: true
+
+HitpointsAttribute < UIWidget
+  size: 64 15
+  !tooltip: tr('Hitpoints: ')
+  
+  UIWidget
+    id: hitpointsIcon
+    size: 9 9
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/icons/hitpoints.png
+    
+  Label
+    id: hitpointsValue
+    text: "1000"
+    anchors.top: parent.top
+    anchors.left: hitpointsIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #ffffff
+    text-auto-resize: true
+
+ExperienceAttribute < UIWidget
+  size: 64 15
+  !tooltip: tr('Experience: ')
+  
+  UIWidget
+    id: experienceIcon
+    size: 9 9
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/icons/experience.png
+    
+  Label
+    id: experienceValue
+    text: "500"
+    anchors.top: parent.top
+    anchors.left: experienceIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #ffffff
+    text-auto-resize: true
+
+SpeedAttribute < UIWidget
+  size: 64 15
+  !tooltip: tr('Speed: ')
+  
+  UIWidget
+    id: speedIcon
+    size: 9 9
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/icons/speed.png
+    
+  Label
+    id: speedValue
+    text: "200"
+    anchors.top: parent.top
+    anchors.left: speedIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #ffffff
+    text-auto-resize: true
+
+ArmorAttribute < UIWidget
+  size: 64 15
+  !tooltip: tr('Armor: ')
+  
+  UIWidget
+    id: armorIcon
+    size: 9 9
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: images/icons/armor.png
+    
+  Label
+    id: armorValue
+    text: "50"
+    anchors.top: parent.top
+    anchors.left: armorIcon.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    text-align: left
+    color: #ffffff
+    text-auto-resize: true
+
+ResistIcon < UIWidget
+  size: 9 9
+  image-source: images/icons/death-resist.png
+  !tooltip: tr('Death Resist: ')
+
+BestiaryCategory < Window
+  !text: tr('Categoria')
+  color: #909090
+  draggable: false
+
+  Button
+    id: button
+    size: 64 64
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: -8
+    opacity: 1.0
+
+    $hover:
+      opacity: 0.7
+
+  Label
+    id: total
+    text-auto-resize: true
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 5
+
+  Label
+    id: known
+    text-auto-resize: true
+    anchors.top: total.bottom
+    anchors.horizontalCenter: total.horizontalCenter
+    margin-top: 1
+
+BestiaryCreature < Window
+  !text: tr('Criatura')
+  color: #909090
+  draggable: false
+
+  Button
+    id: button
+    size: 64 64
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    opacity: 1.0
+
+    $hover:
+      opacity: 0.7
+
+    UICreature
+      id: creature
+      anchors.centerIn: parent
+      size: 64 64
+      phantom: true
+      scale: 0.9
+      margin: 2 0 0 2
+      old-scaling: true
+
+  Label
+    id: unlocked
+    text-auto-resize: true
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-bottom: 5
+
+CharmItem < UICheckBox
+  !text: tr('Titulo')
+  image-source: /images/ui/miniwindow
+  image-border: 3
+  image-border-top: 22
+  color: #929292
+  text-offset: 0 3
+  text-align: top
+  border: 0 #ffffff
+  $focus:
+    border: 2 #ffffff
+  @onClick: modules.game_bestiary.onCharmItemClick(self)
+
+  UIWindow
+    id: InfoBase
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin-bottom: 5
+    margin-right: 5
+    image-source: /images/ui/panel_flat
+    image-border: 10
+    size: 66 66
+    phantom: true
+
+    UICreature
+      id: outfit
+      anchors.centerIn: parent
+      size: 64 64
+      phantom: true
+      old-scaling: true
+
+  UIWidget
+    id: PriceBase
+    size: 73 20
+    anchors.left: parent.left
+    anchors.bottom: InfoBase.bottom
+    margin-left: 8
+    image-source: /images/ui/item
+    image-border: 10
+    phantom: true
+
+    Label
+      id: Value
+      anchors.centerIn: parent
+      !text: tr('0')
+      text-auto-resize: true
+      margin-right: 3
+
+      UIWidget
+        id: ValueFix
+        text: 0
+        visible: false
+
+    UIWidget
+      id: Charm
+      anchors.left: Value.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 2
+      image-source: images/ui/icon_charms
+
+    UIWidget
+      id: Gold
+      anchors.left: Value.right
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 2
+      image-source: images/ui/icon_gold
+      visible: false
+
+  UIWindow
+    id: charmBase
+    anchors.bottom: PriceBase.top
+    anchors.horizontalCenter: PriceBase.horizontalCenter
+    margin-bottom: 5
+    image-source: images/ui/bestiary-charm-bg
+    image-border: 10
+    size: 40 45
+    phantom: true
+
+    UIWidget
+      size: 32 32
+      id: image
+      anchors.centerIn: parent
+      phantom: true
+
+    UIWidget
+      id: lockedMask
+      anchors.fill: parent
+      image-source: images/ui/ditherpattern
+      phantom: true
+
+CharmCreatureName < UICheckBox
+  color: #C0C0C0
+  background-color: #484848
+  border: 1 #666666
+  @onClick: modules.game_bestiary.onCharmCreatureClick(self)
+
+  $checked:
+    background-color: #6B8E23
+    border: 2 #90EE90
+    color: #FFFFFF
+
+  $hover:
+    background-color: #5A5A5A
+    border: 1 #888888
+
+  $checked:hover:
+    background-color: #7BA023
+    border: 2 #A0EEA0
+    color: #FFFFFF
+
+MainWindow
+  id: main
+  !text: tr('Bestiario')
+  size: 725 550
+  anchors.centerIn: parent
+  draggable: true
+
+  Button
+    id: bestiaryBtn
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 125 34
+    text: Bestiario
+    text-offset: 30 0
+    icon: images/topbuttons/icon-cyclopedia-monsterinfo
+    icon-align: left
+    @onClick: modules.game_bestiary.onBestiaryButtonClick(self)
+
+    $pressed:
+      text-offset: 30 0
+      icon-align: left
+
+    $hover:
+      text-offset: 30 0
+      icon-align: left
+
+  Button
+    id: charmsBtn
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin: 0 0 0 15
+    size: 125 34
+    text: Charms
+    text-offset: 30 0
+    icon: images/topbuttons/icon-cyclopedia-monsterbonusinfo
+    icon-align: left
+    @onClick: modules.game_bestiary.onCharmsButtonClick(self)
+
+    $pressed:
+      text-offset: 30 0
+      icon-align: left
+
+    $hover:
+      text-offset: 30 0
+      icon-align: left
+
+  FlatPanel
+    id: panel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 45
+    anchors.bottom: next.bottom
+    margin-bottom: 25
+
+    Window
+      id: creature
+      color: #909090
+      image-source: /images/ui/window
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      visible: false
+      padding-left: 2
+      padding-right: 2
+      padding-bottom: 2
+
+      FlatPanel
+        id: creaturePanel
+        size: 96 96
+        anchors.top: parent.top
+        anchors.left: parent.left
+        margin-left: 15
+        margin-top: 15
+
+        UICreature
+          id: lookType
+          size: 90 90
+          anchors.centerIn: parent
+          old-scaling: true
+
+      BestiaryProgressBar
+        id: progressFillLeft
+        anchors.top: creaturePanel.top
+        anchors.left: creaturePanel.right
+        margin-top: 5
+        margin-left: 10
+
+      BestiaryProgressBar
+        id: progressFillMiddle
+        anchors.top: creaturePanel.top
+        anchors.left: progressFillLeft.right
+        margin-top: 5
+        margin-left: 3
+
+      BestiaryProgressBar
+        id: progressFillRight
+        anchors.top: creaturePanel.top
+        anchors.left: progressFillMiddle.right
+        margin-top: 5
+        margin-left: 3
+      
+      UIWidget
+        id: greenBarsContainer
+        size: 350 25
+        anchors.bottom: progressFillRight.bottom
+        anchors.left: progressFillRight.right
+        margin-left: 20
+        phantom: true
+        
+        TripleProgressBar
+          id: greenBar1
+          anchors.top: parent.top
+          anchors.left: parent.left
+          
+        TripleProgressBar
+          id: greenBar2
+          anchors.top: parent.top
+          anchors.left: greenBar1.right
+          margin-left: 10
+          
+        TripleProgressBar
+          id: greenBar3
+          anchors.top: parent.top
+          anchors.left: greenBar2.right
+          margin-left: 10
+          
+        TripleProgressBar
+          id: greenBar4
+          anchors.top: greenBar1.bottom
+          anchors.left: parent.left
+          margin-top: 15
+          
+        TripleProgressBar
+          id: greenBar5
+          anchors.top: greenBar2.bottom
+          anchors.left: greenBar1.right
+          margin-top: 15
+          margin-left: 10
+          
+        TripleProgressBar
+          id: greenBar6
+          anchors.top: greenBar3.bottom
+          anchors.left: greenBar2.right
+          margin-top: 15
+          margin-left: 10
+      
+      Label
+        !text: tr('Location(s):')
+        anchors.top: greenBarsContainer.bottom
+        anchors.left: greenBarsContainer.left
+        margin-top: 10
+        text-align: left
+        text-auto-resize: true
+      
+      FlatPanel
+        id: locationsPanel
+        height: 85
+        margin-top: 5
+        anchors.top: prev.bottom
+        anchors.left: greenBarsContainer.left
+        anchors.right: greenBarsContainer.right
+        background-color: #2a2a2a
+        border: 1 #555555
+
+        ScrollablePanel
+          id: locationsList
+          focusable: false
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          vertical-scrollbar: locationsScrollbar
+          
+          Label
+            id: locationsText
+            text: "Venore Amazon Camp, Carlin Amazon Camp"
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            padding: 5
+            text-align: left
+            text-wrap: true
+            color: #ffffff
+            text-auto-resize: true
+
+        VerticalScrollBar
+          id: locationsScrollbar
+          anchors.top: locationsList.top
+          anchors.bottom: locationsList.bottom
+          anchors.right: parent.right
+      
+      Label
+        !text: tr('Total de Mortes')
+        text-auto-resize: true
+        anchors.bottom: progressFillMiddle.top
+        anchors.horizontalCenter: progressFillMiddle.horizontalCenter
+        margin-bottom: 5
+
+      ScrollablePanel
+        id: difficultyList
+        size: 64 9
+        focusable: false
+        anchors.top: progressFillLeft.top
+        anchors.left: progressFillLeft.left
+        margin-top: 25
+        layout:
+          type: grid
+          cell-spacing: 2
+          cell-size: 9 9
+          flow: true
+
+        BestiaryDifficulty
+          id: 1
+
+        BestiaryDifficulty
+          id: 2
+  
+        BestiaryDifficulty
+          id: 3
+
+        BestiaryDifficulty
+          id: 4
+
+        BestiaryDifficulty
+          id: 5
+
+      ScrollablePanel
+        id: occurrenceList
+        size: 64 9
+        focusable: false
+        anchors.top: difficultyList.bottom
+        anchors.left: difficultyList.left
+        margin-top: 5
+        layout:
+          type: grid
+          cell-spacing: 2
+          cell-size: 9 9
+          flow: true
+
+        OccurrenceDifficulty
+          id: 1
+
+        OccurrenceDifficulty
+          id: 2
+
+        OccurrenceDifficulty
+          id: 3
+
+        OccurrenceDifficulty
+          id: 4
+
+      ScrollablePanel
+        id: charmList
+        size: 64 15
+        focusable: false
+        anchors.top: occurrenceList.bottom
+        anchors.left: occurrenceList.left
+        margin-top: 5
+
+        CharmDifficulty
+          id: charmDifficulty
+          anchors.top: parent.top
+          anchors.left: parent.left
+
+      VerticalSeparator
+        id: verticalSeparator
+        anchors.top: difficultyList.top
+        anchors.bottom: trackKills.top
+        anchors.left: difficultyList.right
+        margin-left: 5
+        
+      ScrollablePanel
+        id: attributesList
+        size: 64 80
+        focusable: false
+        anchors.top: difficultyList.top
+        anchors.left: verticalSeparator.right
+        margin-left: 5
+
+        HitpointsAttribute
+          id: hitpointsAttribute
+          anchors.top: parent.top
+          anchors.left: parent.left
+
+        ExperienceAttribute
+          id: experienceAttribute
+          anchors.top: hitpointsAttribute.bottom
+          anchors.left: parent.left
+          margin-top: 5
+
+        SpeedAttribute
+          id: speedAttribute
+          anchors.top: experienceAttribute.bottom
+          anchors.left: parent.left
+          margin-top: 5
+
+        ArmorAttribute
+          id: armorAttribute
+          anchors.top: speedAttribute.bottom
+          anchors.left: parent.left
+          margin-top: 5
+
+      FlatPanel
+        id: lootPanel
+        height: 200
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-bottom: 5
+        margin-left: 5
+        margin-right: 5
+
+        ScrollablePanel
+          id: list
+          focusable: false
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
+          vertical-scrollbar: scrollbar
+          layout:
+            type: grid
+            cell-size: 650 50
+            flow: true
+
+        VerticalScrollBar
+          id: scrollbar
+          anchors.top: list.top
+          anchors.bottom: list.bottom
+          anchors.right: parent.right
+
+      CheckBox
+        id: trackKills
+        anchors.bottom: lootPanel.top
+        anchors.left: creaturePanel.left
+        margin-bottom: 10
+        margin-left: 5
+        @onCheckChange: G_BESTIARY.onTracker(self)
+        
+      Label
+        !text: tr('Track Kills')
+        anchors.top: trackKills.top
+        anchors.left: trackKills.right
+        margin-left: 10
+        margin-top: 2
+
+    UIWindow
+      id: categories
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+      ScrollablePanel
+        id: list
+        focusable: false
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        padding-left: 10
+        padding-top: 10
+        padding-bottom: 10
+        vertical-scrollbar: scrollbar
+
+        layout:
+          type: grid
+          cell-spacing: 5
+          cell-size: 128 128
+          flow: true
+
+      VerticalScrollBar
+        id: scrollbar
+        anchors.top: list.top
+        anchors.bottom: list.bottom
+        anchors.right: parent.right
+        step: 48
+        pixels-scroll: true
+
+  Label
+    id: searchLabel
+    !text: tr('Buscar') .. ':'
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    margin: 0 211 25 0
+    text-auto-resize: true
+  
+  TextEdit
+    id: search
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: prev.right
+    margin-left: 7
+    width: 132
+    @onTextChange: G_BESTIARY.search(self)
+    shift-navigation: true
+    max-length: 255
+    height: 16
+    padding: 1 0 0 2
+    text-offset: 1 1
+
+  Button
+    id: searchBtn
+    !text: tr('Buscar')
+    size: 64 22
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: search.right
+    margin-left: 10
+    @onClick: G_BESTIARY.search(self)
+
+  FlatPanel
+    id: charmsPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 45
+    anchors.bottom: prev.bottom
+    margin-bottom: 25
+    visible: false
+    padding: 5
+    
+    UIWindow
+      id: infoPanel
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 120
+      image-source: /images/ui/miniwindow
+      image-border: 3
+      padding: 15
+      image-border-top: 22
+      text: Informacao
+      text-offset: 12 2
+      draggable: false
+
+      UIWidget
+        id: previewCol
+        anchors.top: parent.top
+        anchors.right: parent.right
+        width: 100
+        height: 170
+        margin-right: 5
+
+      UIWidget
+        id: selectorCol
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: previewCol.left
+        width: 120
+        margin: 10 5 0 5
+
+      UIWidget
+        id: infoGroup
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: selectorCol.left
+        anchors.bottom: parent.bottom
+        margin-right: 5
+
+      UIWidget
+        id: descCol
+        anchors.top: infoGroup.top
+        anchors.left: infoGroup.left
+        anchors.right: runeCol.left
+        anchors.bottom: parent.bottom
+        margin: 10 5 0 5
+
+      UIWidget
+        id: runeCol
+        anchors.top: infoGroup.top
+        anchors.bottom: parent.bottom
+        anchors.right: actionsCol.left
+        width: 70
+        height: 120
+        margin: 10 10 0 0
+
+      UIWidget
+        id: actionsCol
+        anchors.top: infoGroup.top
+        anchors.bottom: parent.bottom
+        anchors.right: infoGroup.right
+        width: 120
+        margin: 10 10 0 0
+
+      UIWidget
+        id: TextBase
+        anchors.fill: descCol
+        text-align: center
+        text-wrap: true
+        color: #C1C1C1
+
+      UIWindow
+        id: InfoBase
+        anchors.top: infoGroup.top
+        anchors.right: parent.right
+        margin: 10 0 0 0
+        image-source: images/ui/bestiary-charm-bg
+        image-border: 10
+        size: 75 75
+        phantom: true
+
+        UICreature
+          id: showCreature
+          anchors.centerIn: parent
+          size: 64 64
+          old-scaling: true
+
+          UIWidget
+            id: showCreatureID
+            anchors.centerIn: parent
+            text: nil
+            phantom: true
+            visible:false
+
+      Button
+        id: UpgradeButton
+        size: 120 20
+        anchors.top: actionsCol.top
+        anchors.horizontalCenter: actionsCol.horizontalCenter
+        !text: tr('Upgrade')
+        text-offset: 0 -1
+        color: #C0C0C0
+        enabled: false
+        @onClick: modules.game_bestiary.onUpgradeButtonClick(self)
+
+      UIWidget
+        id: PriceBaseMain
+        anchors.top: UnlockButton.bottom
+        anchors.left: actionsCol.left
+        anchors.right: actionsCol.right
+        margin-top: 5
+        height: 20
+        image-source: /images/ui/item
+        image-border: 10
+        phantom: true
+
+        Label
+          id: Value
+          anchors.centerIn: parent
+          !text: tr('0')
+          text-auto-resize: true
+
+        UIWidget
+          id: Charm
+          anchors.left: Value.right
+          anchors.verticalCenter: parent.verticalCenter
+          margin-left: 2
+          image-source: images/ui/icon_charms
+
+        UIWidget
+          id: Gold
+          anchors.left: Value.right
+          anchors.verticalCenter: parent.verticalCenter
+          margin-left: 2
+          image-source: images/ui/icon_gold
+          visible: false
+
+      Button
+        id: UnlockButton
+        size: 120 20
+        anchors.top: UnlockCost.bottom
+        anchors.horizontalCenter: actionsCol.horizontalCenter
+        margin-top: 5
+        !text: tr('Desbloquear')
+        text-offset: 0 -1
+        color: #C0C0C0
+        enabled: false
+        @onClick: modules.game_bestiary.onUnlockButtonClick(self)
+
+      UIWidget
+        id: UnlockCost
+        anchors.top: UpgradeButton.bottom
+        anchors.left: actionsCol.left
+        anchors.right: actionsCol.right
+        margin-top: 2
+        height: 20
+        image-source: /images/ui/item
+        image-border: 10
+        phantom: true
+
+        Label
+          id: UnlockValue
+          anchors.centerIn: parent
+          !text: tr('0')
+          text-auto-resize: true
+
+        UIWidget
+          id: UnlockCharmIcon
+          anchors.left: UnlockValue.right
+          anchors.verticalCenter: parent.verticalCenter
+          margin-left: 2
+          image-source: images/ui/icon_charms
+
+        UIWidget
+          id: UnlockGoldIcon
+          anchors.left: UnlockValue.right
+          anchors.verticalCenter: parent.verticalCenter
+          margin-left: 2
+          image-source: images/ui/icon_gold
+          visible: false
+
+      UIWindow
+        id: ItemBase
+        anchors.centerIn: runeCol
+        image-source: images/ui/bestiary-charm-bg
+        image-border: 10
+        size: 55 60
+        phantom: true
+
+        UIWidget
+          size: 45 45
+          id: image
+          anchors.centerIn: parent
+          phantom: true
+
+          UIWidget
+            id: imageID
+            anchors.centerIn: parent
+            text: nil
+            phantom: true
+            visible:false
+
+      TextEdit
+        id: SearchEdit
+        anchors.left: selectorCol.left
+        anchors.top: actionsCol.top
+        anchors.right: InfoBase.left
+        color: #C0C0C0
+        placeholder: Digite para buscar
+        margin-right: 10
+        padding-top: 1
+        height: 17
+        @onTextChange: modules.game_bestiary.searchMonsterCharm(self:getText())
+
+      UIWindow
+        id: CreaturesBase
+        anchors.top: SearchEdit.bottom
+        anchors.right: InfoBase.left
+        anchors.left: selectorCol.left
+        anchors.bottom: parent.bottom
+        image-source: /images/ui/panel_flat
+        margin-right: 10
+        image-border: 10
+        phantom: true
+
+        UIScrollArea
+          id: CreatureList
+          vertical-scrollbar: CreatureListScrollbar
+          anchors.fill: parent
+          margin-right: 13
+          padding-left: 3
+          padding-top: 3
+          padding-bottom: 2
+          visible: false
+
+          layout:
+            type: grid
+            cell-size: 125 15
+            cell-spacing: 2
+            flow: true
+
+        VerticalScrollBar
+          id: CreatureListScrollbar
+          anchors.top: parent.top
+          anchors.right: parent.right
+          anchors.bottom: parent.bottom
+          step: 80
+          pixel-scroll: true   
+    
+    Panel
+      id: charmsTabsRow
+      anchors.top: infoPanel.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 42
+
+      Button
+        id: majorCharmsBtn
+        size: 329 36
+        margin-left: 12
+        anchors.left: parent.left
+        text: Major Charms
+        text-offset: 30 0
+        anchors.verticalCenter: parent.verticalCenter
+        icon-source: images/topbuttons/major-charms-button
+        icon-align: left
+        @onClick: modules.game_bestiary.onMajorCharmsButtonClick(self)
+        $pressed:
+          text-offset: 30 0
+          icon-align: left
+
+        $hover:
+          text-offset: 30 0
+          icon-align: left
+
+
+      Button
+        id: minorCharmsBtn
+        size: 329 36
+        anchors.left: majorCharmsBtn.right
+        text: Minor Charms
+        text-offset: 30 0
+        anchors.verticalCenter: parent.verticalCenter
+        icon-source: images/topbuttons/minor-charms-button
+        icon-align: left
+        @onClick: modules.game_bestiary.onMinorCharmsButtonClick(self)
+        $pressed:
+          text-offset: 30 0
+          icon-align: left
+
+        $hover:
+          text-offset: 30 0
+          icon-align: left
+    
+    FlatPanel
+      id: charmsContent
+      anchors.top: charmsTabsRow.bottom
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+      ScrollablePanel
+        id: charmsList
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        phantom: true
+        focusable: false
+        vertical-scrollbar: CharmListScrollbar
+        padding: 1
+
+        layout:
+          type: grid
+          cell-size: 158 94
+          cell-spacing: 8
+          flow: true
+
+      VerticalScrollBar
+        id: CharmListScrollbar
+        anchors.top: charmsList.top
+        anchors.right: parent.right
+        anchors.bottom: charmsList.bottom
+        step: 80
+
+  HorizontalSeparator
+    id: separator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 6
+
+  Panel
+    id: goldCoins
+    size: 100 22
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    image-source: /images/ui/panel_flat
+    image-border: 3
+    text-align: left
+    text-offset: 5 0
+    image-color: #1111118c
+    text: 0
+    icon: images/ui/icon_gold
+    icon-align: right
+    icon-offset: -5 0
+    tooltip: Gold's
+    phantom: false
+    margin: 0 0 -8 0
+
+    UIWidget
+      id: goldCoinsValue
+      text: 0
+      visible: false
+
+  Panel
+    id: bestiaryPoints
+    size: 100 22
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    image-source: /images/ui/panel_flat
+    image-border: 3
+    text-align: left
+    text-offset: 5 0
+    image-color: #1111118c
+    text: 0
+    icon: /images/game/prey/prey_star
+    icon-align: right
+    icon-offset: -5 0
+    tooltip: Star Points
+    phantom: false
+    margin: 0 0 -8 20
+
+  Panel
+    id: charmsPoints
+    size: 100 22
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    image-source: /images/ui/panel_flat
+    image-border: 3
+    text-align: left
+    text-offset: 5 0
+    image-color: #1111118c
+    text: 0
+    icon: images/ui/icon_charms
+    icon-align: right
+    icon-offset: -5 0
+    tooltip: Minor Charms
+    phantom: false
+    margin: 0 0 -8 20
+
+  Panel
+    id: extraCharmsPoints
+    size: 100 22
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    image-source: /images/ui/panel_flat
+    image-border: 3
+    text-align: left
+    text-offset: 5 0
+    image-color: #1111118c
+    text: 0
+    icon: images/ui/minor-charm-echoes
+    icon-align: right
+    icon-offset: -5 0
+    tooltip: Minor Charms
+    phantom: false
+    margin: 0 0 -8 20
+
+  MainWindow
+    id: message
+    anchors.centerIn: parent
+    size: 500 150
+    text: Mensagem
+    visible: false
+
+    Label
+      id: msgLabel
+      anchors.centerIn: parent
+      text-auto-resize: true
+
+    Button
+      id: okBtn
+      anchors.bottom: parent.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      text: Ok
+      @onClick: self:getParent():hide()
+
+  Button
+    id: closeButton
+    !text: tr('Fechar')
+    size: 64 22
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    @onClick: modules.game_bestiary.onCloseButtonClick(self)
+    margin-bottom: -8

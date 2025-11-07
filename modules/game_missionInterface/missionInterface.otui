@@ -1,0 +1,441 @@
+Window
+  id: missionWindow
+  size: 800 455
+  text-offset: 0 1
+  text: "Sistema de Missões"
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  @onEscape: hide()
+
+  Panel
+    id: mainPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: closeButton.top
+
+    Panel
+      id: missionListPanel
+      size: 250 0
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      background-color: #111111cc
+      padding: 5
+
+      Panel
+        id: missionTabs
+        size: 0 30
+        padding-left: 10
+        background-color: #111111cc
+        border-width: 1
+        border-color: #666666cc
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-bottom: 5
+        layout:
+          type: horizontalBox
+          spacing: 20
+
+        UIButton
+          id: tabAll
+          text: "Todos"
+          size: 0 20
+          margin-left: 5
+          expandsHorizontally: true
+          color: white
+          font-size: 11
+          $hover:
+            color: #FFD700
+          $on:
+            color: #FFD700
+          @onClick: modules.game_missionInterface.MissionInterface.setFilter('all')
+
+        UIButton
+          id: tabTask
+          text: "Tasks"
+          size: 0 20
+          expandsHorizontally: true
+          color: white
+          font-size: 11
+          $hover:
+            color: #FFD700
+          $on:
+            color: #FFD700
+          @onClick: modules.game_missionInterface.MissionInterface.setFilter('task')
+
+        UIButton
+          id: tabQuest
+          text: "Quests"
+          size: 0 20
+          expandsHorizontally: true
+          color: white
+          font-size: 11
+          $hover:
+            color: #FFD700
+          $on:
+            color: #FFD700
+          @onClick: modules.game_missionInterface.MissionInterface.setFilter('quest')
+
+        UIButton
+          id: tabNpc
+          text: "Npc's"
+          size: 0 20
+          expandsHorizontally: true
+          color: white
+          font-size: 11
+          $hover:
+            color: #FFD700
+          $on:
+            color: #FFD700
+          @onClick: modules.game_missionInterface.MissionInterface.setFilter('npc')
+
+        
+      ScrollablePanel
+        id: missionList
+        width: 225
+        anchors.top: missionTabs.bottom
+        anchors.left: parent.left
+        anchors.bottom: missionSearchPanel.top
+        margin-top: 4
+        layout:
+          type: verticalBox
+          spacing: 3
+        vertical-scrollbar: missionListScrollBar
+
+      Panel
+        id: missionSearchPanel
+        size: 0 20
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        layout:
+          type: horizontalBox
+          spacing: 5
+
+        Label
+          id: missionSearchLabel
+          text: "Filtrar:"
+          color: white
+          font-size: 10
+          text-align: left
+          margin-top: 3
+
+        TextEdit
+          id: missionSearch
+          size: 170 10
+          text: ""
+          color: white
+          font-size: 10
+          background-color: #222222
+
+      VerticalScrollBar
+        id: missionListScrollBar
+        orientation: vertical
+        anchors.top: missionTabs.bottom
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        step: 20
+        visible: true
+
+    Panel
+      id: objectivePanel
+      size: 250 20
+      anchors.top: parent.top
+      anchors.left: missionListPanel.right
+      anchors.bottom: parent.bottom
+      margin-left: 10
+      background-color: #222222cc
+      padding: 5
+
+      Label
+        id: objectiveTitle
+        text: "Objetivos da Missão"
+        color: yellow
+        background-color: #111111cc
+        border-width: 1
+        height: 20
+        border-color: #666666cc
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-bottom: 5
+        text-align: center
+
+      Label
+        id: missionDescription
+        text: ""
+        color: #CCCCCC
+        font-size: 11
+        text-wrap: true
+        text-auto-resize: true
+        anchors.top: objectiveTitle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-bottom: 5
+
+      ScrollablePanel
+        id: objectiveList
+        anchors.top: missionDescription.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: missionActionButton.top
+        layout:
+          type: verticalBox
+          spacing: 3
+        vertical-scrollbar: objectiveScrollBar
+
+      Button
+        id: missionActionButton
+        size: 120 22
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        border-width: 1
+        border-color: #666666cc
+        margin-bottom: 5
+        text: "Iniciar Missão"
+        tooltip: Clica aqui pra começar porra
+        font-size: 11
+        @onClick: modules.game_missionInterface.MissionInterface.toggleMissionAction()
+
+      VerticalScrollBar
+        id: objectiveScrollBar
+        orientation: vertical
+        anchors.top: objectiveTitle.bottom
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        step: 20
+        visible: false
+
+
+    Panel
+      id: minimapPanel
+      size: 0 0
+      anchors.top: parent.top
+      anchors.left: objectivePanel.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 10
+      background-color: #333333cc
+      padding: 5
+
+      Label
+        id: minimapTitle
+        text: ""
+        color: yellow
+        background-color: #111111cc
+        border-width: 1
+        height: 20
+        border-color: #666666cc
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-bottom: 5
+        text-align: center
+
+      UIMinimap
+        id: missionMinimap
+        anchors.top: minimapTitle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        margin: 5 0 0 0 
+        map-position: 0 0 7
+        zoom: 1
+
+  CheckBox
+    id: showCompletedCheck
+    text: "Mostrar concluídas"
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-color: white
+    font-size: 11
+    @onCheckChange: modules.game_missionInterface.MissionInterface.applyCurrentFilters()
+
+
+  Button
+    id: closeButton
+    size: 70 20
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    text: "Fechar"
+    font-size: 12
+    color: white
+
+    $hover:
+      color: #FFD700
+
+MissionEntry < UIWidget
+  size: 0 45
+  background-color: #111111cc
+  border-width: 1
+  border-color: #666666cc
+  padding: 3
+  layout:
+    type: horizontalBox
+    spacing: 5
+
+  $hover:
+    background-color: #222222cc
+
+  UICreature
+    id: missionOutfit
+    size: 32 32
+    margin-left: 5
+    margin-top: 6
+    margin-bottom: 6
+    old-scaling: true
+
+  Label
+    id: missionName
+    color: white
+    width: 155
+    font-size: 11
+    text-align: left
+    expandsHorizontally: true
+    margin-top: 12
+    margin-bottom: 12
+    text-overflow: ellipsis
+
+  CheckBox
+    id: missionCompletedCheck
+    size: 16 16
+    isChecked: false
+    enabled: false
+    margin-top: 14
+    margin-bottom: 14
+
+ObjectiveEntry < UIWidget
+  size: 220 20
+  layout:
+    type: verticalBox
+    spacing: 2
+
+  Panel
+    id: objectiveHeader
+    size: 220 20
+    background-color: #1a1a1acc
+    border-width: 1
+    border-color: #444444cc
+    layout:
+      type: horizontalBox
+      spacing: 5
+
+    Label
+      id: objectiveLabel
+      color: white
+      text-align: left
+      width: 190
+      text-wrap: true
+
+    CheckBox
+      id: objectiveCompletedCheck
+      margin-top: 5
+      size: 16 16
+      enabled: false
+
+    UIButton
+      id: objectiveDetailButton
+      size: 20 20
+      text: "+"
+      tooltip: Exibir mais informações
+      color: white
+      @onClick: modules.game_missionInterface.MissionInterface.showObjectiveDetails(self:getParent():getParent())
+      $hover:
+        color: #FFD700
+
+DescriptionEntry < UIWidget
+  size: 220 120
+  background-color: #1a1a1acc
+  border-width: 1
+  border-color: #444444cc
+  margin-bottom: 5
+  padding: 4
+
+  Label
+    id: descriptionLabel
+    anchors.fill: parent
+    color: #CCCCCC
+    text-align: left
+    text-wrap: true
+    text-auto-resize: true
+    font-size: 11
+
+ObjectiveDescriptionPanel < Panel
+  background-color: #1a1a1acc
+  border-width: 1
+  border-color: #444444cc
+  margin-top: 3
+  padding: 3
+  height: 35
+  layout:
+    type: verticalBox
+
+  Label
+    id: objectiveDescriptionLabel
+    color: white
+    text-wrap: true
+    text-auto-resize: true
+    font-size: 11
+
+MissionRewardSlot < UIItem
+  size: 40 40
+  virtual: true
+  background-color: #1c1c1ccc
+  border-width: 1
+  border-color: #555555cc
+  margin: 2
+
+  Label
+    id: itemCount
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    color: white
+    font-size: 10
+
+MissionRewardPanel < Panel
+  size: 0 50
+  layout: anchor
+
+  ScrollablePanel
+    id: missionRewardList
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: parent.top
+    height: 42
+    layout:
+      type: horizontalBox
+      spacing: 2
+    horizontal-scrollbar: missionRewardScrollBar
+    auto-hide-scrollbars: false
+
+  HorizontalScrollBar
+    id: missionRewardScrollBar
+    orientation: horizontal
+    anchors.left: missionRewardList.left
+    anchors.right: missionRewardList.right
+    anchors.top: missionRewardList.bottom
+    height: 5
+    step: 40
+    visible: false
+
+MissionExpSlot < UIWidget
+  size: 42 42
+  background-color: #1c1c1ccc
+  border-width: 1
+  border-color: #FFD700cc
+  margin: 2
+
+  Label
+    id: expLabel
+    anchors.fill: parent
+    margin: 0
+    padding: 0
+    text: "EXP"
+    color: #7DDA58
+    font: baby-14
+    text-align: center
+    vertical-align: center
+

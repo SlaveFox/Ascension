@@ -1,0 +1,69 @@
+PetButton < UIButton
+  size: 100 100
+  border-width: 1
+  border-color: #FFD700
+  background-color: #1a1a1a40
+
+  $hover:
+    border-color: #FFAA00
+    background-color: #1a1a1a40
+
+  UICreature
+    id: creaturePreview
+    size: 64 64
+    phantom: true
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+
+CreatureOutfit < UIWidget
+  size: 64 64
+  anchors.horizontalCenter: parent.horizontalCenter
+  anchors.verticalCenter: parent.verticalCenter
+  UICreature
+    id:outfitBox
+    size: 64 64
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+Window
+  text: SELECIONE SEU PET
+  color: #FFE5CC
+  size: 375 400
+  text-offset: 0 1
+  anchors.top: parent.top
+  anchors.centerIn: parent
+
+  ScrollablePanel
+    id: Petbar
+    margin-bottom: 20
+    anchors.left: parent.left
+    anchors.top: parent.top
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    vertical-scrollbar: scrollCategoryList
+    layout:
+      type: grid
+      cell-size: 105 107
+      cell-spacing: 1
+      flow: true
+
+  VerticalScrollBar
+    id: scrollCategoryList
+    anchors.top: Petbar.top
+    anchors.bottom: Petbar.bottom
+    anchors.right: Petbar.right
+    step: 14
+    pixels-scroll: true
+    visible: true
+
+  Button
+    id: buttonClose
+    size: 50 20
+    margin-bottom: -10
+    text: Fechar
+    opacity: 1
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_pet.closePetWindow()
+    $hover:
+      opacity: 0.7
