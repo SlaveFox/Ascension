@@ -26,7 +26,7 @@ except ImportError:
 # Configurações
 APP_NAME = "NTO Ascension"
 APP_VERSION = "1.0.0"  # Versão atual do cliente
-GITHUB_REPO = "SlaveFox/ascension-game"  # Exemplo: "ntoascension/client"
+GITHUB_REPO = "SlaveFox/Ascension"  # Repositório no GitHub
 GITHUB_API = "https://api.github.com"
 CLIENT_EXE = "otclient_dx.exe"
 

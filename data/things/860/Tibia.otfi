@@ -1,9 +1,3 @@
-DatSpr
-  extended: true
-  transparency: true
-  frame-durations: true
-  frame-groups: true
-  metadata-file: Tibia.dat
-  sprites-file: Tibia.spr
-  sprite-size: 32
-  sprite-data-size: 4096
+version https://git-lfs.github.com/spec/v1
+oid sha256:7743548835944bc799cb871a4e5def84f7af76815031871b9ce74b5ec0e8add3
+size 185
