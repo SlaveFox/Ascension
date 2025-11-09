@@ -1,0 +1,18 @@
+# Launcher file - não deve ser commitado
+launcher_gui.py
+
+# Arquivos do launcher na pasta common
+common/.etag-cache.json
+common/.version.json
+
+# Arquivos temporários e de sistema
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.log
+.DS_Store
+Thumbs.db
+
